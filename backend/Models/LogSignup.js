@@ -1,9 +1,9 @@
 let mongoose=require("mongoose")
-let UserModel=mongoose.model({
-    name:String,
-    email:String,
-    password:String
+let UserSchema=mongoose.Schema({
+    name:{type:String,required:true},
+    email:{type:String,required:true},
+    password:{type:String,required:true}
 })
 
-let UserSchema=mongoose.Schema("user",UserModel)
-module.exports=UserModel
+let  SignupModel=mongoose.model("user",UserSchema)
+module.exports= SignupModel
