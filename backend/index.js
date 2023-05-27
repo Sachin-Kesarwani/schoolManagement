@@ -2,7 +2,7 @@ let express=require("express")
 const connection = require("./connection")
 const userRoute = require("./Routes/LoginSignup")
 let app=express()
-let cors=require("cors")
+const cors = require('cors');
 const mailRouter = require("./Routes/MailRoute")
 const googleRouter = require("./Routes/GoogleAuth")
 require("dotenv").config()

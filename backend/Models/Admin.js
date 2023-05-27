@@ -6,5 +6,5 @@ let UserSchema=mongoose.Schema({
     position:{type:String,required:false}
 })
 
-let  SignupModel=mongoose.model("user",UserSchema)
+let  SignupModel=mongoose.model("admin",UserSchema)
 module.exports= SignupModel

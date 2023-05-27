@@ -59,8 +59,8 @@ googleRouter.get('/auth/google',passport.authenticate('google', { scope: ['profi
 googleRouter.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login',session:false }),
   function(req, res) {
-   
-    res.redirect('/google');
+   console.log(re.user)
+    // res.send(req.user)
     // res.status(200).send({msg:"Signup with Google",...req.user})
 
   });
