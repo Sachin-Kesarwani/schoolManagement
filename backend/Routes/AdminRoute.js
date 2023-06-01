@@ -1,0 +1,72 @@
+let {Router}=require("express")
+
+let adminRoutes=Router()
+let jwt=require("jsonwebtoken")
+var bcrypt = require('bcryptjs');
+const AdminModel = require("../Models/Admin");
+adminRoutes.get("/",async(req,res)=>{
+    res.status(200).send({msg:"admin basic routes"})
+})
+adminRoutes.post("/addAdmins",async(req,res)=>{
+    //Followin commetout should be req body
+    // let data={
+    //     name:"Uzair Sheikh",
+    //     email:"uzairsheikh@gmail.com",
+    //     position:"Manager",
+    //     password:"uzairsheikh",
+    //     salary_permoth:10000,
+    //     january:false,
+    //     february:false,
+    //     march:false,
+    //     april:false,
+    //     may:false,
+    //     june:false,
+    //     july:false,
+    //     august:false,
+    //     september:false,
+    //     october:false,
+    //     november:false,
+    //     december:false
+    // }
+   
+    let admindata=req.body
+   
+    try {
+        bcrypt.hash(admindata.password, 8,async function(err, hash) {
+          admindata.password=hash
+          let saveadmin=new AdminModel(admindata)
+         await saveadmin.save()
+         res.status(200).send({msg:"Successfully Added New One"})
+        });
+    } catch (error) {
+        res.status(400).send({msg:"Something went wrong"})
+    }
+})
+
+adminRoutes.post("/loginadmin",async(req,res)=>{
+    let reqdata=req.body
+   
+      try {
+        let storeadmin=await AdminModel.find({email:reqdata.email})
+     
+        if(storeadmin.length>0){
+            bcrypt.compare(reqdata.password,storeadmin[0].password, function(err, result) {
+              
+                 if(result){
+                     let data= storeadmin[0]
+         
+                   
+                      let token = jwt.sign({ userid: data._id,position:data.position}, process.env.secretkey,{ expiresIn: "7d" });
+                      res.status(200).send({"msg":`Successfully Login ${data.position}`,data:storeadmin[0],token,token})
+                 }else{
+                     res.status(400).send({"msg":"password is wrong"})
+                 }
+             });
+        }else{
+            res.status(404).send({"msg":"Not found"}) 
+        }
+      } catch (error) {
+        res.status(400).send({"msg":"Something Went wrong"})
+      }
+})
+module.exports=adminRoutes
