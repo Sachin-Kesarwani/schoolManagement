@@ -4,7 +4,9 @@ const userRoute = require("./Routes/LoginSignup")
 let app=express()
 const cors = require('cors');
 const mailRouter = require("./Routes/MailRoute")
-const googleRouter = require("./Routes/GoogleAuth")
+const googleRouter = require("./Routes/GoogleAuth");
+const requestRoute = require("./Routes/RequestAuth");
+const adminRoutes = require("./Routes/AdminRoute");
 require("dotenv").config()
 app.use(express.json())
 app.use(cors())
@@ -14,6 +16,8 @@ app.get("/",(req,res)=>{
 app.use("/user",userRoute)
 app.use("/mail",mailRouter)
 app.use("/google",googleRouter)
+app.use("/request",requestRoute)
+app.use("/admin",adminRoutes)
 app.listen(process.env.port,async()=>{
 try {
     await connection

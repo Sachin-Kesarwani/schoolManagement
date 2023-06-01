@@ -93,4 +93,5 @@ mailRouter.post("/send/admitted",(req,res)=>{
     })
 })
 
+
 module.exports=mailRouter
