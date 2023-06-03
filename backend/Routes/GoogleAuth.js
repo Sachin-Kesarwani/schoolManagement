@@ -12,8 +12,8 @@ googleRouter.get("/",(req,res)=>{
 let GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
-    clientID:process.env.GOOGLE_CLIENT_ID,
-    clientSecret:process.env.GOOGLE_CLIENT_SECRET,
+    clientID:'436460924258-72cc734j3o3ldk1g24rgfeugksk07nvl.apps.googleusercontent.com',
+    clientSecret:'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',
     callbackURL: "http://localhost:8080/google/auth/google/callback"
   },
  async function(accessToken, refreshToken, profile, cb) {
