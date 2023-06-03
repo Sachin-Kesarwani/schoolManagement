@@ -1,9 +1,16 @@
 import React from 'react'
-
+import {Routes,Route} from "react-router-dom"
+import LoginForm from '../SignupLogin/Login'
+import SignupForm from '../SignupLogin/Signup'
+import Home from '../Pages/Home'
 const AllRoutes = () => {
   return (
     <div>
-      <h1>All ROutes</h1>
+   <Routes>
+   <Route path='/' element={<Home/>} />
+    <Route path='/login' element={<LoginForm/>} />
+    <Route path='/signup' element={<SignupForm/>}/>
+   </Routes>
     </div>
   )
 }

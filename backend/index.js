@@ -5,7 +5,12 @@ let app=express()
 const cors = require('cors');
 const mailRouter = require("./Routes/MailRoute")
 const googleRouter = require("./Routes/GoogleAuth");
+
 const { StudentRouter } = require("./Routes/StudentRoute");
+
+const requestRoute = require("./Routes/RequestAuth");
+const adminRoutes = require("./Routes/AdminRoute");
+
 require("dotenv").config()
 app.use(express.json())
 app.use(cors())
@@ -15,8 +20,14 @@ app.get("/",(req,res)=>{
 app.use("/user",userRoute)
 app.use("/mail",mailRouter)
 app.use("/google",googleRouter)
+
 app.use("/student",StudentRouter)
 app.listen(8080,async()=>{
+
+app.use("/request",requestRoute)
+app.use("/admin",adminRoutes)
+app.listen(process.env.port,async()=>{
+
 try {
     await connection
     console.log("Connected to atlas")

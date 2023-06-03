@@ -1,0 +1,86 @@
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  animation: slide-up 0.5s ease;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fade-in 1s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.container input[type='text'],
+.container input[type='email'],
+.container input[type='password'] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  animation: fade-in 1s ease;
+}
+
+.container button[type='submit'] {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  animation: fade-in 1s ease;
+}
+
+.container button[type='submit']:hover {
+  background-color: #45a049;
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+.custom-loader {
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  padding:1px;
+  background:conic-gradient(#0000 10%,#0F00F4) content-box;
+  -webkit-mask:
+    repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+    radial-gradient(farthest-side,#0000 calc(100% - 4.5px),#000 calc(100% - 4px));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation:s4 2s infinite steps(10);
+}
+@keyframes s4 {to{transform: rotate(1turn)}}

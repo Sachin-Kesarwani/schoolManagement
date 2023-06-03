@@ -5,7 +5,7 @@ let {Router}=require("express")
 const  SignupModel = require("../Models/LogSignup")
 let userRoute=Router()
 const path = require('path');
-
+const session = require('express-session');
 var bcrypt = require('bcryptjs');
 
 var jwt = require('jsonwebtoken');
@@ -35,7 +35,7 @@ userRoute.post("/signup",async(req,res)=>{
                 delete data.password
              
                 let token = jwt.sign({ userid: storeddata._id,position:storeddata.position}, process.env.secretkey,{ expiresIn: "7d" });
-                
+
                  res.status(200).send({"msg":"Successfully Signup",data:data,token:token})
             });
         }else{
