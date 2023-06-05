@@ -20,12 +20,12 @@ app.get("/",(req,res)=>{
 app.use("/user",userRoute)
 app.use("/mail",mailRouter)
 app.use("/google",googleRouter)
-
-app.use("/student",StudentRouter)
-app.listen(8080,async()=>{
-
 app.use("/request",requestRoute)
 app.use("/admin",adminRoutes)
+app.use("/student",StudentRouter)
+
+
+
 app.listen(process.env.port,async()=>{
 
 try {

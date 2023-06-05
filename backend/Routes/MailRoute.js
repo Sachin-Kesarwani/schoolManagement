@@ -92,6 +92,48 @@ mailRouter.post("/send/admitted",(req,res)=>{
         return res.status(500).send({ error })
     })
 })
-
+mailRouter.post("/send/requsetapproved",(req,res)=>{
+    //{"name":"Uzair Sheikh","email": "sachin.kesarwani67890@gmail.com"}
+    let data=req.body
+    let config={
+        service:"gmail",
+        auth:{
+            user:process.env.email,
+            pass:process.env.pass
+        }
+    }
+    let transporter=nodemailer.createTransport(config)
+    let MailGenerator = new Mailgen({
+        theme: "default",
+        product : {
+            name: process.env.product_name,
+            link : process.env.product_link_request
+        }
+    })
+    let response = {
+        body: {
+            name: `${data.name}`,
+            intro: `We hope this email finds you in good health and high spirits. `,
+          
+            outro: "We are thrilled to inform you that whatever the changes you want for your child's has been successfully changed and now onward you can check it on the request section ."
+        }
+    }
+    let mail = MailGenerator.generate(response)
+    let message = {
+        from :process.env.email ,
+        to :data.email,
+        subject: "Successfully Request Approved",
+       
+        html: mail
+    }
+    transporter.sendMail(message).then(() => {
+        return res.status(201).send({
+            msg: "you should receive an email"
+        })
+    }).catch(error => {
+       
+        return res.status(500).send({ error })
+    })
+})
 
 module.exports=mailRouter
