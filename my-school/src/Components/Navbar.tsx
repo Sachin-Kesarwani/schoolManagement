@@ -11,15 +11,16 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">Logo</div>
+      <div className="logo">TEACHME</div>
       <div className={`menu ${isOpen ? 'show' : ''}`}>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <a href="#"  className="fromLeft">Home</a>
+        <a href="#"  className="fromLeft">About</a>
+        <a href="#" className="fromLeft">Services</a>
+        <a href="#" className="fromLeft">Contact</a>
+      </div>
+      <div>
         <Link to="/login"> <button className="login-btn">Login</button></Link>
-    <Link to="/signup"> <button className="signup-btn">Signup</button></Link>
-       
+        <Link to="/signup"> <button className="signup-btn">Signup</button></Link>
       </div>
       <div className={`burger ${isOpen ? 'open' : ''}`} onClick={toggleNavbar}>
         <div className="line"></div>
