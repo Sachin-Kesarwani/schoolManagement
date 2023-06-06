@@ -1,0 +1,36 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.heading>h1{
+    font-weight:900;
+    font-size: 35px;
+    
+}
+.heading{
+    color: white;
+    width: 150px;
+    height: 70px;
+    border-bottom: 9px solid blue;
+    margin: auto;
+    /* margin-top: 50px; */
+    border-radius: 10px;
+    
+}
+
+.why-cont{
+    background-color: rgb(2, 2, 64);
+}
+.main-box>div{
+    border: 1px solid red;
+    height: 200px;
+    width: 100%;
+}
+.main-box>div>img{
+    width: 200px;
+    height: 200px;
+}
+.main-box{
+    display: flex;
+    justify-content: space-evenly;
+}
