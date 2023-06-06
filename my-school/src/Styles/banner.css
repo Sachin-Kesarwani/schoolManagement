@@ -1,7 +1,7 @@
 .banner-cont{
     border: 1px solid red;
     min-width: 100%;
-    min-height: 100vh;
+    min-height: 90vh;
     color: white;
     background: #000;
     border: none;
@@ -20,13 +20,14 @@
     
 }
 .banner-cont>button{
-    background-color: #1da1f2;
+    background-color: rgb(74, 41, 209);
     color: white;
     padding: 12px;
     cursor: pointer;
     border-radius: 5em;
-    font-size: 25px;
+    font-size: 20px;
     width: 300px;
+    border: 1px solid white;
 }
 .services{
     display: block;

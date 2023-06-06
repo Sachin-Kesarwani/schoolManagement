@@ -15,7 +15,7 @@ export const Services = () => {
   }, []);
 
   return (
-    <h1 style={{textAlign:"center"}}>
+    <h1 style={{textAlign:"center",color:"blue"}}>
       <TextTransition springConfig={presets.wobbly} >{TEXTS[index % TEXTS.length]}</TextTransition>
     </h1>
   );
