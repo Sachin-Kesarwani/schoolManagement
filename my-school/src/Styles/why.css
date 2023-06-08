@@ -2,10 +2,9 @@
     margin: 0px;
     padding: 0px;
 }
-.heading>h1{
+.heading h1{
     font-weight:900;
-    font-size: 35px;
-    
+    font-size: 35px;    
 }
 .heading{
     color: white;
@@ -22,15 +21,22 @@
     background-color: rgb(2, 2, 64);
 }
 .main-box>div{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 200px;
     width: 100%;
 }
 .main-box>div>img{
     width: 200px;
     height: 200px;
+    border-radius: 50%;
+    box-shadow: rgb(48, 1, 255) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .main-box{
+    background-color: rgb(2, 2, 64);
     display: flex;
     justify-content: space-evenly;
+}
+.main-box h1{
+    color: white;
+    /* background: #000; */
 }
