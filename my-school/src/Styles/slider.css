@@ -1,0 +1,27 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.slider div{
+    min-width: 500px;
+    height: 300px;
+}
+.slider{
+    margin-top: 200px;
+    background-color: rgb(2, 2, 64);
+    color: white;
+}
+.slider h1{
+margin-bottom: 100px;
+}
+.slider div img{
+    margin-bottom: 100px; 
+}
+.headings{
+    border-bottom: 3px solid blue;
+}
+.headings>h1{
+    color: white;
+}

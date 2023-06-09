@@ -20,14 +20,16 @@
     
 }
 .banner-cont>button{
-    background-color: rgb(74, 41, 209);
+    background-color: rgb(5, 29, 248);
     color: white;
     padding: 12px;
     cursor: pointer;
     border-radius: 5em;
     font-size: 20px;
-    width: 300px;
-    border: 1px solid white;
+    width: 250px;
+    border: none;
+    margin-top: 100px;
+    box-shadow: rgb(1, 30, 248) 0px 5px 15px;
 }
 .services{
     display: block;
@@ -39,4 +41,6 @@
 }
 .services>h1{
     text-align: center;
+    margin-top: 100px;
+    text-transform: uppercase;
 }
