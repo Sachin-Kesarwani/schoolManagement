@@ -4,9 +4,18 @@ let adminRoutes=Router()
 let jwt=require("jsonwebtoken")
 var bcrypt = require('bcryptjs');
 const AdminModel = require("../Models/Admin");
-const adminmiddleware = require("../Middleware/AdminMiddleware");
+const {adminmiddleware,checkadmin }= require("../Middleware/AdminMiddleware");
 adminRoutes.get("/",async(req,res)=>{
     res.status(200).send({msg:"admin basic routes"})
+})
+adminRoutes.get("/all",checkadmin,async(req,res)=>{
+
+try {
+    let alldata=await AdminModel.find()
+    res.status(200).send({msg:"Successfully get All admins",data:alldata})
+} catch (error) {
+    res.status(400).send({msg:"Something went wrong"})
+}
 })
 adminRoutes.post("/addAdmins",adminmiddleware,async(req,res)=>{
     //Followin commetout should be req body

@@ -1,5 +1,5 @@
 const AdminModel = require("../Models/Admin")
-
+let jwt=require("jsonwebtoken")
 
 
 async function adminmiddleware(req,res,next){
@@ -16,4 +16,20 @@ async function adminmiddleware(req,res,next){
     }
 }
 
-module.exports=adminmiddleware
+
+async function checkadmin(req,res,next){
+ let token=req?.headers?.authorization?.split(" ")[1]
+    var decoded = jwt.verify(token, process.env.secretkey);
+  console.log(decoded)
+        try {
+            if(decoded.position==="Manager"){
+                next()
+            }else{
+              res.status(404).send({msg:"You are not authorized"})
+            }
+        } catch (error) {
+            res.status(400).send({msg:"Something Went Wrong"})
+        }
+}
+
+module.exports={adminmiddleware,checkadmin}
