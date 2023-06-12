@@ -8,6 +8,7 @@ import AllRoutes from './Components/AllRoutes';
 import Test1 from './Pages/Test1';
 import SimpleSlider from './Pages/Test1';
 import Navbar from './Components/Navbar';
+import CardsComp from './Components/CardsComp';
 
 
 function App() {
@@ -15,8 +16,6 @@ function App() {
     <div className="App">
       <Navbar/>
      <AllRoutes/>
-     
-  
     </div>
   );
 }

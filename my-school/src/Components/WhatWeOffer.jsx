@@ -5,7 +5,7 @@ const Why = () => {
     <div className='why-cont'>
        <div className='heading'>
         <h1>
-         WHY YOU CHOOSE US
+         WHY US
         </h1>
         </div>
         <div>

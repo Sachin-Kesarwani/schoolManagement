@@ -13,10 +13,19 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">TEACHME</div>
       <div className={`menu ${isOpen ? 'show' : ''}`}>
-        <a href="#"  className="fromLeft">Home</a>
-        <a href="#"  className="fromLeft">About</a>
-        <a href="#" className="fromLeft">Services</a>
-        <a href="#" className="fromLeft">Contact</a>
+
+        <Link to={'/'}>
+        Home
+        </Link>
+        <Link to={'/about'}>
+        About
+        </Link>
+        <Link to={'/about'}>
+        Services
+        </Link>
+        <Link to={'/about'}>
+        Contact
+        </Link>
       </div>
       <div>
         <Link to="/login"> <button className="login-btn">Login</button></Link>
