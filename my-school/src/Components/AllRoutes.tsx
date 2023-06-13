@@ -4,6 +4,7 @@ import LoginForm from '../SignupLogin/Login'
 import SignupForm from '../SignupLogin/Signup'
 import Home from '../Pages/Home'
 import About from '../Pages/About'
+import Services from '../Pages/Services'
 const AllRoutes = () => {
   return (
     <div>
@@ -13,6 +14,7 @@ const AllRoutes = () => {
     <Route path='/signup' element={<SignupForm/>}/>
     <Route path='/about' element={<About/>}/>
     <Route path='/contact' element={<SignupForm/>}/>
+    <Route path='/services' element={<Services/>}/>
    </Routes>
     </div>
   )
