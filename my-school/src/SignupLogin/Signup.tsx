@@ -21,13 +21,13 @@ let dispatch=useAppDispatch()
     e.preventDefault();
     setLoading(true)
 dispatch(signup(formdata)).then((res:any)=>{
-if(res.status==200){
+if(res.status===200){
   setdisabled(true)
 }
   console.log(res)
   setLoading(false)
-  Cookies.set('SchooleManagementData',JSON.stringify(res.data.data) );
-  Cookies.set('SchooleManagementToken',JSON.stringify(res.data.token) );
+  Cookies.set('SchooleManagementUserData',JSON.stringify(res.data.data) );
+  Cookies.set('SchooleManagementUserToken',JSON.stringify(res.data.token) );
   handleToastClick(res.data.data.name)
   
   // let data:string|undefined=(Cookies.get('SchooleUserData'))

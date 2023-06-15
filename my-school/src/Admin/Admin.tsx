@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import './index.css';
 import {
   DesktopOutlined,
@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { ToastContainer, toast } from 'react-toastify';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -42,11 +43,34 @@ const items: MenuItem[] = [
 
 const Admin: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  let [showwelcomeToast,setwelcomeToast]=useState<Boolean>(true)
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  function toastemitter(){
+    toast.success('🦄 ! Welcome To Admin Panel !', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+   
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
 
+   setwelcomeToast(false)
+  }
+
+
+  useEffect(()=>{
+    if(showwelcomeToast){
+      toastemitter()
+    }
+   
+  },[])
   return (
+    <>
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
@@ -67,6 +91,21 @@ const Admin: React.FC = () => {
       </Layout>
       
     </Layout>
+    <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+{/* Same as */}
+<ToastContainer />
+    </>
   );
 };
 

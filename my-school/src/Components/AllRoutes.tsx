@@ -6,6 +6,7 @@ import Home from '../Pages/Home'
 import About from '../Pages/About'
 import Services from '../Pages/Services'
 import Admin from '../Admin/Admin'
+import ForgetPasswordForm from '../SignupLogin/ForgetPassword'
 const AllRoutes = () => {
   return (
     <div>
@@ -17,6 +18,7 @@ const AllRoutes = () => {
     <Route path='/contact' element={<SignupForm/>}/>
     <Route path='/services' element={<Services/>}/>
     <Route path='/admin' element={<Admin/>}/>
+    <Route path="/forgetpasswordform" element={<ForgetPasswordForm/>}/>
    </Routes>
     </div>
   )
