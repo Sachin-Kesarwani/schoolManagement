@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Navbar.css';
+import '../Styles/Navbar.css';
 import { Link } from 'react-router-dom';
 import AdminLogin from '../Admin/AdminLogin';
 
@@ -24,7 +24,7 @@ const Navbar = () => {
         <Link to={'/services'}>
         Services
         </Link>
-        <Link to={'/about'}>
+        <Link to={'/contact'}>
         Contact
         </Link>
         {
