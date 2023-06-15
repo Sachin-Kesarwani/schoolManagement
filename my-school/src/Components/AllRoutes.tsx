@@ -7,6 +7,7 @@ import About from '../Pages/About'
 import Services from '../Pages/Services'
 
 import Admin from '../Admin/Admin'
+import ForgetPasswordForm from '../SignupLogin/ForgetPassword'
 
 import ContactUs from '../Pages/ContactUs'
 
@@ -21,6 +22,7 @@ const AllRoutes = () => {
     <Route path='/contact' element={<ContactUs/>}/>
     <Route path='/services' element={<Services/>}/>
     <Route path='/admin' element={<Admin/>}/>
+    <Route path="/forgetpasswordform" element={<ForgetPasswordForm/>}/>
    </Routes>
     </div>
   )

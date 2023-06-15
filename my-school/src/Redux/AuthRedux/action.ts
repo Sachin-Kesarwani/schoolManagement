@@ -2,7 +2,7 @@ import axios from "axios"
 import { AppDispatch } from "../Store"
 import { loading,error, SIGNUP } from "./auth.type"
 import { signupformdataType } from "../../utils/data.types"
-import { Cookies, useCookies } from 'react-cookie';
+import Cookies from "js-cookie"
 export interface loadinginter{
    type:typeof loading
 }
@@ -49,8 +49,6 @@ export const signup = (data: signupformdataType): any => async (dispatch: AppDis
  
    try {
      const response = await axios.post("http://localhost:8080/user/signup", data);
-
-   //   dispatch(successType(response.data));
  
      return response; 
    } catch (error) {
@@ -61,3 +59,21 @@ export const signup = (data: signupformdataType): any => async (dispatch: AppDis
    }
  };
  
+
+ export const UserLogin = (data:{email:String,password:String}): any => async (dispatch: AppDispatch) => {
+   dispatch(loadingType());
+ 
+   try {
+     const response = await axios.post("http://localhost:8080/user/login", data);
+   if(response.request.status===200){
+   Cookies.set('SchooleManagementAdminData',JSON.stringify(response.data.data) );
+   Cookies.set('SchooleManagementAdminToken',JSON.stringify(response.data.token) );
+   }
+     return response; 
+   } catch (error) {
+  
+     dispatch(errorType());
+ 
+     return error; 
+   }
+ };
