@@ -34,7 +34,7 @@ const LoginForm = () => {
         />
         <div className="form-footer">
           <button type="submit">Log In</button>
-          <a className='forgot' href="#" style={{float:"left"}} onClick={handleForgotPassword}>
+          <a className='forgot' href="#" style={{float:"left",color:"blue"}} onClick={handleForgotPassword}>
             Forgot Password?
           </a>
         </div>

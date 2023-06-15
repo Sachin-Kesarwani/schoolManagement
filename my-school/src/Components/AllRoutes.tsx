@@ -5,7 +5,11 @@ import SignupForm from '../SignupLogin/Signup'
 import Home from '../Pages/Home'
 import About from '../Pages/About'
 import Services from '../Pages/Services'
+
+import Admin from '../Admin/Admin'
+
 import ContactUs from '../Pages/ContactUs'
+
 const AllRoutes = () => {
   return (
     <div>
@@ -16,6 +20,7 @@ const AllRoutes = () => {
     <Route path='/about' element={<About/>}/>
     <Route path='/contact' element={<ContactUs/>}/>
     <Route path='/services' element={<Services/>}/>
+    <Route path='/admin' element={<Admin/>}/>
    </Routes>
     </div>
   )

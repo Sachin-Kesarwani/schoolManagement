@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import '../Styles/Navbar.css';
 import { Link } from 'react-router-dom';
+import AdminLogin from '../Admin/AdminLogin';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+   let access={position:"Admin"}
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -26,6 +27,9 @@ const Navbar = () => {
         <Link to={'/contact'}>
         Contact
         </Link>
+        {
+          (access.position==="Manager"||access.position==="Admin")&&<AdminLogin/>
+        }
       </div>
       <div>
         <Link to="/login"> <button className="login-btn">Login</button></Link>
