@@ -33,9 +33,9 @@ const ServicesCard = () => {
        <img width={"100%"} height={"100%"} src="https://thumbs.dreamstime.com/b/conceptual-hand-writing-showing-our-services-concept-meaning-occupation-function-serving-intangible-products-male-wear-160644151.jpg" alt="" />
       <p id="prompt">HOVER OVER :D</p>
         <div className="title">look mom</div>
-        <div className="subtitle">
+        {/* <div className="subtitle">
           services
-        </div>
+        </div> */}
         
       </div>
     </div>

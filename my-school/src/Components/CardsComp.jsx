@@ -13,7 +13,7 @@ const CardsComp = () => {
 		<p>
 			<img className='devimg' src={sachin} alt='sachin img'/>
 		</p>
-    <p>Sachin <span style={{fontSize:"30px"}}>(Full Stack Developer)</span> </p>
+    <p className='title-sachin'>Sachin <span className='sub-title'>(Full Stack Developer)</span> </p>
 	</div>
   <div>
   <h1>Sachin</h1>
@@ -28,9 +28,9 @@ const CardsComp = () => {
 <div  className='box2'>
 <div class="box">
 		<p>
-			<img className='devimg' src={uzair} alt='sachin img'/>
+			<img className='devimg' src={uzair} alt='uzair img'/>
 		</p>
-    <p>Uzair <span style={{fontSize:"30px"}}>(Full Stack Developer)</span> </p>
+    <p className='title-uzair'>Uzair <span  className='sub-title'>(Full Stack Developer)</span> </p>
 	</div>
 
   <div>

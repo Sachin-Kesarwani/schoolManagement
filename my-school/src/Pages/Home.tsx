@@ -21,7 +21,7 @@ const Home = () => {
       <div style={{backgroundColor:"blue"}}>
         <Extraainfo/>
       </div>
-      <Footer/>
+     
 
     </div>
   )
