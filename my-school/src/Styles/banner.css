@@ -1,7 +1,8 @@
 .banner-cont{
     border: 1px solid red;
     min-width: 100%;
-    min-height: 90vh;
+    /* min-height: 90vh; */
+    height: auto;
     color: white;
     background: #000;
     border: none;
@@ -30,6 +31,7 @@
     border: none;
     margin-top: 100px;
     box-shadow: rgb(1, 30, 248) 0px 5px 15px;
+    margin-bottom: 50px;
 }
 .services{
     display: block;

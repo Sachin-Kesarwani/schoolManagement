@@ -6,7 +6,7 @@
   }
 
   #cont {
-      height: 500px;
+      height: auto;
       width: 60%;
       margin: auto;
       display: flex;
@@ -347,3 +347,36 @@
           transform: scale(1);
       }
   }
+
+
+  @media all and (min-width:0px) and (max-width:500px){
+    #cont {
+        flex-direction: column;
+        
+    }
+    #cont>div:nth-child(1){
+       border: 1px solid red;
+    }
+    
+}
+@media all and (min-width:500px) and (max-width:1200px){
+    
+    #cont {
+        flex-direction: column;
+    }
+    #cont>div:nth-child(1){
+       /* bo/rder: 1px solid red; */
+       margin: auto;
+       padding: 10px;
+    }
+    #cont>div:nth-child(2){
+       /* border: 1px solid red; */
+       margin: auto;
+    }
+   
+    .card {
+        display: flex;
+        height: 70px;
+        width: auto;
+    }
+}

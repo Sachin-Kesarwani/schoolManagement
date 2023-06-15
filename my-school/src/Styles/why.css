@@ -35,8 +35,21 @@
     background-color: rgb(2, 2, 64);
     display: flex;
     justify-content: space-evenly;
+    height: auto;
+    gap: 100px;
+    
 }
 .main-box h1{
     color: white;
     /* background: #000; */
+}
+
+@media all and (min-width:200px) and (max-width:900px){
+    
+    .main-box{
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+    }
+    
 }

@@ -4,19 +4,19 @@ import "react-multi-carousel/lib/styles.css";
 import '../Styles/slider.css'
 const responsive = {superLargeDesktop: {
   // the naming can be any, depends on you.
-  breakpoint: { max: 4000, min: 3000 },
-  items: 5
+  breakpoint: { max: 4000, min: 900 },
+  items: 4
 },
 desktop: {
-  breakpoint: { max: 3000, min: 1024 },
-  items: 3
+  breakpoint: { max: 800, min: 900 },
+  items: 2
 },
 tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
+    breakpoint: { max: 300, min: 800 },
+    items: 1
   },
   mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 0, min: 300 },
       items: 1
   }
 };

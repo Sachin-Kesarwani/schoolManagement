@@ -9,6 +9,7 @@ import Test1 from './Pages/Test1';
 import SimpleSlider from './Pages/Test1';
 import Navbar from './Components/Navbar';
 import CardsComp from './Components/CardsComp';
+import Footer from './Components/Footer';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       {!param&&  <Navbar/>}
     
      <AllRoutes/>
+     <Footer/>
     </div>
   );
 }

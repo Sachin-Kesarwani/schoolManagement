@@ -10,6 +10,7 @@ import Admin from '../Admin/Admin'
 import ForgetPasswordForm from '../SignupLogin/ForgetPassword'
 
 import ContactUs from '../Pages/ContactUs'
+import DashBoard from '../Pages/DashBoard'
 
 const AllRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AllRoutes = () => {
     <Route path='/about' element={<About/>}/>
     <Route path='/contact' element={<ContactUs/>}/>
     <Route path='/services' element={<Services/>}/>
+    <Route path='/dashboard' element={<DashBoard/>}/>
     <Route path='/admin' element={<Admin/>}/>
     <Route path="/forgetpasswordform" element={<ForgetPasswordForm/>}/>
    </Routes>
