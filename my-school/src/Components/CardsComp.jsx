@@ -17,7 +17,7 @@ const CardsComp = () => {
 	</div>
   <div>
   <h1>Sachin</h1>
-    <p className='aboutus'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita dolor voluptates deserunt excepturi corporis minus, atque eum culpa recusandae aliquid ex magnam laudantium dicta laboriosam deleniti, provident quidem dolorum quo.
+    <p  className='aboutus'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita dolor voluptates deserunt excepturi corporis minus, atque eum culpa recusandae aliquid ex magnam laudantium dicta laboriosam deleniti, provident quidem dolorum quo.
     Similique pariatur doloremque error non officia reiciendis harum quidem eaque, libero possimus dolorem eligendi, quis necessitatibus quia! Cupiditate, exercitationem consequatur. Totam nesciunt harum molestiae cupiditate, sint quos quis. Tempora, laborum!
     Mollitia delectus explicabo consectetur pariatur odit repellat id expedita molestias, illum ullam aliquid sed hic similique eaque voluptatem vitae officia velit vel! Consequatur ipsum atque assumenda sunt et pariatur maxime!
     Aliquam quod distinctio ex corporis minima a aliquid. Dolorum tempora vel beatae rem assumenda aut, illo facilis minima dolores tenetur deserunt reiciendis voluptatem dicta deleniti id tempore repellat, sed quia.

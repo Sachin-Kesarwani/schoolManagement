@@ -12,9 +12,13 @@ import CardsComp from './Components/CardsComp';
 
 
 function App() {
+  let url = document.URL;
+  let param = url.includes("admin");
+  console.log(param)
   return (
     <div className="App">
-      <Navbar/>
+      {!param&&  <Navbar/>}
+    
      <AllRoutes/>
     </div>
   );
