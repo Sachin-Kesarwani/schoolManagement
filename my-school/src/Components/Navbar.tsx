@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" style={{ position: "sticky", top: 0, width: '100%', backgroundColor: 'black', padding: '10px', zIndex: 2 }}>
       <div className="logo">TEACHME</div>
       <div className={`menu ${isOpen ? 'show' : ''}`}>
 

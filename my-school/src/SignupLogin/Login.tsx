@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginForm.css'; // Import the CSS file
 import { useAppDispatch } from '../Redux/Store';
 import { UserLogin } from '../Redux/AuthRedux/action';
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
+import { handleScrollToTop } from '../Important/scrollup';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -27,23 +28,28 @@ let navigate=useNavigate()
     navigate("/forgetpasswordform")
   };
 
+
+  useEffect(()=>{
+handleScrollToTop()
+  },[])
   return (
     <div className="container">
       <h2>Login Form</h2>
       <form onSubmit={handleSubmit}>
+       
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
+       
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
+       
         />
         <div className="form-footer">
           <button type="submit">Log In</button>

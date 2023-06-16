@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SignupForm.css'; // Import the CSS file
 import { useAppDispatch } from '../Redux/Store';
 import { signup } from '../Redux/AuthRedux/action';
@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { handleScrollToTop } from '../Important/scrollup';
 let signupformdata={
   name:"",
   email:"",
@@ -53,6 +54,9 @@ if(res.status===200){
       },5000)
     
   };
+  useEffect(()=>{
+    handleScrollToTop()
+      },[])
   return (
     <div className="container">
       <h2>Signup</h2>

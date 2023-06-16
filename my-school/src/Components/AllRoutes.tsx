@@ -14,7 +14,7 @@ import DashBoard from '../Pages/DashBoard'
 
 const AllRoutes = () => {
   return (
-    <div>
+    <div style={{minHeight:"100vh"}}>
    <Routes>
    <Route path='/' element={<Home/>} />
     <Route path='/login' element={<LoginForm/>} />
