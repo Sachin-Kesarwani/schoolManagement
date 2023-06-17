@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { Button, message, Space } from 'antd';
 import { handleScrollToTop } from '../Important/scrollup';
 let signupformdata={
   name:"",
@@ -16,6 +17,8 @@ const SignupForm = () => {
 let [formdata,setformdata]=useState(signupformdata)
 let [loading,setLoading]=useState(false)
 let [disabledbutton,setdisabled]=useState(false)
+const [messageApi, contextHolder] = message.useMessage();
+
 let navigate=useNavigate()
 let dispatch=useAppDispatch()
   const handleSubmit = (e:any) => {
@@ -24,12 +27,29 @@ let dispatch=useAppDispatch()
 dispatch(signup(formdata)).then((res:any)=>{
 if(res.status===200){
   setdisabled(true)
-}
   console.log(res)
-  setLoading(false)
   Cookies.set('SchooleManagementUserData',JSON.stringify(res.data.data) );
   Cookies.set('SchooleManagementUserToken',JSON.stringify(res.data.token) );
+   
   handleToastClick(res.data.data.name)
+  messageApi.open({
+    type: 'success',
+    content:`${res.data.msg} , ${res.data.data.name}`,
+  });
+}else{
+  console.log(res)
+  messageApi.open({
+    type: 'warning',
+    content: res.response.data.msg,
+  });
+  setTimeout(()=>{
+    navigate("/login")
+  },2000)
+
+}
+  
+  setLoading(false)
+
   
   // let data:string|undefined=(Cookies.get('SchooleUserData'))
   // if(data!==undefined){
@@ -42,6 +62,7 @@ if(res.status===200){
     toast.success(`🦄 Successfully Signup ! ${name}`, {
       position: "top-center",
       autoClose: 5000,
+     
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -59,6 +80,7 @@ if(res.status===200){
       },[])
   return (
     <div className="container">
+        {contextHolder}
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -82,7 +104,7 @@ if(res.status===200){
           onChange={(e) => setformdata({...formdata,password:e.target.value})}
           required
         />
-        <button type="submit">{loading?<div className="custom-loader"></div>:"Signup"}</button>
+        <button type="submit">{loading?"Signing...":"Signup"}</button>
       </form>
       <ToastContainer
         position="top-center"
