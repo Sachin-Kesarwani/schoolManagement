@@ -4,7 +4,7 @@ let UserSchema=mongoose.Schema({
     email:{type:String,required:true},
     password:{type:String,required:true},
     position:{type:String,required:false}
-})
+})  
 
 let  SignupModel=mongoose.model("user",UserSchema)
 module.exports= SignupModel

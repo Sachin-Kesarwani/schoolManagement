@@ -149,13 +149,22 @@
 // };
 
 // export default Admin;
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./adminPage.css";
 import { Turn as Hamburger } from 'hamburger-react'
 import { RiDashboardLine } from "react-icons/ri";
 import MobileDrawer from "./Drawer";
 import Cookies from "js-cookie";
 import { Badge } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import DashBoard from "../Pages/DashBoard";
+import Users from "./Users";
+import Teachers from "./Teachers";
+import Alladmins from "./AllAdmins";
+import Students from "./students";
+import Requests from "./Requests";
+import Addadmin from "./Addadmin";
+import Dashboard from "./Dashboard";
 interface arrinter {
   title: String;
   key?: number;
@@ -168,11 +177,13 @@ let arr: arrinter[] = [
   { title: "Teachers", key: 3 },
   { title: "Admins", key: 4 },
   { title: "Students", key: 5 },
-  { title: "Requests", key: 6}
+  { title: "Requests", key: 6},
+  { title: "Add New One", key: 7}
 ];
 
 const Admin = () => {
   let [subhead, setsubhead] = useState<arrinter[]>(arr);
+  let [showwelcomeToast,setwelcomeToast]=useState<Boolean>(true)
   let data=Cookies.get("SchooleManagementAdminData")||"{position:User}"
  let  userdata=JSON.parse(data)
  
@@ -185,7 +196,26 @@ const Admin = () => {
   function openDrawer(){
 
   }
+
+    function toastemitter(){
+    toast.success('🦄 ! Welcome To Admin Panel !', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+
+   setwelcomeToast(false)
+  }
+useEffect(()=>{
+  toastemitter()
+},[])
   return (
+    <>
     <div>
       <div className="maindiv" >
         <div className="maindivSubheading">
@@ -197,8 +227,8 @@ const Admin = () => {
                 className="eachdivSubheading"
                 style={{
                   display:
-                  userdata.position === "User" && el.title === "Teachers"
-                      ? "none"
+                  userdata.position === "Admin" && el.title === "Teachers"
+                      ? "none": userdata.position === "Admin" && el.title === "Add New One"?"none"
                       : "block",
                       borderLeft:active===el.key?"3px solid blue":"white",
                       backgroundColor:active===el.key?"white":"rgb(240, 248, 255)",
@@ -223,12 +253,27 @@ const Admin = () => {
         <MobileDrawer/>
         </div>
         <div className="subheadingDetails">
-
+   {
+    active===1?<Dashboard/>:active===2?<Users/>:active===3?<Teachers/>:active===4?<Alladmins/>:active===5?<Students/>:active===6?<Requests/>:active===7?<Addadmin/>:null
+   }
 
 
         </div>
       </div>
     </div>
+    <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+    </>
   );
 };
 
