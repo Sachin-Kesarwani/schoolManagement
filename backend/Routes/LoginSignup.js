@@ -54,6 +54,7 @@ userRoute.post("/login",async(req,res)=>{
     try {
     
         let storeddata=await SignupModel.find({email:data.email})
+        console.log(storeddata)
         if(storeddata.length>0){
           
             bcrypt.compare(data.password,storeddata[0].password, function(err, result) {
