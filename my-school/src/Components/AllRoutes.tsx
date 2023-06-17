@@ -7,13 +7,14 @@ import About from '../Pages/About'
 import Services from '../Pages/Services'
 
 import Admin from '../Admin/Admin'
+import ForgetPasswordForm from '../SignupLogin/ForgetPassword'
 
 import ContactUs from '../Pages/ContactUs'
 import DashBoard from '../Pages/DashBoard'
 
 const AllRoutes = () => {
   return (
-    <div>
+    <div style={{minHeight:"100vh"}}>
    <Routes>
    <Route path='/' element={<Home/>} />
     <Route path='/login' element={<LoginForm/>} />
@@ -23,6 +24,7 @@ const AllRoutes = () => {
     <Route path='/services' element={<Services/>}/>
     <Route path='/dashboard' element={<DashBoard/>}/>
     <Route path='/admin' element={<Admin/>}/>
+    <Route path="/forgetpasswordform" element={<ForgetPasswordForm/>}/>
    </Routes>
     </div>
   )

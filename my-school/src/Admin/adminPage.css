@@ -1,0 +1,95 @@
+/* .sidebar {
+    width: 200px;
+    background-color: #001529;
+    color: #fff;
+    height: 100vh;
+    transition: width 0.3s;
+  }
+  
+  .sidebar.collapsed {
+    width: 80px;
+  }
+  
+  .demo-logo-vertical {
+    height: 64px;
+    background-color: #1890ff;
+    margin-bottom: 16px;
+  }
+  
+  .menu-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-link {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 8
+  } */
+.maindiv{
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+  .maindivSubheading{
+  padding: 8px;
+  /* width: 20%; */
+  z-index: 2;
+
+  background-color: rgb(240, 248, 255);
+  border-radius: 8px;
+    min-width: 200px;
+    margin-left: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position:sticky;
+    top: 0;
+  }
+
+  .eachdivSubheading{
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .subheadingDetails{
+    width: 80%;
+
+    z-index: 1;
+
+    height: 100%;
+  overflow: scroll;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+.hamburggerDiv{
+  border: 1px solid red;
+  display: none;
+}
+  /* @media screen and (min-width: 850px) and (max-width: 768px) {
+   
+  }
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+   
+  } */
+  @media screen and (min-width: 140px) and (max-width: 500px) {
+    .maindiv{
+    
+      display: block;
+      
+    }
+    .maindivSubheading{
+      display: none;
+    }
+    
+  .subheadingDetails{
+    width:100%;
+    margin: auto;
+  }
+  .hamburggerDiv{
+    display: block;
+  }
+  }

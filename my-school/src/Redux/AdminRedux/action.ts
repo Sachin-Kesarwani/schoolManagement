@@ -2,6 +2,7 @@ import axios from "axios"
 import { LoginDataInter } from "../../Admin/AdminLogin"
 import { loading ,error} from "../AdminRedux/admin.type"
 import { AppDispatch } from "../Store"
+import Cookies from "js-cookie"
 
 
 
@@ -35,7 +36,9 @@ export interface loadinginter{
         const response = await axios.post("http://localhost:8080/admin/loginAdmin", data);
        console.log(response.data.data)
        if(response.request.status===200){
-        localStorage.setItem("schoolManagemnetUserdata",JSON.stringify(response.data.data))
+        Cookies.set('SchooleManagementAdminData',JSON.stringify(response.data.data) );
+        Cookies.set('SchooleManagementAdminToken',JSON.stringify(response.data.token) );
+//localStorage.setItem("schoolManagemnetUserdata",JSON.stringify(response.data.data))
        }
     
       //   dispatch(successType(response.data));

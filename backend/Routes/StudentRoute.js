@@ -38,14 +38,12 @@ StudentRouter.patch("/:id",Adminrouter,async(req,res)=>{
         
     }
 })
-
-
 StudentRouter.delete("/:id",Adminrouter,async(req,res)=>{
     const {id} = req.params
     try {
         let studentdata = await StudentModel.findByIdAndDelete({_id:id})
        
-        res.send({"msg":"user has been deleted"})
+        res.status(200).res.send({"msg":"user has been deleted"})
     } catch (error) {
         res.send({"msg":error.message})
         
