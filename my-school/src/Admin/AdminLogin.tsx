@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import "./adminPage.css"
 import { Button, Modal ,Input, Form} from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons';
 import { loadinginter } from '../Redux/AuthRedux/action';

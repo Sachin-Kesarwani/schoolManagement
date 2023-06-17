@@ -5,15 +5,32 @@ import { UserLogin } from '../Redux/AuthRedux/action';
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
 import { handleScrollToTop } from '../Important/scrollup';
-
+import { Button, message, Space } from 'antd';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [messageApi, contextHolder] = message.useMessage();
 let dispatch=useAppDispatch()
 let navigate=useNavigate()
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    dispatch(UserLogin({email,password})).then(()=>{
+    dispatch(UserLogin({email,password})).then((res:any)=>{
+      if(res.request.status===200){
+        messageApi.open({
+          type: 'success',
+          content: `${res.data.msg} , ${res.data.data.name}`,
+        });
+        setTimeout(()=>{
+navigate("/")
+        },2000)
+      }else{
+       
+        messageApi.open({
+          type: 'error',
+          content: `${res.response.data.msg}`,
+        });
+      }
+
       // const cookieValue = Cookies.get('SchooleManagementAdminData');
 
 // Parse the value if it's stored as a JSON string
@@ -32,7 +49,8 @@ let navigate=useNavigate()
   useEffect(()=>{
 handleScrollToTop()
   },[])
-  return (
+  return (<>
+  {contextHolder}
     <div className="container">
       <h2>Login Form</h2>
       <form onSubmit={handleSubmit}>
@@ -59,6 +77,7 @@ handleScrollToTop()
         </div>
       </form>
     </div>
+    </>
   );
 };
 
