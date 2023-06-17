@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ServicesCard = () => {
+const ServicesCard = ({img}:any) => {
   return (
     <div className="container noselect">
     <div className="canvas">
@@ -30,7 +30,7 @@ const ServicesCard = () => {
       <div className="tracker tr-24"></div>
       <div className="tracker tr-25"></div>
       <div id="card">
-       <img width={"100%"} height={"100%"} src="https://thumbs.dreamstime.com/b/conceptual-hand-writing-showing-our-services-concept-meaning-occupation-function-serving-intangible-products-male-wear-160644151.jpg" alt="" />
+       <img width={"100%"} height={"100%"} src={img} alt="" />
       <p id="prompt">HOVER OVER :D</p>
         <div className="title">look mom</div>
         {/* <div className="subtitle">
