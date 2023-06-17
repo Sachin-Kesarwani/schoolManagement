@@ -5,7 +5,7 @@ import {reducer} from "../Redux/AuthRedux/reducer"
 
 // const rootReducer = combineReducers({
  
-//   AuthReducer
+  
 // });
 
 export const store = legacy_createStore(reducer, applyMiddleware(thunk));
