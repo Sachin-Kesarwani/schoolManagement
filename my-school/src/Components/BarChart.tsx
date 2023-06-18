@@ -1,23 +1,41 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React, { Component } from "react";
+import Chart from "react-apexcharts";
 
-const DoughnutChart: React.FC = () => {
-  const data = {
-    labels: ['Red', 'Blue', 'Yellow'],
-    datasets: [
-      {
-        data: [300, 50, 100],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+    const ctx = {
+      options: {
+        chart: {
+          id: "basic-bar"
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        }
       },
-    ],
-  };
+      series: [
+        {
+          name: "series-1",
+          data: [30, 40, 45, 50, 49, 60, 70, 91]
+        }
+      ]
+    };
+  
+const MyChart=()=>{
 
-  return (
-    <div>
-      <Doughnut data={data} />
-    </div>
-  );
-};
 
-export default DoughnutChart;
+
+    return (
+      <div className="app">
+        <div className="row">
+          <div className="mixed-chart">
+            <Chart
+              options={ctx.options}
+              series={ctx.series}
+              type="bar"
+              width="500"
+            />
+          </div>
+        </div>
+      </div>
+    );
+    }
+
+export default MyChart;

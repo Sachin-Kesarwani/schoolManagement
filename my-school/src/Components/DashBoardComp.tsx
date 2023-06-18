@@ -108,7 +108,7 @@ const DashBoardComp: React.FC = () => {
               background: colorBgContainer,
             }}
           >
-            {/* <ChartData/> */}
+            <ChartData/>
             {assignment && <Assignment />}
             {attendence && <Attendence />}
             {stats && <AppStatus />}
