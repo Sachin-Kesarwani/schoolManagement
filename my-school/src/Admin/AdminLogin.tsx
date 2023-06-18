@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-
+import "./adminPage.css"
 import { Button, Modal ,Input, Form} from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons';
 import { loadinginter } from '../Redux/AuthRedux/action';
 import { useAppDispatch } from '../Redux/Store';
 import { LoginAdmin } from '../Redux/AdminRedux/action';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export interface LoginDataInter {
@@ -21,6 +23,7 @@ const AdminLogin = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   let [logindata, setLogindata] = useState<LoginDataInter>(initialData);
   let [loading,setLoading]=useState<Boolean>(false)
+  let navigate=useNavigate()
 let dispatch=useAppDispatch()
   const showModal = () => {
     setIsModalOpen(true);
@@ -30,11 +33,15 @@ let dispatch=useAppDispatch()
 setLoading(true)
 dispatch(LoginAdmin(logindata)).then((res:any)=>{
     if(res.request.status===200){
-        console.log(res)
+       
         setLoading(false)
         setIsModalOpen(false);
+      
+        setLogindata(initialData)
+       // toastemitter()
+        window.open(`/admin`, '_blank');
     }else{
-        console.log(res)
+     
         setLoading(false)
     }
   
@@ -42,6 +49,10 @@ dispatch(LoginAdmin(logindata)).then((res:any)=>{
 
   
   };
+
+
+
+
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -73,14 +84,15 @@ setLogindata({...logindata,[e.target.name]:e.target.value})
        >
          <Form>
           <Form.Item label="Enter Email">
-            <Input placeholder="Basic usage" name="email" onChange={handleChange} prefix={<UserOutlined  /> }/>
+            <Input placeholder="Basic usage" value={logindata.email} name="email" onChange={handleChange} prefix={<UserOutlined  /> }/>
           </Form.Item>
           <Form.Item label="Password ">
-            <Input type='password' placeholder="Basic usage" name="password" onChange={handleChange} prefix={< EyeInvisibleOutlined/>} />
+            <Input type='password' placeholder="Basic usage" value={logindata.password} name="password" onChange={handleChange} prefix={< EyeInvisibleOutlined/>} />
           </Form.Item>
         </Form>
      
       </Modal>
+    
     </>
   );
 };
