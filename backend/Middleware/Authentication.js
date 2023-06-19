@@ -1,7 +1,8 @@
 
 let jwt=require("jsonwebtoken")
 require("dotenv").config()
-let SignupModel=require("../Models/LogSignup")
+let SignupModel=require("../Models/LogSignup");
+const AdminModel = require("../Models/Admin");
 function Authentication(req,res,next){
 
  let token=req?.headers?.authorization?.split(" ")[1]
@@ -24,4 +25,5 @@ function Authentication(req,res,next){
    });
 }
 
-module.exports=Authentication
+
+module.exports={Authentication}

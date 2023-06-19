@@ -11,13 +11,27 @@ const studentSchema = mongoose.Schema({
     contact:{type:Number,required:true},
     DOB: {type:String,required:true},
     transport: {type:Boolean,required:true},
+    test_score: {type:Number,required:false},
+     //////////////Following data is not need to pass in the body////////////////////
     userid: {type:String,required:true},
     Status: {type:Boolean,required:true},
-    test_score: {type:Number,required:true},
+
     transport_driver: {type:String,required:false},
     transport_conductor: {type:String,required:false},
     class_teacher: {type:String,required:false},
     class_teacher_id: {type:String,required:false},
+    january:{type:Boolean,required:false},
+    february:{type:Boolean,required:false},
+    march:{type:Boolean,required:false},
+    april:{type:Boolean,required:false},
+    may:{type:Boolean,required:false},
+    june:{type:Boolean,required:false},
+    july:{type:Boolean,required:false},
+    august:{type:Boolean,required:false},
+    september:{type:Boolean,required:false},
+    october:{type:Boolean,required:false},
+    november:{type:Boolean,required:false},
+    december:{type:Boolean,required:false},
 })
 
 
