@@ -28,11 +28,11 @@ function AdminChecking(req,res,next){
      // console.log(decoded)
     
      if(decoded){
-      let storedadmin=await AdminModel.findOne({_id:decoded.userid})
+      let storedadmin=await AdminModel.findOne({_id:decoded.adminid})
          
        if(storedadmin&&storedadmin.position==="Admin"||storedadmin.position==="Manager"){
       
-           req.body.userid=decoded.userid
+           req.body.adminid=decoded.adminid
            next()
        }else{
            res.status(400).send({"msg":"Not Authorised"})

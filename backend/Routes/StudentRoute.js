@@ -59,7 +59,7 @@ StudentRouter.get("/allStudents",AdminChecking,async(req,res)=>{
     }
 })
 
-StudentRouter.delete("deleteStudents/:id",async(req,res)=>{
+StudentRouter.delete("deleteStudents/:id",AdminChecking,async(req,res)=>{
     const {id} = req.params
     try {
        await StudentModel.findByIdAndDelete({_id:id})

@@ -67,7 +67,7 @@ adminRoutes.post("/loginadmin",async(req,res)=>{
                      let data= storeadmin[0]
          
                    
-                      let token = jwt.sign({ userid: data._id,position:data.position}, process.env.secretkey,{ expiresIn: "7d" });
+                      let token = jwt.sign({ adminid: data._id,position:data.position}, process.env.secretkey,{ expiresIn: "7d" });
                       res.status(200).send({"msg":`Successfully Login ${data.position}`,data:storeadmin[0],token,token})
                  }else{
                      res.status(400).send({"msg":"password is wrong"})

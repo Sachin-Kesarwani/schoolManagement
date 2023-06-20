@@ -10,6 +10,7 @@ const { StudentRouter } = require("./Routes/StudentRoute");
 
 const requestRoute = require("./Routes/RequestAuth");
 const adminRoutes = require("./Routes/AdminRoute");
+const assignmentRouter = require("./Routes/assignmentRoutes");
 
 require("dotenv").config()
 app.use(express.json())
@@ -23,7 +24,7 @@ app.use("/google",googleRouter)
 app.use("/request",requestRoute)
 app.use("/admin",adminRoutes)
 app.use("/student",StudentRouter)
-
+app.use("/assignment",assignmentRouter)
 
 
 app.listen(process.env.port,async()=>{

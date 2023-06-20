@@ -48,7 +48,7 @@ requestRoute.post("/add",Authentication,async(req,res)=>{
 
 requestRoute.patch("/update/:reqid",AdminChecking,async(req,res)=>{
     let data=req.body
-    // data={category:"name",new_data:"Aman",pre_data:"Sachin"}
+    // data={category:"name",new_data:"Aman",pre_data:"Sachin",aproved_change:true||false}
     let {reqid}=req.params
     console.log(data)
     try {
