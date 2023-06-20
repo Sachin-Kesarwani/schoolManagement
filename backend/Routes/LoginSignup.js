@@ -9,12 +9,28 @@ const session = require('express-session');
 var bcrypt = require('bcryptjs');
 
 var jwt = require('jsonwebtoken');
-const Authentication = require("../Middleware/Authentication");
+const {Authentication }= require("../Middleware/Authentication");
+const { AdminChecking } = require("../Middleware/AdminAuth");
 
 require("dotenv").config()
 userRoute.get("/",(req,res)=>{
     res.status(200).send({"msg":"Sinup and Login Basic Route"})
 })
+
+userRoute.get("/allusers",AdminChecking,async(req,res)=>{
+try {
+    let allusers=await SignupModel.find()
+    if(allusers.length>0){
+        res.status(200).send({msg:"These Are All Users",data:allusers})
+    }else{
+        res.status(404).send({msg:"Not Found",data:[]})
+    }
+  
+} catch (error) {
+    res.status(400).send({msg:"Something Went Wrong"})
+}
+})
+
 
 userRoute.post("/signup",async(req,res)=>{
     let data=req.body
@@ -84,7 +100,7 @@ userRoute.post("/login",async(req,res)=>{
 userRoute.patch("/passwordUpdate",Authentication,async(req,res)=>{
   
 let data=req.body
-
+//data={token,password,updated_password}
     try {
         bcrypt.hash(data.updated_password, 8,async function(err, hash) {
             data.password=hash

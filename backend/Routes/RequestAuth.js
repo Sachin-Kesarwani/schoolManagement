@@ -1,7 +1,8 @@
 
 let {Router}=require("express")
 const RequestModel = require("../Models/RequestModel")
-const Authentication = require("../Middleware/Authentication")
+const {Authentication}= require("../Middleware/Authentication")
+const {AdminChecking}=require("../Middleware/AdminAuth")
 const { StudentModel } = require("../Models/StudentModel")
 let requestRoute=Router()
 
@@ -45,8 +46,9 @@ requestRoute.post("/add",Authentication,async(req,res)=>{
 
 
 
-requestRoute.patch("/update/:reqid",async(req,res)=>{
+requestRoute.patch("/update/:reqid",AdminChecking,async(req,res)=>{
     let data=req.body
+    // data={category:"name",new_data:"Aman",pre_data:"Sachin",aproved_change:true||false}
     let {reqid}=req.params
     console.log(data)
     try {
@@ -70,7 +72,7 @@ requestRoute.patch("/update/:reqid",async(req,res)=>{
        res.status(400).send({msg:"Something went wrong"})
     }
 })
-requestRoute.patch("/reopenRequest/:reqid",async(req,res)=>{
+requestRoute.patch("/reopenRequest/:reqid",Authentication,async(req,res)=>{
     let {reason_message}=req.body
     let {reqid}=req.params
   
