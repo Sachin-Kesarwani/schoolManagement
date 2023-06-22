@@ -1,8 +1,9 @@
 import axios from "axios"
 import { LoginDataInter } from "../../Admin/AdminLogin"
-import { loading ,error} from "../AdminRedux/admin.type"
+import { loading ,error,getUserdata} from "../AdminRedux/admin.type"
 import { AppDispatch } from "../Store"
 import Cookies from "js-cookie"
+import { eachuserInter } from "../../utils/data.types"
 
 
 
@@ -10,14 +11,19 @@ import Cookies from "js-cookie"
 
 
 export interface loadinginter{
-    type:typeof loading
+    type:typeof loading;
+    payload?:eachuserInter[]
  }
  export interface errorinter{
-    type:typeof error
+    type:typeof error;
+    payload?:eachuserInter[]
  }
-
- export type authaction =loadinginter|errorinter
-
+export  interface getuserdatainter{
+   type:typeof getUserdata,
+   payload?:eachuserInter[]
+}
+ export type authaction =getuserdatainter|loadinginter|errorinter ;
+   
  function loadingType(){
     return{
      type:loading
@@ -29,6 +35,12 @@ export interface loadinginter{
      }
   }
 
+let  alluserType=(data:any)=>{
+   return{
+      type:getUserdata,
+      payload:data
+   }
+  }
 
   export let LoginAdmin=(data:LoginDataInter):any=>async(dispatch:AppDispatch)=>{
     dispatch(loadingType())
@@ -37,7 +49,7 @@ export interface loadinginter{
        console.log(response.data.data)
        if(response.request.status===200){
         Cookies.set('SchooleManagementAdminData',JSON.stringify(response.data.data) );
-        Cookies.set('SchooleManagementAdminToken',JSON.stringify(response.data.token) );
+        Cookies.set('SchooleManagementAdminToken',response.data.token);
 //localStorage.setItem("schoolManagemnetUserdata",JSON.stringify(response.data.data))
        }
     
@@ -52,3 +64,21 @@ export interface loadinginter{
       }
   }
  
+
+
+
+export let  getallusers=():any=>async(dispatch:AppDispatch)=>{
+      dispatch(loadingType())
+    try {
+      let token=Cookies.get("SchooleManagementAdminToken")
+      let response=await axios.get(`http://localhost:8080/user/allusers`,{headers:{
+        Authorization:`Bearer ${token}`
+      }})
+      console.log(response.data.data)
+     dispatch(alluserType(response.data.data))
+    
+      return response
+    } catch (error) {
+      
+    }
+}

@@ -4,14 +4,17 @@
 import { inidataType } from "../../utils/data.types"
 import { authaction } from "./action"
 import { loading,error, SIGNUP } from "./auth.type"
-
-let inidata={
+interface loginInter{
+    loading:Boolean,
+    error:Boolean
+}
+let inidataauth={
     loading:false,
     error:false,
   
 }
 
-export function reducer(state:inidataType=inidata,action:authaction){
+export function reducer(state:loginInter=inidataauth,action:authaction){
       switch(action.type){
         case(loading):{
             return {...state,loading:true}
