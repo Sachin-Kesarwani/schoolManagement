@@ -6,6 +6,18 @@ import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
 import { handleScrollToTop } from '../Important/scrollup';
 import { Button, message, Space } from 'antd';
+
+interface ObjectItem {
+  tag: 'p' | 'h1' | 'h2' | 'h4'|"li";
+  title: string;
+}
+
+const arrayOfObjects: ObjectItem[] = [
+  { tag: 'p', title: 'Paragrapdddddddddddddddddddddddddddddddddddddddddh' },
+  { tag: 'h1', title: 'Heading hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh1' },
+  { tag: 'h2', title: 'Heading ppppppppppppppppppppppppppppppppppppppppppppppppp2' },
+  { tag: 'li', title: 'Heading ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp4' }
+];
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,6 +89,29 @@ handleScrollToTop()
         </div>
       </form>
     </div>
+    {arrayOfObjects.map((obj, index) => {
+        let element: JSX.Element;
+        switch (obj.tag) {
+          case 'p':
+            element = <p key={index}>{obj.title}</p>;
+            break;
+          case 'h1':
+            element = <h1 key={index}>{obj.title}</h1>;
+            break;
+          case 'h2':
+            element = <h2 key={index}>{obj.title}</h2>;
+            break;
+          case 'h4':
+            element = <h4 key={index}>{obj.title}</h4>;
+            break;
+            case 'li':
+              element = <li key={index}>{obj.title}</li>;
+              break;
+          default:
+            element = <div key={index}>{obj.title}</div>;
+        }
+        return element;
+      })}
     </>
   );
 };

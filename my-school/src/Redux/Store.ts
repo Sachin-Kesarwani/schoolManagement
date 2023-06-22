@@ -1,14 +1,15 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import {reducer} from "../Redux/AuthRedux/reducer"
+import {reducer as AuthReducer} from "../Redux/AuthRedux/reducer"
+import {reducer as AdminReducer } from "../Redux/AdminRedux/reducer"
 
-// const rootReducer = combineReducers({
- 
+const rootReducer = combineReducers({
+ AuthReducer,AdminReducer
   
-// });
+});
 
-export const store = legacy_createStore(reducer, applyMiddleware(thunk));
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 
 export type AppDispatch = typeof store.dispatch;
 
