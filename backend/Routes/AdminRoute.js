@@ -17,7 +17,7 @@ try {
     res.status(400).send({msg:"Something went wrong"})
 }
 })
-adminRoutes.post("/addAdmins",adminmiddleware,async(req,res)=>{
+adminRoutes.post("/addAdmin",adminmiddleware,checkadmin,async(req,res)=>{
     //Followin commetout should be req body
     // let data={
     //     name:"Uzair Sheikh",

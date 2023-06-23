@@ -165,6 +165,7 @@ import Students from "./students";
 import Requests from "./Requests";
 import Addadmin from "./Addadmin";
 import Dashboard from "./Dashboard";
+import { PlusCircleOutlined } from "@ant-design/icons";
 interface arrinter {
   title: String;
   key?: number;
@@ -185,7 +186,7 @@ const Admin = () => {
   let [subhead, setsubhead] = useState<arrinter[]>(arr);
   let [showwelcomeToast,setwelcomeToast]=useState<Boolean>(true)
   let data=Cookies.get("SchooleManagementAdminData")||"{position:User}"
- let  userdata=JSON.parse(data)
+ let  admindata=JSON.parse(data)
  
   let [active, setActive] = useState(1);
   const [isOpen, setOpen] = useState(false)
@@ -214,6 +215,7 @@ const Admin = () => {
 useEffect(()=>{
   toastemitter()
 },[])
+console.log(admindata)
   return (
     <>
     <div>
@@ -227,8 +229,8 @@ useEffect(()=>{
                 className="eachdivSubheading"
                 style={{
                   display:
-                  userdata.position === "Admin" && el.title === "Teachers"
-                      ? "none": userdata.position === "Admin" && el.title === "Add New One"?"none"
+                  admindata.position === "Admin" && el.title === "Teachers"
+                      ? "none": (admindata.position === "Admin"||admindata.position === "Teacher" )&& el.title === "Add New One"?"none"
                       : "block",
                       borderLeft:active===el.key?"3px solid blue":"white",
                       backgroundColor:active===el.key?"white":"rgb(240, 248, 255)",
@@ -241,7 +243,7 @@ useEffect(()=>{
                     textAlign: "justify",
                   }}
                 >
-                  {el.title} {el.title==="Requests"? <Badge count={20} showZero color='#faad14' />:null}
+                  {el.title} {el.title==="Add New One"?<PlusCircleOutlined/>:null} {el.title==="Requests"? <Badge count={20} showZero color='#faad14' />:null}
                 </h2>
               </div>
             );

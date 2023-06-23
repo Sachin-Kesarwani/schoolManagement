@@ -17,5 +17,5 @@ export type RootState = ReturnType<typeof store.getState>;
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 // type DispatchFunc = () => AppDispatch;
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export let useAppDispatch: () => AppDispatch = useDispatch;
+export let useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

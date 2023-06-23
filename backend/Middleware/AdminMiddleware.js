@@ -3,11 +3,14 @@ let jwt=require("jsonwebtoken")
 
 
 async function adminmiddleware(req,res,next){
+
     let admindata=req.body
+   
     try {
         let storeddata=await AdminModel.find({email:admindata.email})
-        if(storeddata){
-          res.status(200).send({msg:"This user is already exist"})
+     
+        if(storeddata.length!==0){
+          res.status(403).send({msg:"This user is already exists"})
         }else{
          next()
         }
@@ -20,12 +23,12 @@ async function adminmiddleware(req,res,next){
 async function checkadmin(req,res,next){
  let token=req?.headers?.authorization?.split(" ")[1]
     var decoded = jwt.verify(token, process.env.secretkey);
-  console.log(decoded)
+ 
         try {
             if(decoded.position==="Manager"){
                 next()
             }else{
-              res.status(404).send({msg:"You are not authorized"})
+              res.status(401).send({msg:"You are not authorized"})
             }
         } catch (error) {
             res.status(400).send({msg:"Something Went Wrong"})
