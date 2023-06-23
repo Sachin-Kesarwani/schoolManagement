@@ -4,7 +4,8 @@ import { getallusers } from '../Redux/AdminRedux/action'
 import { Avatar, Badge, Button, Card, message, Space } from 'antd';
 import "../admincss/user.css"
 import { UserOutlined } from '@ant-design/icons';
-import { eachuserInter } from '../utils/data.types';
+import { eachuserInter, inidataType } from '../utils/data.types';
+
 // interface eachuserInter{
 //   email:String,
 //   name:String,
@@ -13,17 +14,36 @@ import { eachuserInter } from '../utils/data.types';
 // }
 
 const Users = () => {
-let dispatch=useAppDispatch()
+console.log("hii")
 const [messageApi, contextHolder] = message.useMessage();
-let [alldata,setalldata]=useState<eachuserInter[]>([])
-//let  alldata=useAppSelector((store)=>store?.AdminReducer?.alluserdata)
+let dispatch=useAppDispatch()
+
+let alldata = useAppSelector((state) => (state.AdminReducer as inidataType).alluserdatas);
+
 function getdata(){
   dispatch(getallusers()).then((res:any)=>{
+    console.log(res)
     if(res.request.status===200){
-     setalldata(res.data.data)
+   
       messageApi.open({
         type: 'success',
         content: res.data.msg,
+      });
+    }else if(res.request.status===400){
+      
+      messageApi.open({
+        type: 'error',
+        content: res.response.data.msg,
+      });
+    }else if(res.request.status===401){
+      messageApi.open({
+        type: 'error',
+        content: res.response.data.msg,
+      });
+    }else {
+      messageApi.open({
+        type: 'success',
+        content: res.response.data.msg,
       });
     }
 
@@ -32,7 +52,7 @@ function getdata(){
   useEffect(()=>{
     getdata()
   },[])
-  console.log(alldata)
+
   return (
     <>
      {contextHolder}
@@ -40,12 +60,12 @@ function getdata(){
       <h1 style={{color:"black"}}>Users</h1>
       <div className='ParentdivOfSingleuser'>
         {
-         alldata?.map((e:eachuserInter)=>{
-            return<div>
+         alldata?.map((e:eachuserInter,i)=>{
+            return<div key={i }>
        <Badge.Ribbon text={e.name}/>
        <Avatar style={{ backgroundColor: 'blue',color:"white",marginTop:"30px" }} icon={<UserOutlined />} />
-       <p>Email : {e.email}</p>
-       <p>Position :{e.position}</p>
+       <p style={{textAlign:"left",marginLeft:"8px"}}>Email : {e.email}</p>
+       <p style={{textAlign:"left",marginLeft:"8px"}}>Position :{e.position}</p>
        <button className='makesuserblockButton'>
     Block
     </button>

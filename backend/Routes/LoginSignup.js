@@ -18,6 +18,7 @@ userRoute.get("/",(req,res)=>{
 })
 
 userRoute.get("/allusers",AdminChecking,async(req,res)=>{
+ 
 try {
     let allusers=await SignupModel.find()
     if(allusers.length>0){

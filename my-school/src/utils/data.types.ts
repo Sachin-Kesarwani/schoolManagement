@@ -6,14 +6,17 @@ export interface signupformdataType{
     password:string
 }
 export interface eachuserInter{
-    email:String,
-    name:String,
-    position:String,
-    Password:String
+  _id:String;
+    email:String;
+    name:String;
+    position:String;
+    password:String;
+    __v:Number;
   }
 
   export interface inidataType{
     loading:Boolean;
     error:Boolean;
-    alluserdata:eachuserInter[];
+    alluserdatas:eachuserInter[];
 }
+

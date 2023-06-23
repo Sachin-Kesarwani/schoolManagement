@@ -12,30 +12,30 @@ import { eachuserInter } from "../../utils/data.types"
 
 export interface loadinginter{
     type:typeof loading;
-    payload?:eachuserInter[]
+  payload?:eachuserInter[]
  }
  export interface errorinter{
     type:typeof error;
-    payload?:eachuserInter[]
+   payload?:eachuserInter[]
  }
 export  interface getuserdatainter{
    type:typeof getUserdata,
    payload?:eachuserInter[]
 }
- export type authaction =getuserdatainter|loadinginter|errorinter ;
+ export type Adminaction =getuserdatainter|loadinginter|errorinter ;
    
- function loadingType(){
+ function loadingType():loadinginter{
     return{
      type:loading
     }
  }
- function errorType(){
+ function errorType():errorinter{
      return{
       type:error
      }
   }
 
-let  alluserType=(data:any)=>{
+let  alluserType=(data:eachuserInter[]):getuserdatainter=>{
    return{
       type:getUserdata,
       payload:data
@@ -79,6 +79,25 @@ export let  getallusers=():any=>async(dispatch:AppDispatch)=>{
     
       return response
     } catch (error) {
-      
+      return error
     }
 }
+
+export let addnewoneToorganisation = (data: any): any => async (dispatch: AppDispatch) => {
+  dispatch(loadingType());
+  try {
+    let token = Cookies.get("SchooleManagementAdminToken");
+    let response = await axios({
+      method: "post",
+      url: "http://localhost:8080/admin/addAdmin",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      data: data
+    });
+    console.log(response.data.data);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

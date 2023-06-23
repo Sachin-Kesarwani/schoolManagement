@@ -23,10 +23,11 @@ const AdminModel = require("../Models/Admin");
 // }
 
 function AdminChecking(req,res,next){
+
     let token=req?.headers?.authorization?.split(" ")[1]
+  
    jwt.verify(token, process.env.secretkey,async function(err, decoded) {
-     // console.log(decoded)
-    
+  
      if(decoded){
       let storedadmin=await AdminModel.findOne({_id:decoded.adminid})
          
@@ -35,10 +36,10 @@ function AdminChecking(req,res,next){
            req.body.adminid=decoded.adminid
            next()
        }else{
-           res.status(400).send({"msg":"Not Authorised"})
+           res.status(401).send({"msg":"Not Authorised"})
        }
      }else{
-       res.status(400).send({"msg":"Not Authorized"})
+       res.status(401).send({"msg":"Not Authorized"})
      }
       
      });

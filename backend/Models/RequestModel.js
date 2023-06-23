@@ -7,7 +7,8 @@ let RequestSchema=mongoose.Schema({
     new_data:String||number,
     cancel_request:{type:Boolean,require:false},
     status:{type:Boolean,require:false},
-    reason_message:{type:String,require:true}
+    reason_message:{type:String,require:true},
+    
     }
     )
 
