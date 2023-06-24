@@ -5,6 +5,8 @@ import { Avatar, Badge, Button, Card, message, Space } from 'antd';
 import "../admincss/user.css"
 import { UserOutlined } from '@ant-design/icons';
 import { eachuserInter, inidataType } from '../utils/data.types';
+import Cookies from 'js-cookie';
+import Unauthorised from './Unauthorised';
 
 // interface eachuserInter{
 //   email:String,
@@ -17,12 +19,13 @@ const Users = () => {
 console.log("hii")
 const [messageApi, contextHolder] = message.useMessage();
 let dispatch=useAppDispatch()
-
+let data=Cookies.get("SchooleManagementAdminData")||"{position:User}"
+let  admindata=JSON.parse(data)
 let alldata = useAppSelector((state) => (state.AdminReducer as inidataType).alluserdatas);
 
 function getdata(){
   dispatch(getallusers()).then((res:any)=>{
-    console.log(res)
+  
     if(res.request.status===200){
    
       messageApi.open({
@@ -56,7 +59,8 @@ function getdata(){
   return (
     <>
      {contextHolder}
-    <div>
+     {
+      admindata.position==="Teacher"||admindata.position==="Admin"?<Unauthorised/>:  <div>
       <h1 style={{color:"black"}}>Users</h1>
       <div className='ParentdivOfSingleuser'>
         {
@@ -75,6 +79,8 @@ function getdata(){
       </div>
     
     </div>
+     }
+  
     </>
   )
 }
