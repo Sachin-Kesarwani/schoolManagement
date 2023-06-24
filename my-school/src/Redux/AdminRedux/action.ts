@@ -1,9 +1,9 @@
 import axios from "axios"
 import { LoginDataInter } from "../../Admin/AdminLogin"
-import { loading ,error,getUserdata} from "../AdminRedux/admin.type"
+import { loading ,error,getUserdata, getadmin, getteacher} from "../AdminRedux/admin.type"
 import { AppDispatch } from "../Store"
 import Cookies from "js-cookie"
-import { eachuserInter } from "../../utils/data.types"
+import { eachuserInter, singleTeacherOrAdmin } from "../../utils/data.types"
 
 
 
@@ -22,7 +22,11 @@ export  interface getuserdatainter{
    type:typeof getUserdata,
    payload?:eachuserInter[]
 }
- export type Adminaction =getuserdatainter|loadinginter|errorinter ;
+export  interface getteacherinter{
+  type:typeof getteacher,
+  payload?:singleTeacherOrAdmin[]
+}
+ export type Adminaction =getuserdatainter|loadinginter|errorinter|getteacherinter ;
    
  function loadingType():loadinginter{
     return{
@@ -38,6 +42,13 @@ export  interface getuserdatainter{
 let  alluserType=(data:eachuserInter[]):getuserdatainter=>{
    return{
       type:getUserdata,
+      payload:data
+   }
+  }
+
+  let allTeaherType=(data:singleTeacherOrAdmin[]):getteacherinter=>{
+    return{
+      type:getteacher,
       payload:data
    }
   }
@@ -101,3 +112,16 @@ export let addnewoneToorganisation = (data: any): any => async (dispatch: AppDis
     return error;
   }
 };
+
+
+export let GetAllTeacheresFromServer=(role:String):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingType())
+    try {
+      let token = Cookies.get("SchooleManagementAdminToken");
+      let response=await axios.get(`http://localhost:8080/admin/all?role=${role}`,{headers:{Authorization:`Bearer ${token}`}})
+      dispatch(allTeaherType(response.data.data))
+     return response
+    } catch (error) {
+      return error
+    }
+}
