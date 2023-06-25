@@ -7,6 +7,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { eachuserInter, inidataType } from '../utils/data.types';
 import Cookies from 'js-cookie';
 import Unauthorised from './Unauthorised';
+import LoadingModal from './Loading';
 
 // interface eachuserInter{
 //   email:String,
@@ -19,13 +20,15 @@ const Users = () => {
 console.log("hii")
 const [messageApi, contextHolder] = message.useMessage();
 let dispatch=useAppDispatch()
+let [loading,setLoading]=useState<Boolean>(false)
 let data=Cookies.get("SchooleManagementAdminData")||"{position:User}"
 let  admindata=JSON.parse(data)
 let alldata = useAppSelector((state) => (state.AdminReducer as inidataType).alluserdatas);
 
 function getdata(){
+  setLoading(true)
   dispatch(getallusers()).then((res:any)=>{
-  
+  setLoading(false)
     if(res.request.status===200){
    
       messageApi.open({
@@ -43,12 +46,13 @@ function getdata(){
         type: 'error',
         content: res.response.data.msg,
       });
-    }else {
-      messageApi.open({
-        type: 'success',
-        content: res.response.data.msg,
-      });
     }
+    // else {
+    //   messageApi.open({
+    //     type: 'success',
+    //     content: res.response.data.msg,
+    //   });
+    // }
 
   })
 }
@@ -60,7 +64,7 @@ function getdata(){
     <>
      {contextHolder}
      {
-      admindata.position==="Teacher"||admindata.position==="Admin"?<Unauthorised/>:  <div>
+      admindata.position==="Teacher"||admindata.position==="Admin"?<Unauthorised/>: loading?<LoadingModal />: <div>
       <h1 style={{color:"black"}}>Users</h1>
       <div className='ParentdivOfSingleuser'>
         {
@@ -68,8 +72,8 @@ function getdata(){
             return<div key={i }>
        <Badge.Ribbon text={e.name}/>
        <Avatar style={{ backgroundColor: 'blue',color:"white",marginTop:"30px" }} icon={<UserOutlined />} />
-       <p style={{textAlign:"left",marginLeft:"8px"}}>Email : {e.email}</p>
-       <p style={{textAlign:"left",marginLeft:"8px"}}>Position :{e.position}</p>
+       <p style={{textAlign:"left",marginLeft:"8px"}}><b>Email</b> : {e.email}</p>
+       <p style={{textAlign:"left",marginLeft:"8px"}}><b>Position</b> :{e.position}</p>
        <button className='makesuserblockButton'>
     Block
     </button>

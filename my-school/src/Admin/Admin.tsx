@@ -186,7 +186,7 @@ const Admin = () => {
   let [subhead, setsubhead] = useState<arrinter[]>(arr);
   let [showwelcomeToast,setwelcomeToast]=useState<Boolean>(true)
   let data=Cookies.get("SchooleManagementAdminData")||"{position:User}"
- let  admindata=JSON.parse(data)
+  let  admindata=JSON.parse(data)
  
   let [active, setActive] = useState(1);
   const [isOpen, setOpen] = useState(false)
@@ -218,7 +218,7 @@ useEffect(()=>{
 console.log(admindata)
   return (
     <>
-    <div>
+    <div style={{fontFamily:"sans-serif"}}>
       <div className="maindiv" >
         <div className="maindivSubheading">
           {subhead.map((el, i) => {
@@ -255,6 +255,9 @@ console.log(admindata)
         <MobileDrawer/>
         </div>
         <div className="subheadingDetails">
+          <div >
+<h2 style={{color:"black",textAlign:"left",fontFamily:"sans-serif"}}> 👋 , {admindata.name}</h2>
+          </div>
    {
     active===1?<Dashboard/>:active===2?<Users/>:active===3?<Teachers/>:active===4?<Alladmins/>:active===5?<Students/>:active===6?<Requests/>:active===7?<Addadmin/>:null
    }
