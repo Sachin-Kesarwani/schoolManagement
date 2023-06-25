@@ -1,0 +1,124 @@
+{
+    "data":[
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "What&#039;s the square root of 49?",
+        "correct_answer": "7",
+        "incorrect_answers": [
+        "4",
+        "12",
+        "9"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "What prime number comes next after 19?",
+        "correct_answer": "23",
+        "incorrect_answers": [
+        "25",
+        "21",
+        "27"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "What Greek letter is used to signify summation?",
+        "correct_answer": "Sigma",
+        "incorrect_answers": [
+        "Delta",
+        "Alpha",
+        "Omega"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "What is the symbol for Displacement?",
+        "correct_answer": "&Delta;r",
+        "incorrect_answers": [
+        "dr",
+        "Dp",
+        "r"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "How many sides does a heptagon have?",
+        "correct_answer": "7",
+        "incorrect_answers": [
+        "8",
+        "6",
+        "5"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "What is the plane curve proposed by Descartes to challenge Fermat&#039;s extremum-finding techniques called?",
+        "correct_answer": "Folium of Descartes",
+        "incorrect_answers": [
+        "Elliptic Paraboloid of Descartes",
+        "Cartesian Coordinates",
+        "Descarte&#039;s Helicoid"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "What is the correct order of operations for solving equations?",
+        "correct_answer": "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+        "incorrect_answers": [
+        "Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+        "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+        "The order in which the operations are written."
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Which of the following famous mathematicians died in a duel at the age of 20?",
+        "correct_answer": "Galois",
+        "incorrect_answers": [
+        "Abel",
+        "Euler",
+        "Gauss"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "What is the smallest number that can be expressed as the sum of two positive cubes in two different ways?",
+        "correct_answer": "1729",
+        "incorrect_answers": [
+        "91",
+        "561",
+        "4104"
+        ]
+        },
+        {
+        "category": "Science: Mathematics",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "What type of function is x&sup2;+2x+1?",
+        "correct_answer": "Quadratic",
+        "incorrect_answers": [
+        "Rational",
+        "Linear",
+        "Exponential"
+        ]
+        }
+        ]
+}

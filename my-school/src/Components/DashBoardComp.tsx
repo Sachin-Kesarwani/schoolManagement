@@ -14,6 +14,9 @@ import DoughnutChartfun from "./ChartData";
 import ChartData from "./ChartData";
 import Attendence from "./Attendence";
 import AppStatus from "./AppStatus";
+import { useNavigate } from "react-router";
+import Form from "./FormComp";
+import Test from "./Test";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -35,47 +38,28 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem("Statistics", "1", <PieChartOutlined />),
-  getItem("Assignment", "2", <DesktopOutlined />),
+  getItem("Admissions", "2", <PieChartOutlined />),
+  getItem("Assignment", "3", <DesktopOutlined />),
   getItem("UserInfo", "sub1", <UserOutlined />, [
-    getItem("Attendence", "3"),
-    getItem("Application Status", "4"),
+    getItem("Attendence", "4"),
+    getItem("Application Status", "5"),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem("Files", "9", <FileOutlined />),
+  getItem("Test", "sub2", <TeamOutlined />),
+  // getItem("Files", "9", <FileOutlined />),
 ];
 
 const DashBoardComp: React.FC = () => {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const [assignment,setassignment]=useState<boolean>(false)
-  const [attendence,setattendence]=useState<boolean>(false)
-  const [stats,setstats]=useState<boolean>(false)
-  const [userinfo,setuserinfo]=useState<boolean>(false)
- 
+  const [value,setvalue]=useState<string>("Statistics")
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const handlecomponents = (e: any) => {
-    let value = e.domEvent.target.innerText;
-
-    if(value=="Assignment"){
-      setassignment(true)
-      setstats(false)
-      setattendence(false)
-    }else if(value=="Attendence"){
-      setattendence(true)
-      setassignment(false)
-      setstats(false)
-    }else if(value=="Application Status"){
-      setattendence(false)
-      setassignment(false)
-      setstats(true)
-    }
-
-
+    let v = e.domEvent.target.innerText;
+    setvalue(v)
   };
 
   return (
@@ -97,10 +81,6 @@ const DashBoardComp: React.FC = () => {
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }} />
         <Content style={{ margin: "0 16px" }}>
-          {/* <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb> */}
           <div
             style={{
               padding: 24,
@@ -108,10 +88,8 @@ const DashBoardComp: React.FC = () => {
               background: colorBgContainer,
             }}
           >
-            <ChartData/>
-            {assignment && <Assignment />}
-            {attendence && <Attendence />}
-            {stats && <AppStatus />}
+
+          {value==="Test"?<Test/>:value==="Admissions"?<Form />:value==="Assignment"?<Assignment/>:value==="Attendence"?<Attendence/>:value==="Application Status"?<AppStatus />:value==="Statistics"?<ChartData/>:<ChartData />}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
