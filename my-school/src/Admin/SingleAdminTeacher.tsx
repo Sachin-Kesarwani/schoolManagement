@@ -5,8 +5,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Button } from "antd/es/radio";
 
 const SingleAdminTeacher = ({ data }: { data: singleTeacherOrAdmin }) => {
-  console.log(data);
-  data.march = true;
+ 
   return (
     <div
       key={data.email}

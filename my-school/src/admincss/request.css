@@ -1,0 +1,44 @@
+.user-profile-card {
+    max-width: 270px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cover-image {
+    height: 120px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .cover-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .avatar {
+    display: flex;
+    justify-content: center;
+    margin-top: -64px;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .details {
+    margin-top: 16px;
+  }
+  
+  .follow-button {
+    margin-top: auto;
+  }
+  
