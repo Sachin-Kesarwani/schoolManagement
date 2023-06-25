@@ -11,6 +11,11 @@ import ForgetPasswordForm from '../SignupLogin/ForgetPassword'
 
 import ContactUs from '../Pages/ContactUs'
 import DashBoard from '../Pages/DashBoard'
+import Assignment from './Assignment'
+import Attendence from './Attendence'
+import ChartData from './ChartData'
+import AppStatus from './AppStatus'
+import Form from './FormComp'
 
 const AllRoutes = () => {
   return (
