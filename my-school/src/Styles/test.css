@@ -11,6 +11,15 @@
     min-height: 300px;
     margin: auto;
   }
+
+  .opt.active{
+    background: green;
+    z-index: 1;
+  }
+  .opt.active2{
+    background: red;
+    z-index: 1;
+  }
   
   .small-text, #title2,.desc {
     font-weight: 600;
@@ -115,13 +124,22 @@
     cursor: pointer;
   }
   .options p:hover{
-    background: royalblue;
+    /* background: royalblue; */
+    cursor: pointer;
   }
-
+.time{
+  background: red;
+  font-size: 25px;
+  border-radius: 20px;
+  display: inline-block;
+  max-width: 100%;
+  padding: 10px;
+  color:white;
+}
 
 .buttons{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 
@@ -133,6 +151,10 @@
     border-radius: 15px;
     font-size: 20px;
     cursor: pointer;
+  }
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
   .next{
     padding: 10px;

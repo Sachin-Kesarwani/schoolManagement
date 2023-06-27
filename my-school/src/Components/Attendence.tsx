@@ -4,6 +4,7 @@ import { Card, Col, Row, Statistic } from 'antd';
 
 const Attendence: React.FC = () => (
     <>
+   
     <h1 style={{color:"black",fontSize:"30px",textAlign:"center",marginBottom:"50px"}}>Attendence</h1>
   <Row gutter={16}>
     <Col span={12}>
