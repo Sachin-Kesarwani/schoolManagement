@@ -1,6 +1,9 @@
 import React from 'react'
-
-const ServicesCard = ({img}:any) => {
+interface typeimgandname{
+  name:string,
+  img:string
+}
+const ServicesCard = ({img,name}:typeimgandname) => {
   return (
     <div className="container noselect">
     <div className="canvas">
@@ -31,8 +34,8 @@ const ServicesCard = ({img}:any) => {
       <div className="tracker tr-25"></div>
       <div id="card">
        <img width={"100%"} height={"100%"} src={img} alt="" />
-      <p id="prompt">HOVER OVER :D</p>
-        <div className="title">look mom</div>
+      <p id="prompt">HOVER TO SEE SERVICES</p>
+        <div className="title">{name}</div>
         {/* <div className="subtitle">
           services
         </div> */}
