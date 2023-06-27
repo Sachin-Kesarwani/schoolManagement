@@ -10,6 +10,9 @@ import SimpleSlider from './Pages/Test1';
 import Navbar from './Components/Navbar';
 import CardsComp from './Components/CardsComp';
 import Footer from './Components/Footer';
+import ExpensiveComponent from './Admin/Test';
+import AssignmentForm from './Admin/Test';
+import Github from './Admin/Github';
 
 
 function App() {
@@ -19,7 +22,7 @@ function App() {
   return (
     <div className="App">
       {!param&&  <Navbar/>}
-    
+
      <AllRoutes/>
      <Footer/>
     </div>

@@ -147,6 +147,8 @@ import {
   UserOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { AddAssignmenttoStudents } from "../Redux/AdminRedux/action";
 
 const { Option } = Select;
 
@@ -155,43 +157,68 @@ interface Assignment {
   message: string;
 }
 
-interface FormValues {
+export interface AssignmentFormValues {
   class: number;
   teacher: string;
   assignmet_topic: string;
   assignment: Assignment[];
+  timeLine: {
+  
+    $D: number;
+    $H: number;
+    $L: string;
+    $M: number;
+    $W: number;
+    $d: Date;
+    $m: number;
+    $ms: number;
+    $s: number;
+    $u: undefined;
+    $x: {};
+    $y: number;
+
+  }|undefined|string;
+
 }
 
-const MyForm: React.FC = () => {
+const Addassignment = () => {
   const [form] = Form.useForm();
   const [assignments, setAssignments] = useState<Assignment[]>([]);
-  const [assignmentss, setAssignmentss] = useState<Assignment[]>([]);
-  const onFinish = (values: FormValues) => {
-    console.log(values);
+let [loading,setLoading]=useState(false)
+  let dispatch=useDispatch()
+  const onFinish = (values: AssignmentFormValues) => {
+   // console.log(values);
 
     const assignmentValues = Object.values(values).filter(
       (value) => typeof value === "object" &&value.tag&&value.message
     );
-
+  
+    let timeLineDate = '';
+  if (values.timeLine && typeof values.timeLine !== 'string' && values.timeLine.$d) {
+    timeLineDate = moment(values.timeLine.$d).format("DD-MM-YY");
+  }
     let data={
       class:values.class,
       teacher:values.teacher,
       assignmet_topic:values.assignmet_topic,
       assignment:assignmentValues,
-      timeLine:{type:String,required:true},
-      endAssignment:{type:Boolean,required:false}
+      timeLine:timeLineDate,
+      
     }
-console.log(assignmentValues,"174")
-    const newAssignments: Assignment[] = assignmentValues.map(
-      (assignmentValue) => {
-        return {
-          tag: assignmentValue.tag,
-          message: assignmentValue.message,
-        };
-      }
-    );
+    setLoading(true)
+dispatch(AddAssignmenttoStudents(data)).then((res:any)=>{
+setLoading(false)
+})
+    // const newAssignments: Assignment[] = assignmentValues.map(
+    //   (assignmentValue) => {
+    //     return {
+    //       tag: assignmentValue.tag,
+    //       message: assignmentValue.message,
+    //     };
+    //   }
+    // );
 
-    setAssignmentss(newAssignments);
+    // setAssignmentss(newAssignments);
   };
 
   const handleAddAssignment = () => {
@@ -216,7 +243,7 @@ console.log(assignmentValues,"174")
     return date ? date : null;
   };
   return (
-    <Form<FormValues>
+    <Form<AssignmentFormValues>
       form={form}
       onFinish={onFinish}
       className="form"
@@ -284,7 +311,7 @@ console.log(assignmentValues,"174")
           Add Assignment
         </Button>
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
             name="timeLine"
             rules={[{ required: true, message: "Please select a date" }]}
             getValueFromEvent={getValueFromEvent
@@ -297,14 +324,21 @@ console.log(assignmentValues,"174")
         
           format="DD-MM-YYYY" 
           className="select" />
-      </Form.Item>
+      </Form.Item> */}
+      <Form.Item
+  name="timeLine"
+  rules={[{ required: true, message: "Please select a date" }]}
+  getValueFromEvent={getValueFromEvent}
+>
+  <DatePicker placeholder="Select a date" format="MM-DD-YY" className="select" />
+</Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+         {loading?"Adding...":"Add"}
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default MyForm;
+export default Addassignment;

@@ -166,6 +166,8 @@ import Requests from "./Requests";
 import Addadmin from "./Addadmin";
 import Dashboard from "./Dashboard";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import MyForm from "./Test";
+import Addassignment from "./Addassignmet";
 interface arrinter {
   title: String;
   key?: number;
@@ -179,7 +181,8 @@ let arr: arrinter[] = [
   { title: "Admins", key: 4 },
   { title: "Students", key: 5 },
   { title: "Requests", key: 6},
-  { title: "Add New One", key: 7}
+  { title: "Add New One", key: 7},
+  { title: "Add Assignment", key: 8}
 ];
 
 const Admin = () => {
@@ -259,7 +262,7 @@ console.log(admindata)
 <h2 style={{color:"black",textAlign:"left",fontFamily:"sans-serif"}}> 👋 , {admindata.name}</h2>
           </div>
    {
-    active===1?<Dashboard/>:active===2?<Users/>:active===3?<Teachers/>:active===4?<Alladmins/>:active===5?<Students/>:active===6?<Requests/>:active===7?<Addadmin/>:null
+    active===1?<Dashboard/>:active===2?<Users/>:active===3?<Teachers/>:active===4?<Alladmins/>:active===5?<Students/>:active===6?<Requests/>:active===7?<Addadmin/>:active===8?<Addassignment/>:null
    }
 
 
