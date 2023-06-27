@@ -243,11 +243,13 @@ setLoading(false)
     return date ? date : null;
   };
   return (
-    <Form<AssignmentFormValues>
+    <div >
+      <h2>Add Assignment</h2>
+  <Form<AssignmentFormValues>
       form={form}
       onFinish={onFinish}
       className="form"
-      style={{ maxWidth: "400px", padding: "20px" }}
+      style={{ maxWidth: "400px", padding: "20px" ,margin:"auto"}}
     >
       <Form.Item
         name="class"
@@ -338,6 +340,8 @@ setLoading(false)
         </Button>
       </Form.Item>
     </Form>
+    </div>
+  
   );
 };
 
