@@ -193,3 +193,15 @@ export let AddAssignmenttoStudents=(data:AssignmentFormValues):any=>async(dispat
       return error
     }
 }
+
+export let UpdatedataForRequests=(data:any):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingType())
+    try {
+      let token = Cookies.get("SchooleManagementAdminToken");
+      let response=await axios.patch(`http://localhost:8080/request/update/${data.reqid}`,data,{headers:{Authorization:`Bearer ${token}`}})
+      // dispatch(allRaisedRequest(response.data.requests))
+     return response
+    } catch (error) {
+      return error
+    }
+}

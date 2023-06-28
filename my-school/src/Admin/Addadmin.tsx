@@ -167,19 +167,20 @@ import {
   LockOutlined,
   PlusOutlined,
   PlusCircleOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 import { useAppDispatch } from "../Redux/Store";
 import { addnewoneToorganisation } from "../Redux/AdminRedux/action";
 
 const { Option } = Select;
 
-const data = {
-  name: "Uzair Sheikh",
-  email: "uzairsheikh@gmail.com",
-  position: "Manager",
-  password: "uzairsheikh",
-  salary_permoth: 10000,
-};
+// const data = {
+//   name: "Uzair Sheikh",
+//   email: "uzairsheikh@gmail.com",
+//   position: "Manager",
+//   password: "uzairsheikh",
+//   salary_permoth: 10000,
+// };
 
 const Addadmin = () => {
   const [checkforteacher, setCheckforTeacher] = useState<string>("");
@@ -219,6 +220,11 @@ const Addadmin = () => {
     setCheckforTeacher(value);
   };
 
+  const handleFormReset = () => {
+    form.resetFields();
+    setCheckforTeacher("")
+  };
+
   return (
     <>
       {contextHolder}
@@ -228,7 +234,7 @@ const Addadmin = () => {
       <Form
         form={form}
         onFinish={onFinish}
-        initialValues={data}
+        // initialValues={data}
         className="form"
       >
         <Form.Item
@@ -321,11 +327,22 @@ const Addadmin = () => {
             type="number"
           />
         </Form.Item>
+        <div style={{display:"flex",justifyContent:"center"}}>
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
+        <Button
+            type="default"
+            onClick={handleFormReset}
+            style={{ marginLeft: 10 }}
+            icon={<ReloadOutlined />}
+          >
+            Refresh
+          </Button>
+        </div>
+      
       </Form>
     </>
   );

@@ -36,7 +36,7 @@ try {
    if(data){
     next()
    }else{
-    res.status(401).send({msg:"401 Unauthorized"})
+    res.status(404).send({msg:"Not Found"})
    }
 } catch (error) {
     res.status(400).send({msg:"Something Went Wrong"})

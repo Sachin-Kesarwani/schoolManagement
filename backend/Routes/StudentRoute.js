@@ -79,8 +79,6 @@ StudentRouter.patch("/update/:id",AdminChecking,async(req,res)=>{
         
     }
 })
-
-
 StudentRouter.get("/allStudents/:userid",Authentication,async(req,res)=>{
     let {userid}=req.params
       try {
@@ -90,8 +88,6 @@ StudentRouter.get("/allStudents/:userid",Authentication,async(req,res)=>{
         res.status(400).send({msg:"Something went wrong"})
       }
 })
-
-
 
 StudentRouter.get("/EnrolledAllStudents",AdminChecking,async(req,res)=>{
   

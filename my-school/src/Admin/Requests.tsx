@@ -7,6 +7,7 @@ import { message } from 'antd'
 import { useAppSelector } from '../Redux/Store'
 import { RaisesdrequestInter, inidataType } from '../utils/data.types'
 import LoadingModal from './Loading'
+import Nothing from './Nothing'
 
 const Requests = () => {
   let dispatch=useDispatch()
@@ -46,7 +47,7 @@ dispatch(GetAllRaisedRequests()).then((res:any)=>{
     getdata()
   },[])
   console.log(allRequests)
-  return (
+  return allRequests.length===0?<Nothing/>:(
     <>
     {contextHolder}
     {

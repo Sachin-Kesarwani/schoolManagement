@@ -168,6 +168,9 @@ import Dashboard from "./Dashboard";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import MyForm from "./Test";
 import Addassignment from "./Addassignmet";
+import { useAppDispatch, useAppSelector } from "../Redux/Store";
+import { GetAllEnrolledStudents, GetAllRaisedRequests, GetAllTeacheresFromServer, getallusers } from "../Redux/AdminRedux/action";
+import { inidataType } from "../utils/data.types";
 interface arrinter {
   title: String;
   key?: number;
@@ -190,16 +193,15 @@ const Admin = () => {
   let [showwelcomeToast,setwelcomeToast]=useState<Boolean>(true)
   let data=Cookies.get("SchooleManagementAdminData")||"{position:User}"
   let  admindata=JSON.parse(data)
+let allRequests=useAppSelector((state) => (state.AdminReducer as inidataType).allRequest)
  
   let [active, setActive] = useState(1);
   const [isOpen, setOpen] = useState(false)
+  let dispatch=useAppDispatch()
   function handleChangesubheading(val: number) {
     setActive(val);
   }
 
-  function openDrawer(){
-
-  }
 
     function toastemitter(){
     toast.success('🦄 ! Welcome To Admin Panel !', {
@@ -218,7 +220,14 @@ const Admin = () => {
 useEffect(()=>{
   toastemitter()
 },[])
-console.log(admindata)
+
+useEffect(()=>{
+dispatch(GetAllTeacheresFromServer("Teacher"))
+dispatch(GetAllTeacheresFromServer("Admin"))
+dispatch(getallusers())
+dispatch(GetAllEnrolledStudents())
+dispatch(GetAllRaisedRequests())
+},[])
   return (
     <>
     <div style={{fontFamily:"sans-serif"}}>
@@ -246,7 +255,7 @@ console.log(admindata)
                     textAlign: "justify",
                   }}
                 >
-                  {el.title} {el.title==="Add New One"?<PlusCircleOutlined/>:null} {el.title==="Requests"? <Badge count={20} showZero color='#faad14' />:null}
+                  {el.title} {el.title==="Add New One"?<PlusCircleOutlined/>:null} {el.title==="Requests"? <Badge count={allRequests.length} showZero color='#faad14' />:null}
                 </h2>
               </div>
             );

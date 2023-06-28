@@ -4,6 +4,7 @@ const RequestModel = require("../Models/RequestModel")
 const {Authentication}= require("../Middleware/Authentication")
 const {AdminChecking}=require("../Middleware/AdminAuth")
 const { StudentModel } = require("../Models/StudentModel")
+let mongoose=require("mongoose")
 let requestRoute=Router()
 
 requestRoute.get("/",(req,res)=>{
@@ -22,8 +23,14 @@ requestRoute.get("/all/:studentid",Authentication,async(req,res)=>{
 requestRoute.get("/all",AdminChecking,async(req,res)=>{
 
     try {
-        let alldata=await RequestModel.find()
-        res.status(200).send({msg:"Raised Requests",requests:alldata})
+        let alldata=await RequestModel.find({status:false})
+        console.log(alldata)
+        if(alldata.length==0){
+            res.status(200).send({msg:"No Raised Requests",requests:[]})
+        }else{
+            res.status(200).send({msg:"Raised Requests",requests:alldata})
+        }
+        
     } catch (error) {
         res.status(400).send({msg:"Something went wrong"})
     }
@@ -53,17 +60,24 @@ requestRoute.patch("/update/:reqid",AdminChecking,async(req,res)=>{
     let data=req.body
     // data={category:"name",new_data:"Aman",pre_data:"Sachin",aproved_change:true||false}
     let {reqid}=req.params
-    console.log(data)
+  delete data.reqid
+
     try {
        if(data.aproved_change==true){
         let category=data.category
-      
-        let newdataTochange=data.new_data
-        let updateit={[category]:newdataTochange}
+     delete data.aproved_change
+     let newdataTochange=data.new_data
+     if(data.category=="aadhar"||data.category==="contact"||data.category==="class"){
+        newdataTochange=Number(newdataTochange)
+     }
+ 
     
+        let updateit={[category]:newdataTochange}
+
         await StudentModel.findByIdAndUpdate({_id:data.student_id},updateit)
         await RequestModel.findByIdAndUpdate({_id:reqid},{status:true})
-       res.status(200).send({msg:"Successfully Updated"})
+        let data=await StudentModel.find({_id:data.student_id})
+       res.status(200).send({msg:"Successfully Updated",data})
        }else{
         await RequestModel.findByIdAndUpdate({_id:reqid},{cancel_request:true})
         res.status(200).send({msg:"Request cancelled"})
