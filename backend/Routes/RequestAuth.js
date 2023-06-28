@@ -10,16 +10,24 @@ requestRoute.get("/",(req,res)=>{
     res.status(200).send({"msg":"RequestRout"})
 })
 
-requestRoute.get("/all:/studentid",Authentication,async(req,res)=>{
-        
+requestRoute.get("/all/:studentid",Authentication,async(req,res)=>{
+        let {studentid}=req.params
         try {
-            let alldata=await RequestModel.find({student_id})
+            let alldata=await RequestModel.find({student_id:studentid})
             res.status(200).send({msg:"Successfully get",requests:alldata})
         } catch (error) {
             res.status(400).send({msg:"Something went wrong"})
         }
-        })
+})
+requestRoute.get("/all",AdminChecking,async(req,res)=>{
 
+    try {
+        let alldata=await RequestModel.find()
+        res.status(200).send({msg:"Raised Requests",requests:alldata})
+    } catch (error) {
+        res.status(400).send({msg:"Something went wrong"})
+    }
+})
 requestRoute.post("/add",Authentication,async(req,res)=>{
     //sample={
     // userid:{type:String,require:true},
@@ -27,7 +35,6 @@ requestRoute.post("/add",Authentication,async(req,res)=>{
     // category:{type:String,require:true},
     // previous_data:String||number,
     // new_data:String||number,
-
     // reason_message:{type:String,require:true}
     // }
     let requestdata=req.body
@@ -42,10 +49,6 @@ requestRoute.post("/add",Authentication,async(req,res)=>{
         res.status(400).send({msg:"Something went wrong"})
     }
 })
-
-
-
-
 requestRoute.patch("/update/:reqid",AdminChecking,async(req,res)=>{
     let data=req.body
     // data={category:"name",new_data:"Aman",pre_data:"Sachin",aproved_change:true||false}
@@ -79,7 +82,7 @@ requestRoute.patch("/reopenRequest/:reqid",Authentication,async(req,res)=>{
     try {
 
         await RequestModel.findByIdAndUpdate({_id:reqid},{cancel_request:false,status:false,reason_message})
-       res.status(200).send({msg:"Successfully Reopen Request"})
+       res.status(200).send({msg:"Reopen Request"})
      
       
         

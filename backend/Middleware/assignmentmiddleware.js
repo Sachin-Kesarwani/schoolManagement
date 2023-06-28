@@ -15,7 +15,7 @@ function assignmentmiddleware(req,res,next){
        let storedadmin=await AdminModel.findOne({_id:decoded.adminid})
        
         if(storedadmin&&storedadmin.position==="Admin"||storedadmin.position==="Manager"||storedadmin.position==="Teacher"){
-       
+          console.log(req.body)
             req.body.teacherid=decoded.adminid
             next()
         }else{

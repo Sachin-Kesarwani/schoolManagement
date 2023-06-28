@@ -11,7 +11,8 @@ let assignmentSchema=mongoose.Schema({
     assignmet_topic:{type:String,required:true},
     assignment: { type: [ singleassignment ], required: true },
     timeLine:{type:String,required:true},
-    endAssignment:{type:Boolean,required:false}
+    endAssignment:{type:Boolean,required:false},
+    teacherid:String
 })
 
 let assignmentModel=mongoose.model("assignment",assignmentSchema)

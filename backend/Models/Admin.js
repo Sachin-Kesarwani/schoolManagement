@@ -5,6 +5,7 @@ let AdminSchema=mongoose.Schema({
     password:{type:String,required:true},
     position:{type:String,required:false},
     salary_permoth:{type:Number,require:true},
+    preferred_subject:{type:String,required:false},
     delete_Admin:Boolean,
     january:Boolean,
     february:Boolean,
