@@ -9,10 +9,15 @@ adminRoutes.get("/",async(req,res)=>{
     res.status(200).send({msg:"admin basic routes"})
 })
 adminRoutes.get("/all",checkadmin,async(req,res)=>{
-
+   let {role}=req.query  //title can be Manager ,Teacher ,Admin
 try {
-    let alldata=await AdminModel.find()
-    res.status(200).send({msg:"Successfully get All admins",data:alldata})
+    let alldata=await AdminModel.find({position:role})
+   
+    if(alldata.length>0){
+        res.status(200).send({msg:`Successfully get All ${role}`,data:alldata})
+    }else{
+        res.status(404).send({msg:`Not Found`,data:[]})
+    }
 } catch (error) {
     res.status(400).send({msg:"Something went wrong"})
 }
@@ -26,8 +31,8 @@ adminRoutes.post("/addAdmin",adminmiddleware,checkadmin,async(req,res)=>{
     //     password:"uzairsheikh",
     //     salary_permoth:10000
     // }
-   
     let admindata=req.body
+    console.log(admindata)
        let allsalary={ january:false,
         february:false,
         march:false,

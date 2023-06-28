@@ -30,7 +30,7 @@ assignmentRouter.get("/all",CheckingStudentIsinourSchool,async(req,res)=>{
         }
 })
 assignmentRouter.post("/add",assignmentmiddleware,async(req,res)=>{
-    //data={
+//data={
 //     "class":9,
 //     "teacher":"Amit",
 //     "assignmet_topic":"Environment Study",
@@ -39,11 +39,11 @@ assignmentRouter.post("/add",assignmentmiddleware,async(req,res)=>{
     let data=req.body
   
     data={...data,endAssignment:false}
- 
+ console.log(data)
     try {
         let addAssignment=new assignmentModel(data)
       await addAssignment.save()
-      
+       
      
             res.status(200).send({msg:"Success fully Added Assignment"})
     } catch (error) {

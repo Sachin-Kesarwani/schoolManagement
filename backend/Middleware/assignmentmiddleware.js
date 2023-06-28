@@ -15,7 +15,7 @@ function assignmentmiddleware(req,res,next){
        let storedadmin=await AdminModel.findOne({_id:decoded.adminid})
        
         if(storedadmin&&storedadmin.position==="Admin"||storedadmin.position==="Manager"||storedadmin.position==="Teacher"){
-       
+          console.log(req.body)
             req.body.teacherid=decoded.adminid
             next()
         }else{
@@ -36,7 +36,7 @@ try {
    if(data){
     next()
    }else{
-    res.status(401).send({msg:"401 Unauthorized"})
+    res.status(404).send({msg:"Not Found"})
    }
 } catch (error) {
     res.status(400).send({msg:"Something Went Wrong"})

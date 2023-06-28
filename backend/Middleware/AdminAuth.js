@@ -31,7 +31,7 @@ function AdminChecking(req,res,next){
      if(decoded){
       let storedadmin=await AdminModel.findOne({_id:decoded.adminid})
          
-       if(storedadmin&&storedadmin.position==="Admin"||storedadmin.position==="Manager"){
+       if(storedadmin&&storedadmin.position==="Admin"||storedadmin.position==="Manager"||storedadmin.position=="Teacher"){
       
            req.body.adminid=decoded.adminid
            next()

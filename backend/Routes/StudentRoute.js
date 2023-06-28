@@ -79,8 +79,6 @@ StudentRouter.patch("/update/:id",AdminChecking,async(req,res)=>{
         
     }
 })
-
-
 StudentRouter.get("/allStudents/:userid",Authentication,async(req,res)=>{
     let {userid}=req.params
       try {
@@ -91,13 +89,12 @@ StudentRouter.get("/allStudents/:userid",Authentication,async(req,res)=>{
       }
 })
 
-
-
-StudentRouter.get("/allStudents",AdminChecking,async(req,res)=>{
+StudentRouter.get("/EnrolledAllStudents",AdminChecking,async(req,res)=>{
+  
     try {
-        let studentdata = await StudentModel.find()
+        let studentdata = await StudentModel.find({status:true})
        if(studentdata.length>0){
-        res.status(200).send({"msg":"These are All Students",data:studentdata})
+        res.status(200).send({"msg":"These are Enrolled Students",data:studentdata})
        }else{
         res.status(404).send({"msg":"Not Found",data:studentdata})
        }
@@ -106,6 +103,21 @@ StudentRouter.get("/allStudents",AdminChecking,async(req,res)=>{
         res.status(400).send({msg:"Something went wrong"})
         
     }
+})
+StudentRouter.get("/processedAllStudents",AdminChecking,async(req,res)=>{
+  
+  try {
+      let studentdata = await StudentModel.find({status:false})
+     if(studentdata.length>0){
+      res.status(200).send({"msg":"These are in Process",data:studentdata})
+     }else{
+      res.status(404).send({"msg":"Not Found",data:studentdata})
+     }
+   
+  } catch (error) {
+      res.status(400).send({msg:"Something went wrong"})
+      
+  }
 })
 
 StudentRouter.delete("deleteStudents/:id",AdminChecking,async(req,res)=>{

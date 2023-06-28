@@ -2,7 +2,7 @@ import React from 'react'
 import { studentData } from '../utils/data.types'
 import { Avatar, Badge } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-
+import "../admincss/student.css"
 const EnrolledStudents = ({data}:{data:studentData}) => {
   return (
 

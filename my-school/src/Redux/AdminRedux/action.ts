@@ -4,6 +4,7 @@ import { loading ,error,getUserdata, getadmin, getteacher, enrolledStu, raisedRe
 import { AppDispatch } from "../Store"
 import Cookies from "js-cookie"
 import { RaisesdrequestInter, eachuserInter, singleTeacherOrAdmin, studentData } from "../../utils/data.types"
+import { AssignmentFormValues } from "../../Admin/Addassignmet"
 
 
 
@@ -175,6 +176,30 @@ export let GetAllRaisedRequests=():any=>async(dispatch:AppDispatch)=>{
       let token = Cookies.get("SchooleManagementAdminToken");
       let response=await axios.get(`http://localhost:8080/request/all`,{headers:{Authorization:`Bearer ${token}`}})
       dispatch(allRaisedRequest(response.data.requests))
+     return response
+    } catch (error) {
+      return error
+    }
+}
+
+export let AddAssignmenttoStudents=(data:AssignmentFormValues):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingType())
+    try {
+      let token = Cookies.get("SchooleManagementAdminToken");
+      let response=await axios.post(`http://localhost:8080/assignment/add`,data,{headers:{Authorization:`Bearer ${token}`}})
+      // dispatch(allRaisedRequest(response.data.requests))
+     return response
+    } catch (error) {
+      return error
+    }
+}
+
+export let UpdatedataForRequests=(data:any):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingType())
+    try {
+      let token = Cookies.get("SchooleManagementAdminToken");
+      let response=await axios.patch(`http://localhost:8080/request/update/${data.reqid}`,data,{headers:{Authorization:`Bearer ${token}`}})
+      // dispatch(allRaisedRequest(response.data.requests))
      return response
     } catch (error) {
       return error
