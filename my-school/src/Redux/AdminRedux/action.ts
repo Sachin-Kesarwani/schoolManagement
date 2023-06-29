@@ -205,3 +205,16 @@ export let UpdatedataForRequests=(data:any):any=>async(dispatch:AppDispatch)=>{
       return error
     }
 }
+
+export let GetAllAssignmentsForAdmin=(data:any):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingType())
+    try {
+ 
+      let token = Cookies.get("SchooleManagementAdminToken");
+      let response=await axios.get(`http://localhost:8080/assignment/allAssinmentsForAdmin?role=${data.role}&student_class=${data.class}`,{headers:{Authorization:`Bearer ${token}`}})
+
+     return response
+    } catch (error) {
+      return error
+    }
+}

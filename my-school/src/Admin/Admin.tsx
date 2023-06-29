@@ -171,6 +171,7 @@ import Addassignment from "./Addassignmet";
 import { useAppDispatch, useAppSelector } from "../Redux/Store";
 import { GetAllEnrolledStudents, GetAllRaisedRequests, GetAllTeacheresFromServer, getallusers } from "../Redux/AdminRedux/action";
 import { inidataType } from "../utils/data.types";
+import AllAssignments from "./AllAssignments";
 interface arrinter {
   title: String;
   key?: number;
@@ -185,7 +186,7 @@ let arr: arrinter[] = [
   { title: "Students", key: 5 },
   { title: "Requests", key: 6},
   { title: "Add New One", key: 7},
-  { title: "Add Assignment", key: 8}
+  { title: "Add Assignment", key: 8}, { title: "All Assignments", key: 9}
 ];
 
 const Admin = () => {
@@ -271,7 +272,7 @@ dispatch(GetAllRaisedRequests())
 <h2 style={{color:"black",textAlign:"left",fontFamily:"sans-serif"}}> 👋 , {admindata.name}</h2>
           </div>
    {
-    active===1?<Dashboard/>:active===2?<Users/>:active===3?<Teachers/>:active===4?<Alladmins/>:active===5?<Students/>:active===6?<Requests/>:active===7?<Addadmin/>:active===8?<Addassignment/>:null
+    active===1?<Dashboard/>:active===2?<Users/>:active===3?<Teachers/>:active===4?<Alladmins/>:active===5?<Students/>:active===6?<Requests/>:active===7?<Addadmin/>:active===8?<Addassignment/>:active===9?<AllAssignments/>:null
    }
 
 
