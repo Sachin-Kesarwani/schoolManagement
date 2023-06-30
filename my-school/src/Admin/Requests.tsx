@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { GetAllRaisedRequests } from '../Redux/AdminRedux/action'
 import { message } from 'antd'
 import { useAppSelector } from '../Redux/Store'
-import { RaisesdrequestInter, inidataType } from '../utils/data.types'
+import { RaisesdrequestInter, SingleAssignment, inidataType } from '../utils/data.types'
 import LoadingModal from './Loading'
 import Nothing from './Nothing'
 
@@ -53,7 +53,7 @@ dispatch(GetAllRaisedRequests()).then((res:any)=>{
     {
       loading?<LoadingModal />: <div className='parendivOfrequestDiv'>
       {
-       allRequests&&allRequests.length>0&&allRequests.map((e:RaisesdrequestInter)=>{
+       allRequests&&allRequests.length>0&&allRequests.map((e:any)=>{
     return  <SingleRequests data={e}/>
        }) 
       }

@@ -1,9 +1,9 @@
 import axios from "axios"
 import { LoginDataInter } from "../../Admin/AdminLogin"
-import { loading ,error,getUserdata, getadmin, getteacher, enrolledStu, raisedReq} from "../AdminRedux/admin.type"
+import { loading ,error,getUserdata, getadmin, getteacher, enrolledStu, raisedReq, allassignment} from "../AdminRedux/admin.type"
 import { AppDispatch } from "../Store"
 import Cookies from "js-cookie"
-import { RaisesdrequestInter, eachuserInter, singleTeacherOrAdmin, studentData } from "../../utils/data.types"
+import { RaisesdrequestInter, SingleAssignment, eachuserInter, singleTeacherOrAdmin, studentData } from "../../utils/data.types"
 import { AssignmentFormValues } from "../../Admin/Addassignmet"
 
 
@@ -36,9 +36,12 @@ export interface allraisedRequestInter{
   type:typeof raisedReq,
   payload:RaisesdrequestInter[]
 }
+export interface allassignmentInter{
+  type:typeof allassignment,
+  payload:SingleAssignment[]
+}
 
-
- export type Adminaction =getuserdatainter|loadinginter|errorinter|getteacherinter |getenrolledStudenstinter| allraisedRequestInter;
+ export type Adminaction =getuserdatainter|loadinginter|errorinter|getteacherinter |getenrolledStudenstinter| allraisedRequestInter|allassignmentInter;
    
  function loadingType():loadinginter{
     return{
@@ -77,6 +80,15 @@ let allRaisedRequest=(data: RaisesdrequestInter[]): allraisedRequestInter=>{
     payload:data
   }
 }
+
+let allassignments=(data:SingleAssignment[]):allassignmentInter=>{
+  return {
+    type:allassignment,
+    payload:data
+  }
+}
+
+
   export let LoginAdmin=(data:LoginDataInter):any=>async(dispatch:AppDispatch)=>{
     dispatch(loadingType())
     try {
@@ -212,7 +224,7 @@ export let GetAllAssignmentsForAdmin=(data:any):any=>async(dispatch:AppDispatch)
  
       let token = Cookies.get("SchooleManagementAdminToken");
       let response=await axios.get(`http://localhost:8080/assignment/allAssinmentsForAdmin?role=${data.role}&student_class=${data.class}`,{headers:{Authorization:`Bearer ${token}`}})
-
+  dispatch(allassignments(response.data.data))
      return response
     } catch (error) {
       return error

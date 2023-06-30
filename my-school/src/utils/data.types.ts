@@ -96,6 +96,25 @@ export interface RaisesdrequestInter {
   status: boolean;
   reason_message: string;
 }
+export interface Message {
+  _id: string;
+  message: string;
+  tag: string;
+}
+
+ export interface SingleAssignment {
+  _id: string;
+  assignmet_topic: string;
+  class: number;
+  endAssignment: boolean;
+  teacher: string;
+  teacherId: string;
+  timeLine: string;
+  assignment : Array<Message>;
+}
+
+
+
 
   export interface inidataType{
     loading:Boolean;
@@ -104,6 +123,7 @@ export interface RaisesdrequestInter {
     allTeacher:singleTeacherOrAdmin[],
     alladmin:singleTeacherOrAdmin[],
     enrolledStudents:studentData[],
-    allRequest:RaisesdrequestInter[]
+    allRequest:RaisesdrequestInter[],
+    assignment:SingleAssignment[]
 }
 

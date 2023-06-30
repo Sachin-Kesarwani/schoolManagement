@@ -2,12 +2,13 @@
 import { Form, Input, Select, Button } from 'antd';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../Redux/Store';
-import { inidataType } from '../utils/data.types';
+import { SingleAssignment, inidataType } from '../utils/data.types';
 import { Typography } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import "../admincss/assignment.css"
 import axios from 'axios';
 import { GetAllAssignmentsForAdmin } from '../Redux/AdminRedux/action';
+import SingleAssignmentDiv from './SingleAssignment';
 const { Text } = Typography;
 const { Option } = Select;
 
@@ -17,9 +18,11 @@ const AllAssignments  = () => {
   let [loading,setLoading]=useState(false)
   let allteachers=useAppSelector((state) => (state.AdminReducer as inidataType).allTeacher)
   let alladmin=useAppSelector((state) => (state.AdminReducer as inidataType).alladmin)
+let allassignment=useAppSelector((state) => (state.AdminReducer as inidataType).assignment)
+
   let dispatch=useAppDispatch()
   const onFinish = (values:any) => {
-   
+   setLoading(true)
    if(values.role===undefined){
    values.role="all"
    }else if(values.class===undefined){
@@ -27,15 +30,17 @@ const AllAssignments  = () => {
    }
 
    dispatch(GetAllAssignmentsForAdmin(values)).then((res:any)=>{
-console.log(res)
+    console.log(res)
+setLoading(false)
    })
   };
 
   async function getAllAssignments(teacher:string,student_class:String){
     await axios.get("")
   }
+  console.log(allassignment)
   return (
-    // <div className='allassignmentDiv' >
+<>
  <Form  className='allassignmentDiv' onFinish={onFinish}>
     <h2>All Assignments</h2>
       <Form.Item
@@ -80,7 +85,14 @@ console.log(res)
         </Button>
       </Form.Item>
     </Form>
-    // </div>
+    <div>
+      {
+        allassignment&&allassignment.length>0&&allassignment.map((e:any,i)=>{
+          return <SingleAssignmentDiv data={e}/>
+        })
+      }
+    </div>
+</>
    
   );
 };

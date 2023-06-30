@@ -3,7 +3,7 @@
 
 import { eachuserInter, inidataType } from "../../utils/data.types"
 import { Adminaction } from "./action"
-import { loading,error,getUserdata, getteacher, enrolledStu, getadmin, raisedReq } from "./admin.type"
+import { loading,error,getUserdata, getteacher, enrolledStu, getadmin, raisedReq, allassignment } from "./admin.type"
 
 let inidata:inidataType={
     loading:false,
@@ -12,7 +12,8 @@ let inidata:inidataType={
     allTeacher:[],
     alladmin:[],
     enrolledStudents:[],
-    allRequest:[]
+    allRequest:[],
+    assignment:[]
  }
 
 export let reducer=(state:inidataType=inidata,action:Adminaction)=>{
@@ -45,6 +46,10 @@ export let reducer=(state:inidataType=inidata,action:Adminaction)=>{
         case(raisedReq):{
         
             return {...state,loading:false, allRequest:action.payload}
+        }
+        case(allassignment):{
+        
+            return {...state,loading:false,assignment:action.payload}
         }
         
         default:{
