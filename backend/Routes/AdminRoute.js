@@ -9,13 +9,27 @@ adminRoutes.get("/",async(req,res)=>{
     res.status(200).send({msg:"admin basic routes"})
 })
 adminRoutes.get("/all",checkadmin,async(req,res)=>{
-   let {role}=req.query  //title can be Manager ,Teacher ,Admin
+   let {role}=req.query  //role can be Manager ,Teacher ,Admin
 try {
-    let alldata=await AdminModel.find({position:role})
-   
+    let alldata;
+    if(role=="all"){
+       alldata=await AdminModel.find({
+        $or: [
+          { position: 'Admin' },
+          { position: 'Manager' }
+        ]
+      })
+
+    }else{
+        alldata=await AdminModel.find({position:role})
+
+    }
+   console.log(alldata,27)
     if(alldata.length>0){
+       
         res.status(200).send({msg:`Successfully get All ${role}`,data:alldata})
     }else{
+    
         res.status(404).send({msg:`Not Found`,data:[]})
     }
 } catch (error) {

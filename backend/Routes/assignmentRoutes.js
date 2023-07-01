@@ -29,6 +29,59 @@ assignmentRouter.get("/all",CheckingStudentIsinourSchool,async(req,res)=>{
             res.status(400).send({msg:"Something went wrong"})
         }
 })
+
+assignmentRouter.get("/allAssinmentsForAdmin",assignmentmiddleware,async(req,res)=>{
+  let {role,student_class}=req.query
+
+if(role===undefined){
+    role="all"
+    console.log("if1")
+}
+if(student_class===undefined){
+    student_class="all"
+    console.log("if2")
+}
+console.log(role,student_class)
+try {
+    if(role==="all"){
+     let alldata=await assignmentModel.find({class:Number(student_class)})
+
+     if(alldata.length!==0){
+        res.status(200).send({msg:`All Assignments whose class ${student_class}`,data:alldata})
+
+     }else{
+     res.status(404).send({msg:`Not Found`,data:[]})
+
+     }
+    }else if(student_class==="all"){
+        let alldata=await assignmentModel.find({teacher:role})
+        if(alldata.length!==0){
+            res.status(200).send({msg:`All Assignments with Role ${role}`,data:alldata})
+
+    
+         }else{
+         res.status(404).send({msg:`Not Found`,data:[]})
+    
+         }
+    }else{
+      
+        let alldata=await assignmentModel.find({teacher:role,class:Number(student_class)})
+   
+        if(alldata.length>0){
+            res.status(200).send({msg:`All Assignments whose class is ${student_class} and Role ${role}`,data:alldata})
+
+
+    
+         }else{
+         res.status(404).send({msg:`Not Found`,data:[]})
+    
+         }
+    }
+} catch (error) {
+    res.status(400).send({msg:"Something Went Wrong"})
+}
+
+})
 assignmentRouter.post("/add",assignmentmiddleware,async(req,res)=>{
 //data={
 //     "class":9,
@@ -39,13 +92,13 @@ assignmentRouter.post("/add",assignmentmiddleware,async(req,res)=>{
     let data=req.body
   
     data={...data,endAssignment:false}
- console.log(data)
+
     try {
         let addAssignment=new assignmentModel(data)
       await addAssignment.save()
        
-     
-            res.status(200).send({msg:"Success fully Added Assignment"})
+
+            res.status(200).send({msg:"Success fully Added Assignment",data:addAssignment})
     } catch (error) {
        res.status(400).send({msg:"Something went wrong"}) 
     }

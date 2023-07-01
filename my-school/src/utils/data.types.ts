@@ -96,6 +96,42 @@ export interface RaisesdrequestInter {
   status: boolean;
   reason_message: string;
 }
+export interface Message {
+  _id: string;
+  message: string;
+  tag: string;
+}
+
+ export interface SingleAssignment {
+  _id: string;
+  assignmet_topic: string;
+  class: number;
+  endAssignment: boolean;
+  teacher: string;
+  teacherId: string;
+  timeLine: string;
+  assignment : Array<Message>;
+}
+
+interface Assignment {
+  tag: string;
+  message: string;
+  _id: string;
+}
+
+export interface addassignment {
+  class: number;
+  teacher: string;
+  assignment_topic: string;
+  assignment: Assignment[];
+  timeLine: string;
+  endAssignment: boolean;
+  teacherid: string;
+  _id: string;
+  __v: number;
+}
+
+
 
   export interface inidataType{
     loading:Boolean;
@@ -104,6 +140,7 @@ export interface RaisesdrequestInter {
     allTeacher:singleTeacherOrAdmin[],
     alladmin:singleTeacherOrAdmin[],
     enrolledStudents:studentData[],
-    allRequest:RaisesdrequestInter[]
+    allRequest:RaisesdrequestInter[],
+    assignment:SingleAssignment[]
 }
 

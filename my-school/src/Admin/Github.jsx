@@ -1,4 +1,5 @@
 import { Button } from 'antd'
+import axios from 'axios'
 import React, { useEffect } from 'react'
 let clientid="84065dd2cc85f9e31eea"
 const Github = () => {
@@ -20,7 +21,8 @@ const Github = () => {
                 }).then((re)=>re.json())
                 .then((res)=>{
                     console.log(res)
-                    localStorage.setItem(res.access_token)
+                    localStorage.setItem("githubtoken",res.access_token)
+                    getdata()
                 }).catch((er)=>{
                     console.log(er)
                 })
@@ -32,8 +34,16 @@ const Github = () => {
 
 
 
-    function getdata(){
-
+  async  function getdata(){
+await axios.get("http://localhost:8080/getuserdata",{
+    headers:{
+        Authorization:`Bearer ${localStorage.getItem("githubtoken")}`
+    }
+}).then((res)=>{
+    console.log(res)
+}).catch((er)=>{
+    console.log(er)
+})
     }
   return (
     <div>

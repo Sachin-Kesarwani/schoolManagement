@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="App">
       {!param&&  <Navbar/>}
-
+<Github/>
      <AllRoutes/>
      <Footer/>
     </div>

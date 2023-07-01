@@ -2,8 +2,8 @@
 
 
 import { eachuserInter, inidataType } from "../../utils/data.types"
-import { Adminaction } from "./action"
-import { loading,error,getUserdata, getteacher, enrolledStu, getadmin, raisedReq } from "./admin.type"
+import { Adminaction, deleteassignmentInter } from "./action"
+import { loading,error,getUserdata, getteacher, enrolledStu, getadmin, raisedReq, allassignment, addAssignment, deleteassignment } from "./admin.type"
 
 let inidata:inidataType={
     loading:false,
@@ -12,11 +12,12 @@ let inidata:inidataType={
     allTeacher:[],
     alladmin:[],
     enrolledStudents:[],
-    allRequest:[]
+    allRequest:[],
+    assignment:[]
  }
 
-export let reducer=(state:inidataType=inidata,action:Adminaction)=>{
-
+export let reducer=(state:inidataType=inidata,action:Adminaction|deleteassignmentInter)=>{
+console.log(action)
       switch(action.type){
         case(loading):{
             return {...state,loading:true}
@@ -46,7 +47,18 @@ export let reducer=(state:inidataType=inidata,action:Adminaction)=>{
         
             return {...state,loading:false, allRequest:action.payload}
         }
+        case(allassignment):{
         
+            return {...state,loading:false,assignment:action.payload}
+        }
+        case(addAssignment):{
+        
+            return {...state,loading:false,assignment:[...state.assignment,action.payload]}
+        }
+        case("deleteassignmentInter"):{
+        
+            return {...state,loading:false,assignment:state.assignment.filter((e)=>e._id!==action.payload)}
+        }
         default:{
             return state
         }
