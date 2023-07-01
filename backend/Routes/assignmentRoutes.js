@@ -32,7 +32,16 @@ assignmentRouter.get("/all",CheckingStudentIsinourSchool,async(req,res)=>{
 
 assignmentRouter.get("/allAssinmentsForAdmin",assignmentmiddleware,async(req,res)=>{
   let {role,student_class}=req.query
-  console.log(role,student_class)
+
+if(role===undefined){
+    role="all"
+    console.log("if1")
+}
+if(student_class===undefined){
+    student_class="all"
+    console.log("if2")
+}
+console.log(role,student_class)
 try {
     if(role==="all"){
      let alldata=await assignmentModel.find({class:Number(student_class)})
@@ -55,8 +64,10 @@ try {
     
          }
     }else{
+      
         let alldata=await assignmentModel.find({teacher:role,class:Number(student_class)})
-        if(alldata.length!==0){
+   
+        if(alldata.length>0){
             res.status(200).send({msg:`All Assignments whose class is ${student_class} and Role ${role}`,data:alldata})
 
 
@@ -81,13 +92,13 @@ assignmentRouter.post("/add",assignmentmiddleware,async(req,res)=>{
     let data=req.body
   
     data={...data,endAssignment:false}
- console.log(data)
+
     try {
         let addAssignment=new assignmentModel(data)
       await addAssignment.save()
        
-     
-            res.status(200).send({msg:"Success fully Added Assignment"})
+
+            res.status(200).send({msg:"Success fully Added Assignment",data:addAssignment})
     } catch (error) {
        res.status(400).send({msg:"Something went wrong"}) 
     }

@@ -1,20 +1,58 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SingleAssignment } from '../utils/data.types'
-import { Badge, Button } from 'antd'
-import { Space, Typography } from 'antd';
+import { Badge, Button, message } from 'antd'
+import {  Typography } from 'antd';
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useAppDispatch } from '../Redux/Store';
+import {deleteassignment} from "../Redux/AdminRedux/admin.type"
+const { Text } = Typography;
 
-const { Text, Link } = Typography;
 const SingleAssignmentDiv = ({data}:{data:SingleAssignment}) => {
+  const [messageApi, contextHolder] = message.useMessage();
     let [see,setSee]=useState(false)
     let [assignmentdetail,setAssignmentDetail]=useState(data.assignment )
     let datas=Cookies.get("SchooleManagementAdminData")||"{position:User}"
     let  admindata=JSON.parse(datas)
     const givenDate = new Date(data.timeLine);
     const currentDate = new Date();
+    let dispatch=useAppDispatch()
+
+
+  async function deleteassignment(id:string){
+    let token = Cookies.get("SchooleManagementAdminToken");
+ await axios.delete(`http://localhost:8080/assignment/delete/${id}`,{headers:{
+  Authorization:`Bearae ${token}`
+ }}).then((res)=>{
+console.log(res)
+if(res.request.status===200){
+   
+  messageApi.open({
+    type: 'success',
+    content: res.data.msg,
+  });
+}else if(res.request.status===400){
   
+  messageApi.open({
+    type: 'error',
+    content: res.data.msg,
+  });
+}else if(res.request.status===401){
+  messageApi.open({
+    type: 'error',
+    content: res.data.msg,
+  });
+}
+
+dispatch({ type: "deleteassignmentInter",payload: id });
+ }).catch((er)=>{
+
+ })
+  }
+
   return (
     <div style={{borderRadius:"8px",boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",width:"100%",height:see?"270px":"120px",marginBottom:"10px"}}>
+      {contextHolder}
         <div style={{display:"flex",justifyContent:"space-between",width:"100%"}}>
         <Badge style={{background:"orange",margin:"5px 5px",float:"right"}} count={`Class ${data.class}`}/>
         <Badge style={{background:currentDate>=givenDate?"green":"red",margin:"5px 5px",float:"right"}} count={`${data.timeLine}`}/>
@@ -27,7 +65,7 @@ const SingleAssignmentDiv = ({data}:{data:SingleAssignment}) => {
         <Text style={{float:"left",margin:"0px 0px 5px 20px"}} type="secondary">Created by {data.teacher}</Text>
         <div>
         <Button style={{marginRight:"20px"}} onClick={()=>setSee(!see)}>{see?"Close":"See"}</Button>
-           <Button >Edit</Button>
+           <Button onClick={()=>deleteassignment(data._id)} >Delete</Button>
         </div>
         </div>
         <div style={{overflow:"scroll",height:"150px",display:see?"block":"none"}}>

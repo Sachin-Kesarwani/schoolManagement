@@ -113,6 +113,23 @@ export interface Message {
   assignment : Array<Message>;
 }
 
+interface Assignment {
+  tag: string;
+  message: string;
+  _id: string;
+}
+
+export interface addassignment {
+  class: number;
+  teacher: string;
+  assignment_topic: string;
+  assignment: Assignment[];
+  timeLine: string;
+  endAssignment: boolean;
+  teacherid: string;
+  _id: string;
+  __v: number;
+}
 
 
 

@@ -17,7 +17,7 @@ let  admindata=JSON.parse(data)
 let alladmin=useAppSelector((state) => (state.AdminReducer as inidataType).alladmin)
   function getallTeacher(){
     setLoading(true)
-dispatch(GetAllTeacheresFromServer("Admin")).then((res:any)=>{
+dispatch(GetAllTeacheresFromServer("all")).then((res:any)=>{
   setLoading(false)
   if(res.request.status===200){
    
@@ -47,6 +47,7 @@ dispatch(GetAllTeacheresFromServer("Admin")).then((res:any)=>{
   useEffect(()=>{
     getallTeacher()
   },[])
+  console.log(alladmin)
   return (
     <> {contextHolder}
     {

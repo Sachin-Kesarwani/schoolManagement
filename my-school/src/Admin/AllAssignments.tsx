@@ -1,20 +1,21 @@
 
-import { Form, Input, Select, Button } from 'antd';
-import React, { useState } from 'react';
+import { Form, Input, Select, Button, message } from 'antd';
+import React, {  useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../Redux/Store';
 import { SingleAssignment, inidataType } from '../utils/data.types';
 import { Typography } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { ReloadOutlined, UserOutlined } from '@ant-design/icons';
 import "../admincss/assignment.css"
 import axios from 'axios';
 import { GetAllAssignmentsForAdmin } from '../Redux/AdminRedux/action';
 import SingleAssignmentDiv from './SingleAssignment';
+import LoadingModal from './Loading';
 const { Text } = Typography;
 const { Option } = Select;
 
 const AllAssignments  = () => {
   const classNames = ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10'];
-
+  const [messageApi, contextHolder] = message.useMessage();
   let [loading,setLoading]=useState(false)
   let allteachers=useAppSelector((state) => (state.AdminReducer as inidataType).allTeacher)
   let alladmin=useAppSelector((state) => (state.AdminReducer as inidataType).alladmin)
@@ -26,22 +27,47 @@ let allassignment=useAppSelector((state) => (state.AdminReducer as inidataType).
    if(values.role===undefined){
    values.role="all"
    }else if(values.class===undefined){
-   values.student_class="all"
+   values.class="all"
    }
 
    dispatch(GetAllAssignmentsForAdmin(values)).then((res:any)=>{
-    console.log(res)
+console.log(res)
 setLoading(false)
+if(res.request.status===200){
+   
+  messageApi.open({
+    type: 'success',
+    content: res.data.msg,
+  });
+}else if(res.request.status===400){
+  
+  messageApi.open({
+    type: 'error',
+    content: res.data.msg,
+  });
+}else if(res.request.status===401){
+  messageApi.open({
+    type: 'error',
+    content: res.data.msg,
+  });
+}else if(res.request.status===404){
+  messageApi.open({
+    type: 'error',
+    content: res.response.data.msg,
+  });
+}
    })
   };
 
-  async function getAllAssignments(teacher:string,student_class:String){
-    await axios.get("")
-  }
-  console.log(allassignment)
+
+
+
+
+
   return (
 <>
- <Form  className='allassignmentDiv' onFinish={onFinish}>
+{contextHolder}
+ <Form className='allassignmentDiv' onFinish={onFinish}>
     <h2>All Assignments</h2>
       <Form.Item
       label="Choose Role" 
@@ -83,15 +109,20 @@ setLoading(false)
         <Button type="primary" htmlType="submit">
           Search
         </Button>
+     
       </Form.Item>
     </Form>
-    <div>
+
+    {
+      loading?<LoadingModal/>: <div>
       {
         allassignment&&allassignment.length>0&&allassignment.map((e:any,i)=>{
           return <SingleAssignmentDiv data={e}/>
         })
       }
     </div>
+    }
+   
 </>
    
   );

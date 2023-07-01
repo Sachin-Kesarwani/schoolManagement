@@ -21,7 +21,18 @@ app.get("/gettoken",async(req,res)=>{
    }))
 
 })
-
+app.get("/getuserdata",async(req,res)=>{
+ await   fetch("https://api.github.com/user",{
+    method:"GET",
+    headers:{
+        "Authorization":req.get("Authorization")
+    }
+ }).then((re)=>re.json()).then((re)=>{
+    res.send(re)
+ }).catch((er)=>{
+    res.send(er)
+ })
+})
 app.listen(8080,()=>{
     console.log("server is running at ",8080)
 })

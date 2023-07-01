@@ -224,7 +224,7 @@ useEffect(()=>{
 
 useEffect(()=>{
 dispatch(GetAllTeacheresFromServer("Teacher"))
-dispatch(GetAllTeacheresFromServer("Admin"))
+dispatch(GetAllTeacheresFromServer("all"))
 dispatch(getallusers())
 dispatch(GetAllEnrolledStudents())
 dispatch(GetAllRaisedRequests())

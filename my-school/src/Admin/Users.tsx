@@ -17,7 +17,7 @@ import LoadingModal from './Loading';
 // }
 
 const Users = () => {
-console.log("hii")
+
 const [messageApi, contextHolder] = message.useMessage();
 let dispatch=useAppDispatch()
 let [loading,setLoading]=useState<Boolean>(false)
