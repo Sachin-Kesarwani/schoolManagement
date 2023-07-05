@@ -13,6 +13,7 @@ import Footer from './Components/Footer';
 import ExpensiveComponent from './Admin/Test';
 import AssignmentForm from './Admin/Test';
 import Github from './Admin/Github';
+import Payment from './Admin/Payment';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
     <div className="App">
       {!param&&  <Navbar/>}
 <Github/>
+
      <AllRoutes/>
      <Footer/>
     </div>

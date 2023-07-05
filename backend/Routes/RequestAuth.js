@@ -24,7 +24,7 @@ requestRoute.get("/all",AdminChecking,async(req,res)=>{
 
     try {
         let alldata=await RequestModel.find({status:false})
-        console.log(alldata)
+    
         if(alldata.length==0){
             res.status(200).send({msg:"No Raised Requests",requests:[]})
         }else{
