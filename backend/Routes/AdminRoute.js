@@ -24,7 +24,7 @@ try {
         alldata=await AdminModel.find({position:role})
 
     }
-   console.log(alldata,27)
+ 
     if(alldata.length>0){
        
         res.status(200).send({msg:`Successfully get All ${role}`,data:alldata})

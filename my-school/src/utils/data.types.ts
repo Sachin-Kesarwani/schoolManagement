@@ -14,7 +14,7 @@ export interface eachuserInter{
     __v:Number;
   }
 export interface singleTeacherOrAdmin{
-  _id:String;
+  _id:string;
   name: string;
   email: string;
   password: string;
@@ -32,7 +32,7 @@ export interface singleTeacherOrAdmin{
   october: boolean;
   november: boolean;
   december: boolean;
-  preferred_subject?:String
+  preferred_subject?:string
 }
 
 
