@@ -47,7 +47,7 @@ const arr = shuffleArray(options)
 const handlnext=()=>{
     let innervalue = document.querySelector(".next")?.innerHTML
     let optionsarr = document.querySelectorAll(".opt")
-    if(innervalue=="Next"){
+    if(innervalue==="Next"){
         setindex(index+1)
         
     }else{
