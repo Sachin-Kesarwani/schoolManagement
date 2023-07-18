@@ -12,6 +12,7 @@ import {
   addAssignment,
   deleteassignment,
   editAfterAdminPayment,
+  cancelRequest,
 } from "../AdminRedux/admin.type";
 import { AppDispatch } from "../Store";
 import Cookies from "js-cookie";
@@ -24,6 +25,7 @@ import {
   studentData,
 } from "../../utils/data.types";
 import { AssignmentFormValues } from "../../Admin/Addassignmet";
+
 
 export interface loadinginter {
   type: typeof loading;
@@ -70,6 +72,12 @@ export interface editAfterAdminPaymentInter {
  
   payload?:singleTeacherOrAdmin;
 }
+
+export interface cancelRequestType{
+  type:typeof cancelRequest;
+  payload:string
+
+}
 export type Adminaction =
   | getuserdatainter
   | loadinginter
@@ -80,7 +88,7 @@ export type Adminaction =
   | allassignmentInter
   | addsingleAssignmentToexist
   | deleteassignmentInter
-  | editAfterAdminPaymentInter
+  | editAfterAdminPaymentInter| cancelRequestType
 
 function loadingType(): loadinginter {
   return {

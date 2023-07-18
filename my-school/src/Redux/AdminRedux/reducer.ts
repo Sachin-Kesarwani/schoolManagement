@@ -3,7 +3,7 @@
 
 import { eachuserInter, inidataType } from "../../utils/data.types"
 import { Adminaction, deleteassignmentInter } from "./action"
-import { loading,error,getUserdata, getteacher, enrolledStu, getadmin, raisedReq, allassignment, addAssignment, deleteassignment, editAfterAdminPayment } from "./admin.type"
+import { loading,error,getUserdata, getteacher, enrolledStu, getadmin, raisedReq, allassignment, addAssignment, deleteassignment, editAfterAdminPayment, cancelRequest } from "./admin.type"
 
 let inidata:inidataType={
     loading:false,
@@ -58,6 +58,10 @@ export let reducer=(state:inidataType=inidata,action:Adminaction|deleteassignmen
         case("deleteassignmentInter"):{
         
             return {...state,loading:false,assignment:state.assignment.filter((e)=>e._id!==action.payload)}
+        }
+        case(cancelRequest):{
+        
+            return {...state,loading:false, allRequest:state.allRequest.filter((e)=>e._id!==action.payload)}
         }
         // case(editAfterAdminPayment):{
            

@@ -72,7 +72,13 @@ console.log(amount,order_id,currency)
                   console.log(result)
                   if(result.request.status===200){
                   //  dispatch({type:editAfterAdminPayment,payload:result.data.data})
-                  dispatch(GetAllTeacheresFromServer("all"))
+                  if(result.data.data.position==="Manager"||result.data.data.position==="Admin"){
+                    dispatch(GetAllTeacheresFromServer("all"))
+                  }else{
+                    dispatch(GetAllTeacheresFromServer("Teacher"))
+                  }
+                
+               
                   }
                 // alert(result.data.msg);
             },
