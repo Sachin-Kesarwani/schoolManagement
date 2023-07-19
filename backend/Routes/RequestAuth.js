@@ -23,8 +23,8 @@ requestRoute.get("/all/:studentid",Authentication,async(req,res)=>{
 requestRoute.get("/all",AdminChecking,async(req,res)=>{
 
     try {
-        let alldata=await RequestModel.find({status:false})
-    
+        let alldata=await RequestModel.find({status:false,cancel_request:false})
+    console.log(alldata)
         if(alldata.length==0){
             res.status(200).send({msg:"No Raised Requests",requests:[]})
         }else{
@@ -73,14 +73,14 @@ requestRoute.patch("/update/:reqid",AdminChecking,async(req,res)=>{
  
     
         let updateit={[category]:newdataTochange}
-
+      console.log(updateit,data.student_id)
         await StudentModel.findByIdAndUpdate({_id:data.student_id},updateit)
         await RequestModel.findByIdAndUpdate({_id:reqid},{status:true})
-        let data=await StudentModel.find({_id:data.student_id})
-       res.status(200).send({msg:"Successfully Updated",data})
+        let alldata=await StudentModel.find({_id:data.student_id})
+       res.status(200).send({msg:"Successfully Updated",alldata})
        }else{
         await RequestModel.findByIdAndUpdate({_id:reqid},{cancel_request:true})
-        res.status(200).send({msg:"Request cancelled"})
+        res.status(200).send({msg:"Request cancelled",reqid})
        }
       
         

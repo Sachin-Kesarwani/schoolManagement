@@ -27,6 +27,7 @@ let navigate=useNavigate()
   const handleSubmit = (e:any) => {
     e.preventDefault();
     dispatch(UserLogin({email,password})).then((res:any)=>{
+      console.log(res)
       if(res.request.status===200){
         messageApi.open({
           type: 'success',
