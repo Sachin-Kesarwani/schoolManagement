@@ -81,7 +81,7 @@ userRoute.post("/login",async(req,res)=>{
         
                   
                      let token = jwt.sign({ userid: data._id,position:data.position}, process.env.secretkey,{ expiresIn: "7d" });
-                     res.status(200).send({"msg":"Successfully Login",storeddata,token,token})
+                     res.status(200).send({"msg":"Successfully Login",data,token,token})
                 }else{
                     res.status(400).send({"msg":"password is wrong"})
                 }

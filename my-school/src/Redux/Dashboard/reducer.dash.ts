@@ -1,35 +1,52 @@
+import { studentData } from "../../utils/data.types";
+import { userAction } from "./action.dash";
+import { ERROR, GETSUDENTS, LOADING } from "./types.dash";
 
 type data ={
     name:string
 
 }
 
-type inittype= {
+export interface inidatainter {
     loading:boolean;
     error:boolean;
-    data:Array<data>
+    allStudentsdata:studentData[]
 
 }
 
-const initialstate:inittype = {
+const initialstate = {
     loading:false,
     error:false,
-    data:[]
+    allStudentsdata:[]
 }
 
 
 
 
-export const Dashreducer=(state=initialstate,{type,payload}:any)=>{
-
-
-
-
-    switch(type){
-        default:{
-            return {...state}
+export const Dashreducer=(state:inidatainter=initialstate,action:userAction)=>{
+    switch (action.type) {
+        case LOADING:{
+            return {
+                ...state,loading:true
+            }
         }
+        case ERROR:{
+            return {
+                ...state,error:true,loading:false
+            }
+        }
+        case GETSUDENTS:{
+            return {
+                ...state,loading:false,allStudentsdata:action.payload
+            }
+        }
+             
+           
+    
+        default:
+            break;
     }
+
 
 
 }

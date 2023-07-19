@@ -79,8 +79,8 @@ StudentRouter.patch("/update/:id",AdminChecking,async(req,res)=>{
         
     }
 })
-StudentRouter.get("/allStudents/:userid",Authentication,async(req,res)=>{
-    let {userid}=req.params
+StudentRouter.get("/allStudents",Authentication,async(req,res)=>{
+    let {userid}=req.body
       try {
         let allstudent=await StudentModel.find({userid})
         res.status(200).send({"msg":"Your Childrens",data:allstudent})
