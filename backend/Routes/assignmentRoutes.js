@@ -6,6 +6,7 @@ let assignmentRouter=Router()
 
 assignmentRouter.get("/all",CheckingStudentIsinourSchool,async(req,res)=>{
     let {student_class}=req.query
+
         try {
            let allAssignments=await assignmentModel.find({class:Number(student_class)})
            if(allAssignments.length>0){

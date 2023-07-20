@@ -23,7 +23,8 @@ const initialstate = {
 
 
 
-export const Dashreducer=(state:inidatainter=initialstate,action:userAction)=>{
+export const reducer=(state:inidatainter=initialstate,action:userAction)=>{
+    console.log(action)
     switch (action.type) {
         case LOADING:{
             return {
@@ -37,14 +38,18 @@ export const Dashreducer=(state:inidatainter=initialstate,action:userAction)=>{
         }
         case GETSUDENTS:{
             return {
-                ...state,loading:false,allStudentsdata:action.payload
+                ...state,loading:false,allStudentsdata:[...state.allStudentsdata,...action.payload]
             }
         }
              
            
     
-        default:
-            break;
+        default:{
+            return {
+                ...state
+            }
+        }
+           
     }
 
 
