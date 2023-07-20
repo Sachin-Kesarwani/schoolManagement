@@ -1,11 +1,11 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import {reducer as AuthReducer} from "../Redux/AuthRedux/reducer"
+// import {reducer as AuthReducer} from "../Redux/AuthRedux/reducer"
 import {reducer as AdminReducer } from "../Redux/AdminRedux/reducer"
-
+import {reducer as Dashreducer} from "../Redux/Dashboard/reducer.dash"
 const rootReducer = combineReducers({
- AuthReducer,AdminReducer
+    Dashreducer,AdminReducer
   
 });
 

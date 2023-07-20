@@ -17,7 +17,7 @@ function errortype(){
 }
 function getallstudentstype(data:studentData[]){
 return{
-  type:typeof GETSUDENTS,
+  type:GETSUDENTS,
   payload:data
 }
 }
