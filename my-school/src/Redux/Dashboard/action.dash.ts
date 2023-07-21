@@ -1,8 +1,9 @@
 import axios from "axios"
-import { studentData } from "../../utils/data.types"
+import { RaisesdrequestInter, studentData } from "../../utils/data.types"
 import { AppDispatch } from "../Store"
-import { ERROR, GETSUDENTS, LOADING } from "./types.dash"
+import { ADDNEWREQUEST, ERROR, GETALLREQUESTS, GETSUDENTS, LOADING } from "./types.dash"
 import Cookies from "js-cookie"
+import { allraisedRequestInter } from "../AdminRedux/action"
 
 
 function loadingtype(){
@@ -21,6 +22,19 @@ return{
   payload:data
 }
 }
+
+function getallrequestType(data:RaisesdrequestInter[]){
+  return {
+    type:GETALLREQUESTS,
+    payload:data
+  }
+}
+function addnewrequestType(data:RaisesdrequestInter){
+  return {
+    type:ADDNEWREQUEST,
+    payload:data
+  }
+}
 //////////////////////Interface////////////////////////////////
 export interface loadinginter{
   type:typeof LOADING
@@ -32,7 +46,15 @@ export interface getstudentdatainter{
   type:typeof GETSUDENTS,
   payload:studentData[]
 }
-export type userAction =loadinginter |errorinter|getstudentdatainter
+export interface getrequestinter{
+  type:typeof GETALLREQUESTS,
+  payload:allraisedRequestInter[]
+}
+export interface addrequestinter{
+  type:typeof ADDNEWREQUEST;
+  payload:allraisedRequestInter
+}
+export type userAction =loadinginter |errorinter|getstudentdatainter|getrequestinter|addrequestinter
 
 
 
@@ -42,9 +64,35 @@ export let getAllStudentsOfusers=():any=>async(dispatch:AppDispatch)=>{
      return await  axios.get(`http://localhost:8080/student/allStudents`, { headers: { Authorization: `Bearer ${token}` } })
       .then((res)=>{
         dispatch(getallstudentstype(res.data.data))
-      console.log(res)
+    
       }).catch((err)=>{
         dispatch(errortype())
-        console.log(err)
+    
       })
+}
+
+
+export let addNewRequest=(data:any):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingtype())
+  let token=(Cookies.get("SchooleManagementUserToken"))
+ return await  axios.post(`http://localhost:8080/request/add`, data,{ headers: { Authorization: `Bearer ${token}` } })
+//   .then((res)=>{
+ 
+// \
+//   }).catch((err)=>{
+//     // dispatch(errortype())
+//     console.log(err)
+//   })
+}
+
+export let getAllStudentsRequests=(studentID:string):any=>async(dispatch:AppDispatch)=>{
+  dispatch(loadingtype())
+  let token=(Cookies.get("SchooleManagementUserToken"));
+ let res=await axios.get(`http://localhost:8080/request/all/${studentID}`, { headers: { Authorization: `Bearer ${token}` } });
+
+if(res.request.status===200){
+  console.log(res)
+  dispatch(getallrequestType(res.data.requests))
+}
+ return res
 }

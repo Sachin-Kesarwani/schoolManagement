@@ -95,6 +95,8 @@ export interface RaisesdrequestInter {
   cancel_request: boolean;
   status: boolean;
   reason_message: string;
+  __v?:number
+
 }
 export interface Message {
   _id: string;

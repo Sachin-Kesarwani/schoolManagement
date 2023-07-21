@@ -138,9 +138,9 @@ if(value===""){
       <Button onClick={getassignment} style={{backgroundColor:warn?"red":"blue",color:"white"}}>{warn?"Please Select both oprions":"Get All Assignments"}</Button>
     
     </div>
-    {/* filter((e,i)=>i>=maxassignment*(page-1)&&i<=maxassignment*(page-1)+maxassignment) */}
+
     {
-      allassignments&&allassignments.length>0&&allassignments.map((e)=>{
+      allassignments&&allassignments.length>0&&allassignments.filter((e,i)=>i>=maxassignment*(page-1)&&i<maxassignment*(page-1)+maxassignment).map((e)=>{
         return <SingleAssignmentDisplay data={e}/>
       })
     }

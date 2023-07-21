@@ -19,6 +19,17 @@
    border: 1px solid red;
 }
 
+.selection{
+  width: 100%;
+}
+.add-new-request{
+ 
+}
+.eachCardParentDiv{
+display: grid;
+grid-template-columns: repeat(4,1fr);
+gap:10px;
+}
 /* Extra small devices (phones) */
 @media (max-width: 575.98px) {
     /* Styles for mobile devices */
@@ -35,10 +46,15 @@
     grid-template-columns: repeat(1,1fr);
   
 }
-  }
-  .selection{
-    width: 100%;
-  }
+.eachCardParentDiv{
+   
+  grid-template-columns: repeat(1,1fr);
+
+}
+}
+.eachrequestcard{
+  width: 100%;
+}
   /* Small devices (tablets) */
   @media (min-width: 576px) and (max-width: 767.98px) {
     /* Styles for tablets */
@@ -49,6 +65,11 @@
   margin: auto;
         grid-template-columns: repeat(2,1fr);
       
+    }
+    .eachCardParentDiv{
+   
+      grid-template-columns: repeat(2,1fr);
+   
     }
   }
   
@@ -63,6 +84,11 @@
               grid-template-columns: repeat(3,1fr);
             
           }
+          .eachCardParentDiv{
+   
+            grid-template-columns: repeat(3,1fr);
+         
+          }
   }
   
   /* Large devices (desktops) */
@@ -71,6 +97,11 @@
     .parenDivOfEachStudentTable{
         grid-template-columns: repeat(2,1fr);
      }
+     .eachCardParentDiv{
+   
+      grid-template-columns: repeat(4,1fr);
+   
+    }
   }
   
   /* Extra large devices (large desktops) */
@@ -79,5 +110,10 @@
         grid-template-columns: repeat(2,1fr);
      }
     /* Styles for large desktops */
+    .eachCardParentDiv{
+   
+      grid-template-columns: repeat(4,1fr);
+   
+    }
   }
   
