@@ -51,7 +51,8 @@ requestRoute.post("/add",Authentication,async(req,res)=>{
         
         let savedata=await RequestModel(requestdata)
         savedata.save()
-        res.status(200).send({msg:"Successfully added Request"})
+
+        res.status(200).send({msg:"Successfully added Request",data:savedata})
     } catch (error) {
         res.status(400).send({msg:"Something went wrong"})
     }
