@@ -90,20 +90,31 @@ requestRoute.patch("/update/:reqid",AdminChecking,async(req,res)=>{
        res.status(400).send({msg:"Something went wrong"})
     }
 })
-requestRoute.patch("/reopenRequest/:reqid",Authentication,async(req,res)=>{
-    let {reason_message}=req.body
-    let {reqid}=req.params
+requestRoute.patch("/reopenRequest/:reqid", Authentication, async (req, res) => {
+    const { reason_message } = req.body;
+    const { reqid } = req.params;
+   
+  
+    if (!reason_message) {
+      return res.status(400).send({ error: "Missing reason_message in the request" });
+    }
   
     try {
-
-        await RequestModel.findByIdAndUpdate({_id:reqid},{cancel_request:false,status:false,reason_message})
-       res.status(200).send({msg:"Reopen Request"})
-     
-      
-        
+      const updatedRequest = await RequestModel.findByIdAndUpdate(
+        reqid,
+        { cancel_request: false, status: false, reason_message },
+        { new: true } // This option returns the updated document instead of the original one
+      );
+  
+      if (!updatedRequest) {
+        return res.status(404).send({ error: "Request not found" });
+      }
+  
+      res.status(200).send({ msg: "Reopen Request", updatedRequest });
     } catch (error) {
-      
-       res.status(400).send({msg:"Something went wrong"})
+     
+      res.status(500).send({ error: "Something went wrong" });
     }
-})
+  });
+  
 module.exports=requestRoute

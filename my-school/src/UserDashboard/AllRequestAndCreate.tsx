@@ -27,9 +27,7 @@ const AllRequestAndCreate = () => {
   return (
     <>
       <div style={{display:"flex",justifyContent:"flex-end",gap:"10px",margin:"8px"}}>
-        <Button onClick={() => setShowform(!showform)}>
-          {showform ? "Close Form" : "Create Request"}{" "}
-        </Button>
+       
         {!showform && (
           <Select
             defaultValue="Select Your Child Name"
@@ -50,6 +48,9 @@ const AllRequestAndCreate = () => {
             })}
           </Select>
         )}
+         <Button onClick={() => setShowform(!showform)}>
+          {showform ? "Close Form" : "Create Request"}{" "}
+        </Button>
       </div>
 
       {!showform && (

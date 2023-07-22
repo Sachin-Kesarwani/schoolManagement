@@ -1,7 +1,7 @@
 import axios from "axios"
 import { RaisesdrequestInter, studentData } from "../../utils/data.types"
 import { AppDispatch } from "../Store"
-import { ADDNEWREQUEST, ERROR, GETALLREQUESTS, GETSUDENTS, LOADING } from "./types.dash"
+import { ADDNEWREQUEST, ERROR, GETALLREQUESTS, GETSUDENTS, LOADING, UPDATETHEREOPENREQUEST } from "./types.dash"
 import Cookies from "js-cookie"
 import { allraisedRequestInter } from "../AdminRedux/action"
 
@@ -48,13 +48,17 @@ export interface getstudentdatainter{
 }
 export interface getrequestinter{
   type:typeof GETALLREQUESTS,
-  payload:allraisedRequestInter[]
+  payload:RaisesdrequestInter[]
 }
 export interface addrequestinter{
   type:typeof ADDNEWREQUEST;
-  payload:allraisedRequestInter
+  payload:RaisesdrequestInter
 }
-export type userAction =loadinginter |errorinter|getstudentdatainter|getrequestinter|addrequestinter
+export interface updatewithReopenRequestInter{
+  type:typeof UPDATETHEREOPENREQUEST,
+  payload:RaisesdrequestInter
+}
+export type userAction =loadinginter |errorinter|getstudentdatainter|getrequestinter|addrequestinter|updatewithReopenRequestInter
 
 
 

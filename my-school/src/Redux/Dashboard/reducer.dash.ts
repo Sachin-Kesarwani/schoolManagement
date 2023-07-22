@@ -1,7 +1,7 @@
-import { studentData } from "../../utils/data.types";
+import { RaisesdrequestInter, studentData } from "../../utils/data.types";
 import { allraisedRequestInter } from "../AdminRedux/action";
 import { userAction } from "./action.dash";
-import { ERROR, GETALLREQUESTS, GETSUDENTS, LOADING } from "./types.dash";
+import { ERROR, GETALLREQUESTS, GETSUDENTS, LOADING, UPDATETHEREOPENREQUEST } from "./types.dash";
 
 type data ={
     name:string
@@ -12,7 +12,7 @@ export interface inidatainter {
     loading:boolean;
     error:boolean;
     allStudentsdata:studentData[]
-    allRequestofEachStudents:allraisedRequestInter[]
+    allRequestofEachStudents:RaisesdrequestInter[]
 
 }
 
@@ -27,7 +27,7 @@ const initialstate = {
 
 
 export const reducer=(state:inidatainter=initialstate,action:userAction)=>{
-    console.log(action)
+   
     switch (action.type) {
         case LOADING:{
             return {
@@ -50,7 +50,11 @@ export const reducer=(state:inidatainter=initialstate,action:userAction)=>{
             }
         }
                
-         
+         case UPDATETHEREOPENREQUEST:{
+            return {
+                ...state,allRequestofEachStudents:state.allRequestofEachStudents.map((e)=>e._id===action.payload._id?action.payload:e)
+            }
+         }
            
     
         default:{
