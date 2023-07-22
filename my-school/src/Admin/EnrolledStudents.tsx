@@ -1,12 +1,12 @@
 import React from 'react'
 import { studentData } from '../utils/data.types'
-import { Avatar, Badge } from 'antd'
+import { Avatar, Badge, Button } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import "../admincss/student.css"
 const EnrolledStudents = ({data}:{data:studentData}) => {
   return (
 
-      <div className='singleEnrolledStudent'>
+      <div className='singleEnrolledStudent' style={{padding:"10px 0px"}}>
   <Badge.Ribbon text={data.name} />
   <Avatar style={{ backgroundColor: 'blue', color: 'white', marginTop: '30px' }} icon={<UserOutlined />} />
   <p style={{ textAlign: 'left', marginLeft: '8px' }}>

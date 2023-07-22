@@ -35,10 +35,10 @@ const StudentDetail = ({id}:{id:string}) => {
 
   function getStudents(){
     let data=allEnrolledStudents.filter((e:any)=>{
-      return e.id===id
+      return e._id===id
     })
   
-
+console.log(data)
     if(data.length>0){
       setName(data[0].name)
       const dataSource = Object.entries(data[0]).map(([key, value]) => ({
@@ -54,6 +54,7 @@ const StudentDetail = ({id}:{id:string}) => {
   useEffect(()=>{
     getStudents()
   },[])
+  // console.log(allEnrolledStudents,id)
   const columns = [
     {
       title: 'Label',
@@ -92,6 +93,7 @@ const StudentDetail = ({id}:{id:string}) => {
      
        studentDetail &&  <Table columns={columns} dataSource={studentDetail} pagination={false} />
       }
+   
       </Modal>
     </>
   );

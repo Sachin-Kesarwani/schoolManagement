@@ -1,6 +1,6 @@
-import React from "react";
-import { Badge, Avatar, Button } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import React,{useState} from "react";
+import { Badge, Avatar, Button, Tooltip } from "antd";
+import { FormOutlined, UserOutlined } from "@ant-design/icons";
 import { RaisesdrequestInter } from "../utils/data.types";
 import StudentDetail from "./StudentDetailmodal";
 import { useAppDispatch } from "../Redux/Store";
@@ -24,6 +24,7 @@ import {
 // };
 // data={category:"name",new_data:"Aman",pre_data:"Sachin",aproved_change:true||false}
 const SingleRequests = ({ data }: { data: RaisesdrequestInter }) => {
+  let [status,setStatus]=useState(data.status)
   let dispatch = useAppDispatch();
   function handleChanges(
     category: string,
@@ -42,6 +43,7 @@ const SingleRequests = ({ data }: { data: RaisesdrequestInter }) => {
     };
     console.log(data, "hii");
     dispatch(UpdatedataForRequests(data)).then((res: any) => {
+      setStatus(!status)
       console.log(res);
     });
   }
@@ -58,7 +60,7 @@ const SingleRequests = ({ data }: { data: RaisesdrequestInter }) => {
   }
   console.log(data);
   return (
-    <div key={data.userid}>
+    <div key={data.userid} style={{paddingBottom:"10px"}}>
       <Badge.Ribbon text={data.category} />
       <Avatar
         style={{ backgroundColor: "blue", color: "white", marginTop: "30px" }}
@@ -85,13 +87,14 @@ const SingleRequests = ({ data }: { data: RaisesdrequestInter }) => {
       </p>
 
       <Button
+      disabled={status}
       onClick={()=>cancelRequest(data._id)}
         style={{ margin: "10px", backgroundColor: "red", color: "white" }}
       >
         Cancel
       </Button>
       <Button
-        disabled={data.status}
+        disabled={status}
         onClick={() =>
           handleChanges(
             data.category,
@@ -103,8 +106,14 @@ const SingleRequests = ({ data }: { data: RaisesdrequestInter }) => {
         }
         style={{ margin: "10px", backgroundColor: "orange", color: "white" }}
       >
-        {data.status ? "Approve Changes" : "Approved Changes"}
+        {!status ? "Approve Changes" : "Approved Changes"}
       </Button>
+      <Tooltip title="Make Changes Manually" color={"grey"} key={"make changes manually"}>
+       
+          <FormOutlined style={{fontSize:"20px",cursor:"pointer"}} />
+        </Tooltip>
+   
+     
     </div>
   );
 };

@@ -16,7 +16,7 @@
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(4,1fr);
-   border: 1px solid red;
+
 }
 
 .selection{

@@ -1,8 +1,9 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Form, Input, Select, Switch, Button, Row, Col } from 'antd';
 import { useAppDispatch, useAppSelector } from '../Redux/Store';
 import { inidatainter } from '../Redux/Dashboard/reducer.dash';
 import { addNewRequest } from '../Redux/Dashboard/action.dash';
+import Loader from './Loader/Loader';
 //sample={
     // userid:{type:String,require:true},
     // student_id:{type:String,require:true},
@@ -27,9 +28,13 @@ const { Option } = Select;
 
 const AddNewRequest = () => {
     let dispatch=useAppDispatch()
+    let [loading,setLoading]=useState(false)
   const onFinish = (values:any) => {
     console.log('Form values:', values);
-   dispatch(addNewRequest(values))
+    setLoading(true)
+   dispatch(addNewRequest(values)).then((res:any)=>{
+setLoading(false)
+   })
     // Perform any further actions with the form values, such as sending the data to the server
   };
   let studentdata = useAppSelector(
@@ -112,7 +117,7 @@ const AddNewRequest = () => {
 
         <Col span={24}>
           <Form.Item>
-            <Button type="primary" htmlType="submit">Submit</Button>
+            <Button type="primary" htmlType="submit">{loading?<Loader/>:"Submit"}</Button>
           </Form.Item>
         </Col>
       </Row>

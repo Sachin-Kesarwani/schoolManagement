@@ -1,10 +1,11 @@
-import { Button, Select, message } from 'antd';
+import { Button, Select, Spin, message } from 'antd';
 import React, { useState } from 'react';
 import { useAppSelector } from '../Redux/Store';
 import { inidatainter } from '../Redux/Dashboard/reducer.dash';
 import axios from 'axios';
 import AssignmentPagination from './AssignmentPagination';
 import SingleAssignmentDisplay from './SingleAssignmentDisplay';
+import Loader from './Loader/Loader';
 
 interface InputInter {
   student_class: string;
@@ -20,6 +21,7 @@ const StudentAssignment = () => {
   let [page,setPage]=useState(1)
   let [maxassignment,setMaxAssignment]=useState(5)
   let [allassignments,setAllassignments]=useState([])
+  let [loading,setLoading]=useState(false)
   const options = Array.from({ length: 10 }, (_, index) => index + 1);
   let studentdata = useAppSelector(
     (store) => (store.Dashreducer as inidatainter).allStudentsdata
@@ -34,15 +36,15 @@ const StudentAssignment = () => {
 
   async function getassignment(e:any){
    e.preventDefault()
-   console.log(inputdata)
+  
    if(inputdata.student_class!==""&&inputdata.studentid!==""){
- 
+ setLoading(true)
     await axios.get(`http://localhost:8080/assignment/all`,{
       params: inputdata,
     })
     .then((res)=>{
       if(res.request.status===200){
-       
+       setLoading(false)
          setAllassignments(res.data.allAssignments)
         messageApi.open({
           type: 'success',
@@ -135,7 +137,7 @@ if(value===""){
       </Select>
       }
      
-      <Button onClick={getassignment} style={{backgroundColor:warn?"red":"blue",color:"white"}}>{warn?"Please Select both oprions":"Get All Assignments"}</Button>
+      <Button onClick={getassignment} style={{backgroundColor:warn?"red":"blue",color:"white"}}>{warn?"Please Select both oprions":loading?   <Loader/>:"Get All Assignments"}</Button>
     
     </div>
 
