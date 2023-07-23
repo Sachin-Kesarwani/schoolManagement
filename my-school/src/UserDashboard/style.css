@@ -1,119 +1,128 @@
-.parenDivOfEachStudentTable{
-    display: grid;
-    width: 100%;
-    gap:10px;
-    grid-template-columns: repeat(2,1fr);
-    overflow-x: scroll;
+.parenDivOfEachStudentTable {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  overflow-x: scroll;
 }
 
-.eachCard{
-    width: 100%;
-}
-
-.assignmentInputmaindiv{
-    width:80%;
-    margin: auto;
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(4,1fr);
-
-}
-
-.selection{
+.eachCard {
   width: 100%;
 }
-.add-new-request{
- 
+
+.assignmentInputmaindiv {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
 }
-.eachCardParentDiv{
-display: grid;
-grid-template-columns: repeat(4,1fr);
-gap:10px;
+
+.selection {
+  width: 100%;
+}
+
+.eachCardParentDiv {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.noonestudying {
+  width: 300px;
+ 
+  height: 300px;
+}
+.eachrequestcard {
+  width: 100%;
 }
 /* Extra small devices (phones) */
 @media (max-width: 575.98px) {
-    /* Styles for mobile devices */
-    .parenDivOfEachStudentTable{
-       grid-template-columns: repeat(1,1fr);
-    }
+  /* Styles for mobile devices */
+  .parenDivOfEachStudentTable {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
-   .tableofstudentdata{
+  .tableofstudentdata {
     width: auto;
+  }
+  .assignmentInputmaindiv {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .eachCardParentDiv {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .noonestudying{
+    background-image: url('https://media.istockphoto.com/id/525409577/photo/elevated-view-of-students-writing-their-gcse-exam.jpg?s=1024x1024&w=is&k=20&c=c-ojE5uhGJfTRkBb9hWkp1Bnc7CRpI_ZsHyHJwhxwyE=');
+    background-repeat: no-repeat;
    
-   }
-   .assignmentInputmaindiv{
-  
-    grid-template-columns: repeat(1,1fr);
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: black;
+    border: 2px solid rgb(255, 0, 0);
+  }
   
 }
-.eachCardParentDiv{
-   
-  grid-template-columns: repeat(1,1fr);
 
+/* Small devices (tablets) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Styles for tablets */
+  .parenDivOfEachStudentTable {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .assignmentInputmaindiv {
+    margin: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .eachCardParentDiv {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
+/* Medium devices (laptops, small desktops) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Styles for laptops and small desktops */
+  .parenDivOfEachStudentTable {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .assignmentInputmaindiv {
+    margin: auto;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .eachCardParentDiv {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-.eachrequestcard{
-  width: 100%;
+
+/* Large devices (desktops) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Styles for desktops */
+  .parenDivOfEachStudentTable {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .eachCardParentDiv {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .noonestudying {
+    width:50%;
+   
+    height: 50%;
+  }
 }
-  /* Small devices (tablets) */
-  @media (min-width: 576px) and (max-width: 767.98px) {
-    /* Styles for tablets */
-    .parenDivOfEachStudentTable{
-        grid-template-columns: repeat(1,1fr);
-     }
-     .assignmentInputmaindiv{
-  margin: auto;
-        grid-template-columns: repeat(2,1fr);
-      
-    }
-    .eachCardParentDiv{
-   
-      grid-template-columns: repeat(2,1fr);
-   
-    }
+
+/* Extra large devices (large desktops) */
+@media (min-width: 1200px) {
+  .parenDivOfEachStudentTable {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* Medium devices (laptops, small desktops) */
-  @media (min-width: 768px) and (max-width: 991.98px) {
-    /* Styles for laptops and small desktops */
-    .parenDivOfEachStudentTable{
-        grid-template-columns: repeat(1,1fr);
-     }
-     .assignmentInputmaindiv{
-        margin: auto;
-              grid-template-columns: repeat(3,1fr);
-            
-          }
-          .eachCardParentDiv{
-   
-            grid-template-columns: repeat(3,1fr);
-         
-          }
+  /* Styles for large desktops */
+  .eachCardParentDiv {
+    grid-template-columns: repeat(4, 1fr);
   }
-  
-  /* Large devices (desktops) */
-  @media (min-width: 992px) and (max-width: 1199.98px) {
-    /* Styles for desktops */
-    .parenDivOfEachStudentTable{
-        grid-template-columns: repeat(2,1fr);
-     }
-     .eachCardParentDiv{
+  .noonestudying {
+    width:50%;
    
-      grid-template-columns: repeat(4,1fr);
-   
-    }
+    height: 50%;
   }
-  
-  /* Extra large devices (large desktops) */
-  @media (min-width: 1200px) {
-    .parenDivOfEachStudentTable{
-        grid-template-columns: repeat(2,1fr);
-     }
-    /* Styles for large desktops */
-    .eachCardParentDiv{
-   
-      grid-template-columns: repeat(4,1fr);
-   
-    }
-  }
-  
+}

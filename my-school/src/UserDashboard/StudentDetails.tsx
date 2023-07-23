@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../Redux/Store";
 import { inidatainter } from "../Redux/Dashboard/reducer.dash";
 import SingleStudentTable from "./SingleStudentTable";
 import "./style.css"
+import NoOnestudying from "./NoOnestudying";
 const StudentDetails = () => {
   let studentdata = useAppSelector(
     (store) => (store.Dashreducer as inidatainter).allStudentsdata
@@ -15,7 +16,7 @@ const StudentDetails = () => {
   let userdata = JSON.parse(Cookieuserdata);
 
   console.log(studentdata);
-  return (
+  return studentdata && studentdata.length===0?<NoOnestudying/>: (
     <div>
       <h1 style={{ color: "black" }}>
         {" "}
