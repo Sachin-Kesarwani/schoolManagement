@@ -38,7 +38,7 @@ const AllRequestAndCreate = () => {
 
             {studentdata.map((e) => {
               return (
-                <Option value={e._id}>
+                <Option style={{display:e.status?"block":"none"}} value={e._id}>
                   {e.name}{" "}
                   <span style={{ color: "orange", fontSize: "12px" }}>
                     Class {e.class}

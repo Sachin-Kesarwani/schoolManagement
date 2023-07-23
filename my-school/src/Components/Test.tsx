@@ -68,7 +68,7 @@ const handlnext=()=>{
 const handleoption=(i:number,e:string)=>{
    let answer = onedoc.correct_answer
     let optionsarr = document.querySelectorAll(".opt")
-    if(e==answer){
+    if(e===answer){
 
         optionsarr[i].classList.add("active")
         setscore(score+1) 
