@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
-
+// values.parents_image=parentImageURl
+// values.student_image=studentImageURL
 const studentSchema = mongoose.Schema({
     name: {type:String,required:true},
     fatherName: {type:String,required:true},
@@ -14,6 +15,8 @@ const studentSchema = mongoose.Schema({
     test_score: {type:Number,required:false},
     transport_from: {type:String,required:false},
     transport_to: {type:String,required:false},
+    parents_image:{type:String,required:false},
+    student_image:{type:String,required:false},
      //////////////Following data is not need to pass in the body////////////////////
     userid: {type:String,required:true},
     status: {type:Boolean,required:true},

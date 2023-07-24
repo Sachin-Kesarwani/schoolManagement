@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../Redux/Store";
 import { getAllStudentsRequests } from "../Redux/Dashboard/action.dash";
 import AddNewRequest from "./AddNewRequest";
 import { inidatainter } from "../Redux/Dashboard/reducer.dash";
-import { Button, Card, Select } from "antd";
+import { Button, Card, Image, Select } from "antd";
 import { Option } from "antd/es/mentions";
 import EachRequest from "./EachRequest";
 import { RaisesdrequestInter } from "../utils/data.types";
@@ -52,7 +52,9 @@ const AllRequestAndCreate = () => {
           {showform ? "Close Form" : "Create Request"}{" "}
         </Button>
       </div>
-
+           {
+            !showform && allrequests.length===0&&<Image preview={false} src="https://media.istockphoto.com/id/1405760543/vector/question-and-answer-solving-problem-or-business-solution-ask-for-reply-or-idea-to-solve.jpg?s=612x612&w=0&k=20&c=2PgCTaLtGHheBM6SH5gMKRPVwQHmVWWW_bOX9NQbp6E="/>
+           }
       {!showform && (
         <div>
           <div className="eachCardParentDiv">

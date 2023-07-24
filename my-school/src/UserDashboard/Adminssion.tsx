@@ -1,9 +1,11 @@
 import React from 'react'
+import Form from '../Components/FormComp'
+import AddNewStudent from './AddNewStudent'
 
 const Adminssion = () => {
   return (
     <div>
-      adminssion
+   <AddNewStudent/>
     </div>
   )
 }

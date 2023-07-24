@@ -14,9 +14,11 @@ const assignmentRouter = require("./Routes/assignmentRoutes");
 const paymentRoute = require("./Routes/PaymentROute");
 
 const multer = require('multer');
-const cloudinary = require('cloudinary')
+
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
+let fs=require("fs")
+const  {v2: cloudinary}=require('cloudinary');
 
 require("dotenv").config()
 app.use(express.json())
@@ -36,38 +38,54 @@ app.use("/payment",paymentRoute)
 
 
 
-cloudinary.config({
-  cloud_name: 'dtorys7bi',
-  api_key: '723226371683247',
-  api_secret: '4YKk4aIhzr2NEz638MXvfHT_HUY',
-  secure: true,
+          
+cloudinary.config({ 
+  cloud_name: 'dtorys7bi', 
+  api_key: '723226371683247', 
+  api_secret: '4YKk4aIhzr2NEz638MXvfHT_HUY' 
 });
+// cloudinary.config({ 
+//   cloud_name: process.env.CLOUDNAME, 
+//   api_key:process.env.CLOUDINARY_API_KEY, 
+//   api_secret: process.env.CLOUDINARY_SECRET_KEY
+// });
 app.use(express.urlencoded({ extended: true }));
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-      folder: './uploads', // Optional: Change this to your desired folder name in Cloudinary
-    },
-  });
-  const upload = multer({ storage: storage });
+
+
+  // SET STORAGE
+  var storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, './uploads')
+      },
+      filename: function (req, file, cb) {
+      //   cb(null, file.originalname + '-' + Date.now()+".jpg")
+      cb(null, Date.now()+ '-' +file.originalname )
+      }
+    })
+   
+  var upload = multer({ storage: storage })
+  app.post("/uploadphoto",upload.single('myImage'),async(req,res)=>{
   
-  // Define a route to handle image uploads
-  // app.post("/upload",(req,res)=>{
-  //   console.log("hii")
-  //   res.send("hii")
-  // })  
-  app.post("/upload",upload.single('image'), (req, res) => {
-    // Check if a file was provided in the request
-    console.log("hiii")
-    if (req.file) {
-      // If an image was uploaded successfully, return its Cloudinary URL
-      res.status(200).json({ imageUrl: req.file.path });
-    } else {
-      // If no image was provided, return an error message
-      res.status(400).json({ message: 'No image file provided' });
+    let path=req.file.path
+    console.log(req.file)
+    console.log('hiii')
+    console.log(process.env.CLOUDINARY_API_KEY)
+    try {
+      const result = await cloudinary.uploader.upload(path); // Upload image to Cloudinary
+      let imageUrl = result.secure_url; // Get the URL of the uploaded image from Cloudinary
+      console.log(imageUrl)
+      fs.unlinkSync(path)
+      res.status(201).send(imageUrl);
+        // console.log(imageUrl,"54")  
+        // let data=new imageModel({image:path})
+        // await data.save()
+        // res.send("uploaded")
+    } catch (error) {
+        res.send("error")
     }
-  });
+   
   
+})
 ///////////////////////////////////////////////////////////////////////////////
 app.listen(process.env.port,async()=>{
 
