@@ -1,24 +1,54 @@
 
 
-import React, { useState } from 'react';
-import { Form, Input, Select, Button, Row, Col, Switch, Card } from 'antd';
+import React, { useState ,useContext} from 'react';
+import { Form, Input, Select, Button, Row, Col, Switch, Card, Image, Steps, Result } from 'antd';
 // import 'animate.css/animate.min.css';
 import "./DashBoardCSS/AddnewStudent.css" // Custom CSS file for additional styles
-import axios, { Axios } from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import Loader from './Loader/Loader';
+import Test from "./TestforAdmission"
+import { AddnewStudentInter } from '../utils/data.types';
+import Cookies from 'js-cookie';
 
+let inidata=  {DOB: "",
+aadhar: 0,
+address: "",
+class:0,
+contact:0,
+fatherName: "",
+motherName:"",
+name:"",
+parents_image: "",
+student_image:"",
+transport:false,
+transport_from:"",
+transport_to: "",
+test_score:0
+}
 const { Option } = Select;
 
 const AddNewStudent = () => {
   const [showTransportFields, setShowTransportFields] = useState(false);
   const [studentImageURL, setStudentImageURL] = useState('');
   let [parentImageURl,setparentImageURl]=useState("")
+  let [imagestudentLoading,setImagestudentLoading]=useState(false)
+  let [imageparentLoading,setImageparentLoading]=useState(false)
+   let [data,setData]=useState<AddnewStudentInter>(inidata)
+let [formSubmitted,setformSubmitted]=useState(false)
+
+
+  let [test,setTest]=useState(false)
+  let [currentStatus,setCurrentStatus]=useState(-1)
   const onFinish = (values:any) => {
     values.parents_image=parentImageURl
     values.student_image=studentImageURL
     if(values.transport===undefined){
       values.transport=false
     }
-    console.log('Form values:', values);
+    setData(values)
+  
+    setTest(true)
+    setCurrentStatus(0)
   };
 
   const handleTransportSwitchChange = (checked:boolean) => {
@@ -27,6 +57,7 @@ const AddNewStudent = () => {
 
  async  function getSudentimagURl(event: any){
   event.preventDefault();
+  setImagestudentLoading(true)
   const formData = new FormData();
   const fileInput = event.target.files[0];
   formData.append('myImage', fileInput);
@@ -38,6 +69,7 @@ const AddNewStudent = () => {
       },
     });
   if(response.status===201){
+    setImagestudentLoading(false)
     setStudentImageURL(response.data);
   }
    // Update the student image URL after successful upload
@@ -47,6 +79,7 @@ const AddNewStudent = () => {
   }
   async  function getParentimagURl(event: any){
     event.preventDefault();
+    setImageparentLoading(true)
     const formData = new FormData();
     const fileInput = event.target.files[0];
     formData.append('myImage', fileInput);
@@ -58,6 +91,7 @@ const AddNewStudent = () => {
         },
       });
     if(response.status===201){
+      setImageparentLoading(false)
       setparentImageURl(response.data); 
     }
      // Update the student image URL after successful upload
@@ -66,9 +100,48 @@ const AddNewStudent = () => {
     }
     }
 
+  async function addformdata(score:number){
+    const obj = {
+      ...data,test_score: score,
+    };
+ console.log(obj)
+    try {
+      let token=(Cookies.get("SchooleManagementUserToken"))
+      const response: AxiosResponse = await axios.post("http://localhost:8080/student/register",obj, { headers: { Authorization: `Bearer ${token}` } });
+      // Handle the response here if needed
+      console.log(response.data);
+      setTest(false)
+      setformSubmitted(true)
+      setCurrentStatus(2)
+    } catch (error) {
+      // Handle any errors that occurred during the API call
+      console.error(error);
+    }
+  }
+
+
   return (
-    <div className="form-container">
-      <Card style={{border:"1px solid red"}}>
+    <>
+      <Steps
+      style={{width:"90%",margin:"auto"}}
+    current={currentStatus}
+    items={[
+      {
+        title: 'Form Filling',
+       
+      },
+      {
+        title: 'Test',
+      
+      },
+      {
+        title: 'Waiting',
+       
+      },
+    ]}
+  />
+     <div className="form-container" style={{display:test?"none":formSubmitted?"none":"block"}}>
+      <Card >
       <Form onFinish={onFinish} layout="vertical">
         <Row gutter={16}>
           <Col xs={24} sm={12}>
@@ -113,14 +186,34 @@ const AddNewStudent = () => {
             >
               <Input type='file' name="myImage" accept="image/*" onChange={getSudentimagURl} />
             </Form.Item>
-          </Col>
+            </Col>
+            {
+        imagestudentLoading ?<Col style={{display:"grid",alignItems:"center"}} xs={24} sm={12}><Loader color={"blue"}/></Col>:  studentImageURL.length>0&&<Col   xs={24} sm={12}><Image preview={false} style={{margin:"auto",borderRadius:"10px"}} width={"80px"} height={"80px"} src={studentImageURL}/></Col>
+        }
+          {/* </Col>
+          <Col xs={24} sm={12}>
+            <Form.Item label="Parents Image" name="parents_image" rules={[{ required: true, message: 'Please enter the class!' }]}>
+            <Input type='file' name="myImage" accept="image/*" onChange={getParentimagURl} />
+            
+            </Form.Item>
+          </Col> */}
+        </Row>
+        <Row  gutter={16}>
+        {/* {
+        imagestudentLoading ?<Col xs={24} sm={12}><Loader color={"blue"}/></Col>:  studentImageURL.length>0&&<Col xs={24} sm={12}><Image preview={false} style={{margin:"auto",borderRadius:"10px"}} width={"80px"} height={"80px"} src={studentImageURL}/></Col>
+        } */}
+      
           <Col xs={24} sm={12}>
             <Form.Item label="Parents Image" name="parents_image" rules={[{ required: true, message: 'Please enter the class!' }]}>
             <Input type='file' name="myImage" accept="image/*" onChange={getParentimagURl} />
             
             </Form.Item>
           </Col>
+          {
+        imageparentLoading?<Col style={{display:"grid",alignItems:"center"}}  xs={24} sm={12}><Loader color={"blue"}/></Col> : parentImageURl.length>0&&<Col xs={24} sm={12}><Image preview={false} style={{margin:"auto",borderRadius:"10px"}} width={"80px"} height={"80px"} src={parentImageURl}/></Col>
+        }
         </Row>
+       
         <Form.Item label="Address" name="address" rules={[{ required: true, message: 'Please enter the address!' }]}>
           <Input />
         </Form.Item>
@@ -192,6 +285,18 @@ const AddNewStudent = () => {
       </Card>
      
     </div>
+    {/* {
+      test&& <Test addformdata={addformdata} setCurrentStatus={  setCurrentStatus} currentStatus={currentStatus} />
+    } */}
+    {
+      formSubmitted? <Result
+      status="success"
+      title="Successfully Form Submitted Wait for the Response"
+    
+    />: test&& <Test addformdata={addformdata} setCurrentStatus={  setCurrentStatus} currentStatus={currentStatus} />
+    }
+    </>
+   
   );
 };
 

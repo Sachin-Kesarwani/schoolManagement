@@ -28,8 +28,8 @@ dispatch(signup(formdata)).then((res:any)=>{
 if(res.status===200){
   setdisabled(true)
   console.log(res)
-  Cookies.set('SchooleManagementUserData',JSON.stringify(res.data.data) );
-  Cookies.set('SchooleManagementUserToken',JSON.stringify(res.data.token) );
+  Cookies.set('SchooleManagementUserData',JSON.stringify(res.data.data),{expires:7} );
+  Cookies.set('SchooleManagementUserToken',JSON.stringify(res.data.token),{expires:7} );
    
   handleToastClick(res.data.data.name)
   messageApi.open({

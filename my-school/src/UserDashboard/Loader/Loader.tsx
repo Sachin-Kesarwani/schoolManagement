@@ -1,8 +1,8 @@
 import React from 'react'
 import "./loader.css"
-const Loader = () => {
+const Loader = ({color="white"}) => {
   return (
-    <span className="loader"></span>
+    <span className="loader" style={{color:color}}></span>
   )
 }
 

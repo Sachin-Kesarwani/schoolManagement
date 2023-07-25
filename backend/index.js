@@ -67,13 +67,11 @@ app.use(express.urlencoded({ extended: true }));
   app.post("/uploadphoto",upload.single('myImage'),async(req,res)=>{
   
     let path=req.file.path
-    console.log(req.file)
-    console.log('hiii')
-    console.log(process.env.CLOUDINARY_API_KEY)
+  
     try {
       const result = await cloudinary.uploader.upload(path); // Upload image to Cloudinary
       let imageUrl = result.secure_url; // Get the URL of the uploaded image from Cloudinary
-      console.log(imageUrl)
+    
       fs.unlinkSync(path)
       res.status(201).send(imageUrl);
         // console.log(imageUrl,"54")  
