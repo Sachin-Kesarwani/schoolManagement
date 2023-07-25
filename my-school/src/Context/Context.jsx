@@ -1,16 +1,17 @@
-import { createContext } from "vm";
+// import { createContext ,useState} from "react";
+// import { AddnewStudentInter } from "../utils/data.types"
 
 
+// export let context=createContext()
 
-let context=createContext()
 
-
-let contextProvider=({children})=>{
-    return(
-        <context.provider value={{}}>
-            {
-                children
-            }
-        </context.provider>
-    )
-}
+// export let ContextProvider=({children})=>{
+//     let [newlyaddedStudent,setnewlyStudent]=useState<AddnewStudentInter>({});
+//     return(
+//         <context.Provider value={{newlyaddedStudent,setnewlyStudent}}>
+//             {
+//                 children
+//             }
+//         </context.Provider>
+//     )
+// }

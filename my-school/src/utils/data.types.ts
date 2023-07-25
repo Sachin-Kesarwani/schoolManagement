@@ -83,6 +83,8 @@ export interface studentData {
   transport_fees_november?: boolean;
   transport_fees_december?: boolean;
   __v?: number;
+  student_image?: string;
+  parent_image?: string;
 }
 
 export interface RaisesdrequestInter {
@@ -146,3 +148,19 @@ export interface addassignment {
     assignment:SingleAssignment[]
 }
 
+export interface AddnewStudentInter{
+  DOB: string;
+  aadhar: number;
+  address: string;
+  class:number;
+  contact:number;
+  fatherName: string;
+  motherName: string;
+  name: string;
+  parents_image: string;
+  student_image: string;
+  transport: boolean;
+  transport_from: string;
+  transport_to: string;
+  test_score?:number;
+}

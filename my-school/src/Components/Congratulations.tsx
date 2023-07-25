@@ -7,8 +7,8 @@ export default () => {
    
     <Confetti
     // confettiSource={{ x: 660, y: 300, w: 200, h: 200 }}
-      width={1500}
-      height={1500}
+      width={200}
+      height={200}
     // tweenDuration={5000}
     />
   )

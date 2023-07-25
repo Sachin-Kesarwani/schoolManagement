@@ -66,8 +66,8 @@ export const signup = (data: signupformdataType): any => async (dispatch: AppDis
    try {
      const response = await axios.post("http://localhost:8080/user/login", data);
    if(response.request.status===200){
-   Cookies.set('SchooleManagementUserData',JSON.stringify(response.data.data) );
-   Cookies.set('SchooleManagementUserToken',response.data.token );
+   Cookies.set('SchooleManagementUserData',JSON.stringify(response.data.data) ,{expires:7});
+   Cookies.set('SchooleManagementUserToken',response.data.token ,{expires:7});
    }
      return response; 
    } catch (error) {

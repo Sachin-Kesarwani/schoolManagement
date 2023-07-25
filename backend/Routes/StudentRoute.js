@@ -53,9 +53,12 @@ StudentRouter.post("/register",Authentication,presentationOFstudent,async(req,re
       delete data.transport_to
       data={...data,...fees,status:false}
     }
-       
+    console.log(data,"56")
+       data.contact=Number(data.contact)
+       data.aadhar=Number(data.aadhar)
+       data.class=Number(data.class)
     try {
-    
+        console.log(data)
         let studentdata =new StudentModel(data)
      
         await studentdata.save()
