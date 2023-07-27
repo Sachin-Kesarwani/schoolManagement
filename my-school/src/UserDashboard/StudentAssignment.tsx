@@ -25,7 +25,7 @@ const StudentAssignment = () => {
   let [maxassignment, setMaxAssignment] = useState(5);
   let [allassignments, setAllassignments] = useState([]);
   let [loading, setLoading] = useState(false);
-  const options = Array.from({ length: 10 }, (_, index) => index + 1);
+  const options = Array.from({ length: 12}, (_, index) => index + 1);
   let studentdata = useAppSelector(
     (store) => (store.Dashreducer as inidatainter).allStudentsdata
   );
@@ -105,7 +105,7 @@ const StudentAssignment = () => {
           {studentdata &&
             studentdata.length > 0 &&
             studentdata.map((e) => (
-              <Option key={e._id} value={e._id}>
+              <Option style={{display:e.status?"block":"none"}} key={e._id} value={e._id}>
                 {e.name}
               </Option>
             ))}

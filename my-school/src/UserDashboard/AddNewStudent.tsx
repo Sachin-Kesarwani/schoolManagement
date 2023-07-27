@@ -1,6 +1,6 @@
 
 
-import React, { useState ,useContext} from 'react';
+import React, { useState ,useContext, useRef} from 'react';
 import { Form, Input, Select, Button, Row, Col, Switch, Card, Image, Steps, Result } from 'antd';
 // import 'animate.css/animate.min.css';
 import "./DashBoardCSS/AddnewStudent.css" // Custom CSS file for additional styles
@@ -9,6 +9,7 @@ import Loader from './Loader/Loader';
 import Test from "./TestforAdmission"
 import { AddnewStudentInter } from '../utils/data.types';
 import Cookies from 'js-cookie';
+import { ToastContainer, toast } from 'react-toastify';
 
 let inidata=  {DOB: "",
 aadhar: 0,
@@ -35,8 +36,9 @@ const AddNewStudent = () => {
   let [imageparentLoading,setImageparentLoading]=useState(false)
    let [data,setData]=useState<AddnewStudentInter>(inidata)
 let [formSubmitted,setformSubmitted]=useState(false)
-
-
+let [resultStatus,setResultStatus]=useState<string>("success")
+let [resultMessage,setResultMessage]=useState("")
+const formRef = useRef<any>();
   let [test,setTest]=useState(false)
   let [currentStatus,setCurrentStatus]=useState(-1)
   const onFinish = (values:any) => {
@@ -49,6 +51,19 @@ let [formSubmitted,setformSubmitted]=useState(false)
   
     setTest(true)
     setCurrentStatus(0)
+  };
+
+  const validateClassValue = (_: any, value: number) => {
+    if (value > 12) {
+      return Promise.reject(new Error('Class value should not be greater than 12!'));
+    }
+    return Promise.resolve();
+  };
+  const validateAadharLength = (_: any, value: string) => {
+    if (value && value.length > 16) {
+      return Promise.reject(new Error('Aadhar number should not be greater than 16 digits!'));
+    }
+    return Promise.resolve();
   };
 
   const handleTransportSwitchChange = (checked:boolean) => {
@@ -109,17 +124,51 @@ let [formSubmitted,setformSubmitted]=useState(false)
       let token=(Cookies.get("SchooleManagementUserToken"))
       const response: AxiosResponse = await axios.post("http://localhost:8080/student/register",obj, { headers: { Authorization: `Bearer ${token}` } });
       // Handle the response here if needed
-      console.log(response.data);
-      setTest(false)
-      setformSubmitted(true)
-      setCurrentStatus(2)
+      console.log(response)
+      if(response.status===201){
+        setResultMessage(response.data.msg)
+          setTest(false)
+          setformSubmitted(true)
+          setCurrentStatus(2)
+          setTimeout(()=>{
+            onReset()
+           },3000)
+      }else if (response.status===200){
+       setResultStatus("warning")
+       setResultMessage(response.data.msg)
+       setTest(false)
+       setformSubmitted(true)
+       setCurrentStatus(2)
+       setTimeout(()=>{
+        onReset()
+       },3000)
+      }else if (response.status===400){
+        setResultMessage(response.data.msg)
+        setResultStatus("error")
+        setTest(false)
+       setformSubmitted(true)
+       setCurrentStatus(2)
+       setTimeout(()=>{
+        onReset()
+       },3000)
+      }
+   
+    
     } catch (error) {
       // Handle any errors that occurred during the API call
       console.error(error);
     }
   }
 
-
+  const onReset = () => {
+    // Call resetFields on the form reference to reset the form
+    formRef.current.resetFields();
+    setTest(false)
+    setformSubmitted(false)
+    setCurrentStatus(-1)
+    setStudentImageURL("")
+    setparentImageURl("")
+  };
   return (
     <>
       <Steps
@@ -142,7 +191,7 @@ let [formSubmitted,setformSubmitted]=useState(false)
   />
      <div className="form-container" style={{display:test?"none":formSubmitted?"none":"block"}}>
       <Card >
-      <Form onFinish={onFinish} layout="vertical">
+      <Form onFinish={onFinish}     ref={formRef}  layout="vertical">
         <Row gutter={16}>
           <Col xs={24} sm={12}>
             <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please enter the name!' }]}>
@@ -171,7 +220,7 @@ let [formSubmitted,setformSubmitted]=useState(false)
             </Form.Item>
           </Col>
           <Col xs={24} sm={12}>
-            <Form.Item label="Class" name="class" rules={[{ required: true, message: 'Please enter the class!' }]}>
+            <Form.Item label="Class" name="class" rules={[{ required: true, message: 'Please enter the class!' }, { validator: validateClassValue } ]}>
               <Input type="number" />
             </Form.Item>
           </Col>
@@ -221,7 +270,7 @@ let [formSubmitted,setformSubmitted]=useState(false)
         <Form.Item
           label="Aadhar Number"
           name="aadhar"
-          rules={[{ required: true, message: 'Please enter the Aadhar number!' }]}
+          rules={[{ required: true, message: 'Please enter the Aadhar number!' },   { validator: validateAadharLength } ]}
         >
           <Input type="number" />
         </Form.Item>
@@ -290,11 +339,16 @@ let [formSubmitted,setformSubmitted]=useState(false)
     } */}
     {
       formSubmitted? <Result
-      status="success"
-      title="Successfully Form Submitted Wait for the Response"
+      status={resultStatus as any}
+      title={resultMessage}
+      subTitle="We will respond within 24 hours"
     
     />: test&& <Test addformdata={addformdata} setCurrentStatus={  setCurrentStatus} currentStatus={currentStatus} />
     }
+
+
+
+
     </>
    
   );

@@ -28,9 +28,11 @@ function Authentication(req,res,next){
 
  async function  presentationOFstudent(req,res,next){
   let {name}=req.body
+  let {aadhar}=req.body
+  
   try {
-    let storeddata=await StudentModel.find({name:name})
-   
+    let storeddata=await StudentModel.find({name:name ,aadhar:Number(aadhar)})
+
     if(storeddata.length>0){
        res.status(200).send({msg:"Student Already Registered , Verfication is in Process"})
     }else{
