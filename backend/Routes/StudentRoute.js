@@ -63,7 +63,7 @@ StudentRouter.post("/register",Authentication,presentationOFstudent,async(req,re
      
         await studentdata.save()
      
-        res.status(200).send({"msg":"Registered Successfully and Verification is pending by school"})
+        res.status(201).send({"msg":"Registered Successfully and Verification is pending by school"})
     } catch (error) {
         res.status(400).send({"msg":"Someting went wrong"})
         

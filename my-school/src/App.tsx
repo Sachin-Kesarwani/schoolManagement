@@ -15,13 +15,16 @@ import AssignmentForm from './Admin/Test';
 import Github from './Admin/Github';
 import Payment from './Admin/Payment';
 import axios from 'axios';
-import { Button } from 'antd';
+import { Button, Collapse } from 'antd';
 import ImageUploader from './UserDashboard/ImageUpload';
 // class CustomFile extends File {
 //   constructor(fileBits: BlobPart[], fileName: string, options?: FilePropertyBag) {
 //     super(fileBits, fileName, options);
 //   }
 // }
+
+const { Panel } = Collapse;
+
 
 function App() {
   let url = document.URL;
@@ -32,7 +35,7 @@ function App() {
     <div className="App">
     
       {!param&&  <Navbar/>}
-
+     
      <AllRoutes/>
      <Footer/>
     </div>

@@ -24,7 +24,7 @@ const SingleStudentTable = ({ data }: { data: studentData }) => {
       setparentimage(data.parent_image);
     }
     const dataSource = Object.entries(data)
-      .filter(([key]) => key !== "student_image" && key !== "parentimage")
+      .filter(([key]) => key !== "student_image" && key !== "parent_image")
       .map(([key, value]) => ({
         key,
         label: key.toUpperCase(),

@@ -5,6 +5,7 @@ import {
   UserOutlined,
   EditOutlined,
   SendOutlined,
+  MoneyCollectOutlined 
 } from "@ant-design/icons";
 
 import StudentAssignment from "./StudentAssignment";
@@ -17,6 +18,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../Redux/Store";
 import { getAllStudentsOfusers } from "../Redux/Dashboard/action.dash";
 import AddNewStudent from "./AddNewStudent";
+import Fees from "./Fees/Fees";
 
 const MyTabbedInterface = () => {
   const { TabPane } = Tabs;
@@ -42,10 +44,13 @@ const MyTabbedInterface = () => {
           : name === "createrequests"
           ? "3"
           : name==="admission"
-          ?"4":"1"
+          ?"4"
+          :  name==="test"
+          ?"5":
+          "1"
       }
     >
-      {[UserOutlined, EditOutlined, SendOutlined,UserOutlined ].map((Icon, i) => {
+      {[UserOutlined, EditOutlined, SendOutlined,UserOutlined ,MoneyCollectOutlined ].map((Icon, i) => {
         const id = String(i + 1);
 
         return (
@@ -66,8 +71,17 @@ const MyTabbedInterface = () => {
                   <Icon />
                   Create Requests
                 </Link>
-              ) :(
+              ) :id==="4"?(
                 <Link to="/dashboard?type=admission">
+                  <Icon />
+                 Admission
+                </Link>
+              ) :id==="5"?(
+                <Link to="/dashboard?type=fees">
+                  <Icon />
+              Pay Fees
+                </Link>):(
+                <Link to="/dashboard?type=studentdetails">
                   <Icon />
                  Admission
                 </Link>
@@ -81,7 +95,10 @@ const MyTabbedInterface = () => {
               <StudentAssignment />
             ) :name==="admission"?(
               <AddNewStudent/>
-            ) :(
+            ) :name==="fees"?(
+                <Fees/>
+            )
+             :(
               <AllRequestAndCreate />
             )}
           </TabPane>
