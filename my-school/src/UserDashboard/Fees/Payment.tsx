@@ -13,8 +13,8 @@ declare global {
       Razorpay: any;
     }
   }
-function Payment({salaryStatus,salary_amount,month,idofAdmin,name,email}:{salaryStatus:boolean,salary_amount:Number,month:string,idofAdmin:String,name:string,email:string}) {
-
+function Payment({ feeStatus, fees,month,idofstudent,name,email}:{ feeStatus:any, fees:Number,month:string,idofstudent:String,name:string,email:string}) {
+  console.log( feeStatus, fees,month,idofstudent,name,email)
     let dispatch=useAppDispatch()
     function loadScript(src:any) {
         return new Promise((resolve) => {
@@ -41,8 +41,8 @@ function Payment({salaryStatus,salary_amount,month,idofAdmin,name,email}:{salary
             alert("Razorpay SDK failed to load. Are you online?");
             return;
         }
-        let info={salary_amount,month}
-        const result = await axios.post("http://localhost:8080/payment/pay",info,{headers:{Authorization:`Bearer ${token }`}});
+        let info={ fees,month}
+        const result = await axios.post("http://localhost:8080/payment/payStudentfees",info,{headers:{Authorization:`Bearer ${token }`}});
 
         if (!result) {
             alert("Server error. Are you online?");
@@ -65,22 +65,16 @@ console.log(amount,order_id,currency)
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpayOrderId: response.razorpay_order_id,
                     razorpaySignature: response.razorpay_signature,
-                    salary_amount,month,idofAdmin,name,email
+                    fees,month,idofstudent,name,email
 
                 };
                
-                const result = await axios.post("http://localhost:8080/payment/success", data);
+                const result = await axios.post("http://localhost:8080/payment/successPayStudentfees", data);
                   console.log(result)
-                  if(result.request.status===200){
-                  //  dispatch({type:editAfterAdminPayment,payload:result.data.data})
-                  if(result.data.data.position==="Manager"||result.data.data.position==="Admin"){
-                    dispatch(GetAllTeacheresFromServer("all"))
-                  }else{
-                    dispatch(GetAllTeacheresFromServer("Teacher"))
-                  }
+                 
                 
                
-                  }
+                  
                 // alert(result.data.msg);
             },
             prefill: {
@@ -102,14 +96,14 @@ console.log(amount,order_id,currency)
 
 useEffect(()=>{
     if(month==="all"){
-        console.log(salaryStatus,salary_amount)
+        console.log( feeStatus, fees)
     }
 },[])
     return (
       
           
-                <Button style={{color:"black"}} disabled={salaryStatus} onClick={displayRazorpay}>
-                 {salaryStatus?"Paid":"PAY"} {month==="all"?"Full Salary":""}
+                <Button style={{color:"black"}} disabled={ feeStatus} onClick={displayRazorpay}>
+                 { feeStatus?"Paid":"PAY"} {month==="all"?"Full Salary":""}
                 </Button>
            
      

@@ -46,8 +46,8 @@ StudentRouter.post("/register",Authentication,presentationOFstudent,async(req,re
   
         let distance=parseInt(Number(data.transport_to)/5)
         transport_fees.transport_per_month_fees=400+(200*distance)
-     
-      data={...data,...fees,...transport_fees,status:false}
+        let school_fees=Number(data.class) * 250 + 200;
+      data={...data,...fees,...transport_fees,status:false,school_fees:school_fees}
     }else{
       delete data.transport_from
       delete data.transport_to
