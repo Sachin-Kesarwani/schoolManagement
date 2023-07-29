@@ -25,6 +25,7 @@ const studentSchema = mongoose.Schema({
     class_teacher: {type:String,required:false},
     class_teacher_id: {type:String,required:false},
     transport_per_month_fees:{type:Number,required:false},
+    school_fees:{type:Number,required:false},
     january:{type:Boolean,required:false},
     february:{type:Boolean,required:false},
     march:{type:Boolean,required:false},

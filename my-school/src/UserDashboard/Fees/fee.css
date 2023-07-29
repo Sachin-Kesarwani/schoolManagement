@@ -1,0 +1,16 @@
+Apply vertical scrolling and set a fixed height for the table container
+.table-container {
+    max-height: 240px; /* Set the desired height */
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  }
+  
+  /* Apply text ellipsis to the cells in the "Value" column */
+  .ant-table-tbody .table-cell-ellipsis {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide any overflowing content */
+    text-overflow: ellipsis; /* Show an ellipsis (...) when the content overflows */
+  }
+  
+  .ant-table-thead th {
+    text-align: center;
+  }

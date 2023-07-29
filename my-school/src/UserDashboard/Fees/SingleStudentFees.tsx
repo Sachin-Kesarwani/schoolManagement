@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { studentData } from '../../utils/data.types';
-import { Avatar, Badge, Button, Card, Collapse, Table } from 'antd';
+import { Avatar, Badge, Button, Card, Collapse, Table, Tag, Tooltip } from 'antd';
 import Payment from "./Payment"
-
+import Cookies from 'js-cookie';
+import "./fee.css"
 interface DataItem {
   key: string;
   label: string;
   value: string;
+  feeStatus: boolean; 
+  month:string
 }
 const { Panel } = Collapse;
 const SingleStudentFees = ({ data }: { data: studentData}) => {
   let [studentImage, setStudentImage] = useState("");
   let [feedata, setFeedata] = useState<DataItem[]>([]);
   let [name,setName]=useState(data.name)
- 
+  let Cookieuserdata =
+  Cookies.get("SchooleManagementUserData") || "{name:Sachin}";
+let userdata = JSON.parse(Cookieuserdata);
+
   function createKeyAndvalueforstudentDetaails() {
     // Filter out only the keys starting with "transport_fees"
     const allFeesData = Object.entries(data)
@@ -29,7 +35,9 @@ const SingleStudentFees = ({ data }: { data: studentData}) => {
         }).map(([key, value]) => ({
         key,
         label: key.toUpperCase(),
+        month:key,
         value: typeof value === "boolean" ? (value ? "Paid" : "Not Paid") : String(value), // Ensure value is always a string
+        feeStatus:value
       }));
 
     setFeedata(allFeesData);
@@ -41,48 +49,63 @@ const SingleStudentFees = ({ data }: { data: studentData}) => {
 
   const columns = [
     {
-        title: 'Label',
+        title: 'Month',
         dataIndex: 'label',
         key: 'label',
+        className: 'table-cell-ellipsis',
+        render:(title:string)=>{
+          return <Tooltip title={title} color={"blue"} key={title}>
+           <div style={{overflow:"auto",textOverflow:"ellipsis",textAlign:"center"}}>
+               {title}
+          </div>
+          </Tooltip> 
+        }
       },
       {
-        title: 'Value',
+        title: 'Status',
         dataIndex: 'value',
         key: 'value',
+        className: 'table-cell-ellipsis',
         render: (value:string) => (
-          <span style={{ backgroundColor: value === 'Not Paid' ? 'red' : 'green' ,padding:"5px",borderRadius:"15px",color:value==="Not Paid"?"white":"black"}}>
-            {value}
-          </span>
+          <Tag color={ value === 'Not Paid' ? 'red' : 'green' } key={value}>
+              {value.toUpperCase()}
+            </Tag>
+          // <Tag style={{ backgroundColor: value === 'Not Paid' ? 'red' : 'green' ,padding:"5px 15px",borderRadius:"15px",color:value==="Not Paid"?"white":"white",}}>
+          //   {value}
+          // </Tag>
         ),
       },
       {
-        title: 'Pay',
+        title: 'Pay Now',
         dataIndex: 'label', // We'll use 'label' as dataIndex since it contains the label text
         key: 'pay',
-        render: (label:string) => ( // Custom render function for the 'Pay' column
+        render: (label:string, record: DataItem) => ( // Custom render function for the 'Pay' column
+
         <Payment
-        idofAdmin={data._id}
-        month={"january"}
+        idofstudent={data._id}
+        month={record.month}
         name={data.name}
-        email={"abc@gmail.com"}
-        salaryStatus={data.january}
-        salary_amount={500}
+        email={userdata.email}
+        feeStatus={record.feeStatus}
+        fees={500}
       />
         //   <Button onClick={() => console.log('Pay clicked for:', label)}>Pay</Button>
         ),
       },
   ];
-  console.log(feedata,data)
+
   return (
     <Collapse>
   
       
-      <Panel style={{width:"95%",margin:"auto"}} key={data._id}  header={<div style={{ display: 'flex', alignItems: 'center' }}><Avatar    
+      <Panel style={{width:"98%",margin:"auto",}} key={data._id}  header={<div style={{ display: 'flex', alignItems: 'center' }}><Avatar    
             style={{ cursor: 'pointer' }} src={data.student_image}/> <h3 style={{color:"black"}}>{name}</h3></div>}>
           <Card style={{border:"1px solid black"}}>
  
-        
-        <Table  dataSource={feedata}  pagination={false} columns={columns} />
+        <div className='table-container'>
+        <Table scroll={{ y: 240 }}  dataSource={feedata}  pagination={false} columns={columns} />
+
+        </div>
      
  
      </Card>
