@@ -1,7 +1,7 @@
 import { RaisesdrequestInter, studentData } from "../../utils/data.types";
 import { allraisedRequestInter } from "../AdminRedux/action";
 import { userAction } from "./action.dash";
-import { ERROR, GETALLREQUESTS, GETSUDENTS, LOADING, UPDATETHEREOPENREQUEST } from "./types.dash";
+import { ERROR, GETALLREQUESTS, GETSUDENTS, LOADING, UPDATEAFETERFEEPAYMENT, UPDATETHEREOPENREQUEST } from "./types.dash";
 
 type data ={
     name:string
@@ -27,7 +27,7 @@ const initialstate = {
 
 
 export const reducer=(state:inidatainter=initialstate,action:userAction)=>{
-   
+
     switch (action.type) {
         case LOADING:{
             return {
@@ -53,6 +53,11 @@ export const reducer=(state:inidatainter=initialstate,action:userAction)=>{
          case UPDATETHEREOPENREQUEST:{
             return {
                 ...state,allRequestofEachStudents:state.allRequestofEachStudents.map((e)=>e._id===action.payload._id?action.payload:e)
+            }
+         }
+         case UPDATEAFETERFEEPAYMENT:{
+            return {
+                ...state,allStudentsdata:state.allStudentsdata.map((e)=>e._id===action.payload._id?action.payload:e)
             }
          }
            

@@ -13,7 +13,7 @@ const Fees = () => {
   return (
     <>
     {
-        studentdata&& studentdata.length>0&&studentdata .filter(
+        studentdata&& studentdata.length>0&&studentdata.filter(
             (e, i) =>
               i >= maxStudent * (page - 1) &&
               i < maxStudent * (page - 1) +maxStudent

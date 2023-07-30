@@ -58,7 +58,7 @@ setLoading(false)
            
               {
                 studentdata.map((e)=>{
-                    return    <Option style={{dispale:e.status?"block":"none"}} value={e._id}>{e.name} <span style={{color:"orange",fontSize:"12px"}}>Class  {e.class}</span></Option>
+                    return    <Option style={{display:e.status?"block":"none"}} value={e._id}>{e.name} <span style={{color:"orange",fontSize:"12px"}}>Class  {e.class}</span></Option>
                 })
               }
             </Select>

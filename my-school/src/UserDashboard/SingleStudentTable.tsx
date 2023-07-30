@@ -24,7 +24,7 @@ const SingleStudentTable = ({ data }: { data: studentData }) => {
       setparentimage(data.parent_image);
     }
     const dataSource = Object.entries(data)
-      .filter(([key]) => key !== "student_image" && key !== "parent_image")
+      .filter(([key]) => key !== "student_image" && key !== "parents_image")
       .map(([key, value]) => ({
         key,
         label: key.toUpperCase(),
@@ -37,8 +37,8 @@ const SingleStudentTable = ({ data }: { data: studentData }) => {
               : "In Process"
             : typeof value === "boolean"
             ? value
-              ? "Paid"
-              : "Not Paid"
+              ? "Fees Paid"
+              : "Fees Not Paid"
             : value,
       }));
     setDisplaydata(dataSource);

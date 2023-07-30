@@ -1,4 +1,4 @@
-import React ,{useEffect}from "react";
+import React ,{useEffect, useState}from "react";
 
 import axios from "axios";
 import { Button } from "antd";
@@ -8,13 +8,16 @@ import { useDispatch } from "react-redux";
 
 import { useAppDispatch } from "../../Redux/Store";
 import { GetAllTeacheresFromServer } from "../../Redux/AdminRedux/action";
+import { UPDATEAFETERFEEPAYMENT } from "../../Redux/Dashboard/types.dash";
+import { getAllStudentsOfusers } from "../../Redux/Dashboard/action.dash";
 declare global {
     interface Window {
       Razorpay: any;
     }
   }
-function Payment({ feeStatus, fees,month,idofstudent,name,email}:{ feeStatus:any, fees:Number,month:string,idofstudent:String,name:string,email:string}) {
-  console.log( feeStatus, fees,month,idofstudent,name,email)
+function Payment({ feeStatus, fees,month,idofstudent,name,email,changeTagStatus}:{ feeStatus:any, fees:Number,month:string,idofstudent:String,name:string,email:string,changeTagStatus:(id:String,month:string)=>void}) {
+
+    let [localfeestatus,setlocalFeestaus]=useState(feeStatus)
     let dispatch=useAppDispatch()
     function loadScript(src:any) {
         return new Promise((resolve) => {
@@ -50,7 +53,7 @@ function Payment({ feeStatus, fees,month,idofstudent,name,email}:{ feeStatus:any
         }
  
         const { amount, id: order_id, currency } = result.data;
-console.log(amount,order_id,currency)
+
         const options = {
             key: "rzp_test_0ml2Do2xSO01b9", // Enter the Key ID generated from the Dashboard
             amount: amount.toString(),
@@ -70,9 +73,12 @@ console.log(amount,order_id,currency)
                 };
                
                 const result = await axios.post("http://localhost:8080/payment/successPayStudentfees", data);
-                  console.log(result)
+               
                  
-                
+                if(result.status===200){
+                    changeTagStatus(idofstudent,month)
+                    setlocalFeestaus(true)
+                }
                
                   
                 // alert(result.data.msg);
@@ -102,8 +108,8 @@ useEffect(()=>{
     return (
       
           
-                <Button style={{color:"black"}} disabled={ feeStatus} onClick={displayRazorpay}>
-                 { feeStatus?"Paid":"PAY"} {month==="all"?"Full Salary":""}
+                <Button style={{color:"black"}} disabled={ localfeestatus} onClick={displayRazorpay}>
+                 { localfeestatus?"Paid":"PAY"} 
                 </Button>
            
      
