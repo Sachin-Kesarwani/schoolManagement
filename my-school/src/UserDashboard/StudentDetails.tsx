@@ -9,6 +9,7 @@ import "./style.css"
 import {Collapse} from "antd"
 import { handleScrollToTop } from "../Important/scrollup";
 import LoadingModal from "../Admin/Loading";
+
 const { Panel } = Collapse;
 
 const StudentDetails = () => {
@@ -61,7 +62,7 @@ let loading= useAppSelector(
       <Modal visible={!!previewImage} onCancel={handleClosePreview} footer={null}>
         {previewImage && <img alt="Preview" src={previewImage} style={{ width: "100%" }} />}
       </Modal>
-      {/* </div> */}
+   
     </div>
   );
 };

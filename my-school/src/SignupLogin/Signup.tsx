@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { Button, message, Space } from 'antd';
 import { handleScrollToTop } from '../Important/scrollup';
+import Loader from '../UserDashboard/Loader/Loader';
 let signupformdata={
   name:"",
   email:"",
@@ -25,6 +26,7 @@ let dispatch=useAppDispatch()
     e.preventDefault();
     setLoading(true)
 dispatch(signup(formdata)).then((res:any)=>{
+  setLoading(false)
 if(res.status===200){
   setdisabled(true)
   console.log(res)
@@ -104,7 +106,7 @@ if(res.status===200){
           onChange={(e) => setformdata({...formdata,password:e.target.value})}
           required
         />
-        <button type="submit">{loading?"Signing...":"Signup"}</button>
+        <button type="submit">{loading?<Loader/>:"Signup"}</button>
       </form>
       <ToastContainer
         position="top-center"

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import './LoginForm.css'; // Import the CSS file
-import { useAppDispatch } from '../Redux/Store';
+import { useAppDispatch, useAppSelector } from '../Redux/Store';
 import { UserLogin } from '../Redux/AuthRedux/action';
 import Cookies from "js-cookie"
 import { useNavigate } from 'react-router-dom';
 import { handleScrollToTop } from '../Important/scrollup';
 import { Button, message, Space } from 'antd';
+import Loader from '../UserDashboard/Loader/Loader';
+import { context } from '../Context/Context';
 
 interface ObjectItem {
   tag: 'p' | 'h1' | 'h2' | 'h4'|"li";
@@ -23,17 +25,22 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
 let dispatch=useAppDispatch()
+let [loading,setLoading]=useState(false)
 let navigate=useNavigate()
+let {checkforAuthentication}=useContext(context)
   const handleSubmit = (e:any) => {
+    setLoading(true)
     e.preventDefault();
     dispatch(UserLogin({email,password})).then((res:any)=>{
-      console.log(res)
+
+      setLoading(false)
       if(res.request.status===200){
         messageApi.open({
           type: 'success',
           content: `${res.data.msg} , ${res.data.data.name}`,
         });
         setTimeout(()=>{
+          checkforAuthentication()
 navigate("/")
         },2000)
       }else{
@@ -83,36 +90,14 @@ handleScrollToTop()
        
         />
         <div className="form-footer">
-          <button type="submit">Log In</button>
+          <button type="submit">{loading?<Loader/>:"Log In"}</button>
           <a className='forgot' href="#" style={{float:"left",color:"blue"}} onClick={handleForgotPassword}>
             Forgot Password?
           </a>
         </div>
       </form>
     </div>
-    {arrayOfObjects.map((obj, index) => {
-        let element: JSX.Element;
-        switch (obj.tag) {
-          case 'p':
-            element = <p key={index}>{obj.title}</p>;
-            break;
-          case 'h1':
-            element = <h1 key={index}>{obj.title}</h1>;
-            break;
-          case 'h2':
-            element = <h2 key={index}>{obj.title}</h2>;
-            break;
-          case 'h4':
-            element = <h4 key={index}>{obj.title}</h4>;
-            break;
-            case 'li':
-              element = <li key={index}>{obj.title}</li>;
-              break;
-          default:
-            element = <div key={index}>{obj.title}</div>;
-        }
-        return element;
-      })}
+   
     </>
   );
 };

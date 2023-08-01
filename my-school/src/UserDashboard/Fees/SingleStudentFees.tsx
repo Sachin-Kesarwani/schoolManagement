@@ -55,9 +55,8 @@ let userdata = JSON.parse(Cookieuserdata);
         className: 'table-cell-ellipsis',
         render:(title:string)=>{
           return <Tooltip title={title} color={"blue"} key={title}>
-           <div style={{overflow:"auto",textOverflow:"ellipsis",textAlign:"center"}}>
                {title}
-          </div>
+        
           </Tooltip> 
         }
       },
@@ -70,16 +69,14 @@ let userdata = JSON.parse(Cookieuserdata);
           <Tag color={ value === 'Not Paid' ? 'red' : 'green' } key={value}>
               {value.toUpperCase()}
             </Tag>
-          // <Tag style={{ backgroundColor: value === 'Not Paid' ? 'red' : 'green' ,padding:"5px 15px",borderRadius:"15px",color:value==="Not Paid"?"white":"white",}}>
-          //   {value}
-          // </Tag>
+          
         ),
       },
       {
         title: 'Pay Now',
-        dataIndex: 'label', // We'll use 'label' as dataIndex since it contains the label text
+        dataIndex: 'label',
         key: 'pay',
-        render: (label:string, record: DataItem) => ( // Custom render function for the 'Pay' column
+        render: (label:string, record: DataItem) => ( 
 
         <Payment
         idofstudent={data._id}
@@ -88,11 +85,17 @@ let userdata = JSON.parse(Cookieuserdata);
         email={userdata.email}
         feeStatus={record.feeStatus}
         fees={500}
+        changeTagStatus={changeTagStatus}
       />
-        //   <Button onClick={() => console.log('Pay clicked for:', label)}>Pay</Button>
         ),
       },
   ];
+
+  function changeTagStatus(id:String,month:string){
+ let newdata=[...feedata].map((e)=>e.month===month?{...e,feeStatus:true,value:"Paid"}:e)
+
+ setFeedata(newdata)
+  }
 
   return (
     <Collapse>
@@ -103,8 +106,8 @@ let userdata = JSON.parse(Cookieuserdata);
           <Card style={{border:"1px solid black"}}>
  
         <div className='table-container'>
-        <Table scroll={{ y: 240 }}  dataSource={feedata}  pagination={false} columns={columns} />
-
+        <Table scroll={{ y: 240,x: 300 }}   key={data._id}  dataSource={feedata}  pagination={false} columns={columns} />
+           
         </div>
      
  

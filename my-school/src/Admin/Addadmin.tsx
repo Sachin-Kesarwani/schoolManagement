@@ -229,7 +229,7 @@ const Addadmin = () => {
     <>
       {contextHolder}
       <h2 style={{ color: "black" }}>
-        Add New One <PlusCircleOutlined />
+      
       </h2>
       <Form
         form={form}
@@ -237,6 +237,7 @@ const Addadmin = () => {
         // initialValues={data}
         className="form"
       >
+         <h2> Add New One <PlusCircleOutlined /></h2>
         <Form.Item
           name="name"
           rules={[{ required: true, message: "Please enter his/her name" }]}

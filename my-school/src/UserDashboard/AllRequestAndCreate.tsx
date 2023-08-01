@@ -8,6 +8,8 @@ import { Option } from "antd/es/mentions";
 import EachRequest from "./EachRequest";
 import { RaisesdrequestInter } from "../utils/data.types";
 import "./style.css";
+import Loader from "./Loader/Loader";
+import LoadingModal from "../Admin/Loading";
 const AllRequestAndCreate = () => {
   let [showform, setShowform] = useState(false);
   let studentdata = useAppSelector(
@@ -15,6 +17,9 @@ const AllRequestAndCreate = () => {
   );
   let allrequests = useAppSelector(
     (store) => (store.Dashreducer as inidatainter).allRequestofEachStudents
+  );
+  let loading = useAppSelector(
+    (store) => (store.Dashreducer as inidatainter).loading
   );
   let dispatch = useAppDispatch();
 
@@ -26,7 +31,8 @@ const AllRequestAndCreate = () => {
   console.log(allrequests, "26");
   return (
     <>
-      <div style={{display:"flex",justifyContent:"flex-end",gap:"10px",margin:"8px"}}>
+   
+     <div style={{display:"flex",justifyContent:"flex-end",gap:"10px",margin:"8px"}}>
        
         {!showform && (
           <Select
@@ -55,7 +61,8 @@ const AllRequestAndCreate = () => {
            {
             !showform && allrequests.length===0&&<Image preview={false} src="https://media.istockphoto.com/id/1405760543/vector/question-and-answer-solving-problem-or-business-solution-ask-for-reply-or-idea-to-solve.jpg?s=612x612&w=0&k=20&c=2PgCTaLtGHheBM6SH5gMKRPVwQHmVWWW_bOX9NQbp6E="/>
            }
-      {!showform && (
+      {
+      loading?<LoadingModal/>:!showform && (
         <div>
           <div className="eachCardParentDiv">
             {allrequests &&

@@ -45,9 +45,9 @@ const MyTabbedInterface = () => {
           ? "3"
           : name==="admission"
           ?"4"
-          :  name==="test"
-          ?"5":
-          "1"
+          :  name==="fees"? "5"
+          :"1"
+         
       }
     >
       {[UserOutlined, EditOutlined, SendOutlined,UserOutlined ,MoneyCollectOutlined ].map((Icon, i) => {
