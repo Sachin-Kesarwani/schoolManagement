@@ -68,6 +68,7 @@ export const signup = (data: signupformdataType): any => async (dispatch: AppDis
    if(response.request.status===200){
    Cookies.set('SchooleManagementUserData',JSON.stringify(response.data.data) ,{expires:7});
    Cookies.set('SchooleManagementUserToken',response.data.token ,{expires:7});
+ 
    }
      return response; 
    } catch (error) {

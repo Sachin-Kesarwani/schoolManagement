@@ -43,12 +43,12 @@ if(res.request.status===200){
   
   messageApi.open({
     type: 'error',
-    content: res.data.msg,
+    content:  res.response.data.msg,
   });
 }else if(res.request.status===401){
   messageApi.open({
     type: 'error',
-    content: res.data.msg,
+    content: res.response.data.msg,
   });
 }else if(res.request.status===404){
   messageApi.open({

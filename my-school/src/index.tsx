@@ -7,18 +7,22 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import { CookiesProvider } from "react-cookie";
+import { ContextProvider } from "./Context/Context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <CookiesProvider>
+  <ContextProvider>
+ <CookiesProvider>
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
   </CookiesProvider>
+  </ContextProvider>
+ 
 );
 
 // If you want to start measuring performance in your app, pass a function

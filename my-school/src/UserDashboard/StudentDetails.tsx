@@ -53,7 +53,7 @@ let loading= useAppSelector(
       {studentdata && 
           studentdata.length > 0 &&
           studentdata.map((e) => {
-            return   <Panel style={{overflow:"scroll"}}  header={<div style={{ display: 'flex', alignItems: 'center' }}><Avatar    onClick={() => handlePreview(e.student_image)}
+            return   <Panel  header={<div style={{ display: 'flex', alignItems: 'center' }}><Avatar    onClick={() => handlePreview(e.student_image)}
             style={{ cursor: 'pointer' }} src={e.student_image}/> <h3 style={{color:"black"}}>{e.name}</h3></div>} key={e._id}>
        <SingleStudentTable data={e} />;
           </Panel> 

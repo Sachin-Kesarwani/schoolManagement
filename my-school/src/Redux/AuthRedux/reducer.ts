@@ -20,10 +20,10 @@ export function reducer(state:loginInter=inidataauth,action:authaction){
             return {...state,loading:true}
         }
         case(error):{
-            return {...state,error:true}
+            return {...state,error:true,loading:false}
         }
         case(SIGNUP):{
-            return {...state}
+            return {...state,loading:false}
         }
         default:{
             return state

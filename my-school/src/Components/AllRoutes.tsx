@@ -17,6 +17,7 @@ import ChartData from './ChartData'
 import AppStatus from './AppStatus'
 import Form from './FormComp'
 import MainDashBoard from '../UserDashboard/MainDashBoard'
+import PrivateRoute from '../PrivateRoute'
 
 const AllRoutes = () => {
   return (
@@ -29,7 +30,13 @@ const AllRoutes = () => {
     <Route path='/contact' element={<ContactUs/>}/>
     <Route path='/services' element={<Services/>}/>
     {/* <Route path='/dashboard' element={<DashBoard/>}/> */}
-    <Route path='/dashboard' element={<MainDashBoard/>}/>
+    <Route path='/dashboard' element={
+      <PrivateRoute>
+        <MainDashBoard/>
+      </PrivateRoute>
+
+    
+    }/>
     <Route path='/admin' element={<Admin/>}/>
     <Route path="/forgetpasswordform" element={<ForgetPasswordForm/>}/>
    </Routes>

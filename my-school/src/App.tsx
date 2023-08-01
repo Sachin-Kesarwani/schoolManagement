@@ -17,6 +17,8 @@ import Payment from './Admin/Payment';
 import axios from 'axios';
 import { Button, Collapse } from 'antd';
 import ImageUploader from './UserDashboard/ImageUpload';
+import Test from './UserDashboard/TestforAdmission';
+
 // class CustomFile extends File {
 //   constructor(fileBits: BlobPart[], fileName: string, options?: FilePropertyBag) {
 //     super(fileBits, fileName, options);
@@ -38,6 +40,7 @@ function App() {
      
      <AllRoutes/>
      <Footer/>
+
     </div>
   );
 }
